@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Provider/login_provider.dart';
 import 'package:toptan/Widgets/drawer.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -148,8 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed('move_to_login_screen');
+                  signOut();
                 },
                 title: Text(
                   'Log out',
@@ -166,6 +169,19 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       ),
     );
+  }
+
+  signOut() {
+    Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+    /*   try {
+      Provider.of<LoginProvider>(context, listen: false).logout();
+      ShowToast.showToast('Logout success', MessageType.Success);
+     // Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+    } catch (error) {
+      ShowToast.showToast('Logout Failed', MessageType.Failed);
+
+      print('error: ' + error.toString());
+    }*/
   }
 
   titleTextStyle() {

@@ -53,52 +53,54 @@ class AboutUsScreen extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Text(
-                      'About us',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 20,
-                        color: const Color(0xff08a8ff),
-                        letterSpacing: 0.24,
-                        fontWeight: FontWeight.w500,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Text(
+                        'About us',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          color: const Color(0xff08a8ff),
+                          letterSpacing: 0.24,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 35),
-                    Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
-                      'Lorem Ipsum has been the industry\'s standard dummy '
-                      'text ever since the 1500s,',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        color: const Color(0xff323b4a),
-                        letterSpacing: 0.48,
-                        height: 1.875,
+                      SizedBox(height: 35),
+                      Text(
+                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
+                        'Lorem Ipsum has been the industry\'s standard dummy '
+                        'text ever since the 1500s,',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          color: const Color(0xff323b4a),
+                          letterSpacing: 0.48,
+                          height: 1.875,
+                        ),
+                        textHeightBehavior:
+                            TextHeightBehavior(applyHeightToFirstAscent: false),
+                        textAlign: TextAlign.center,
                       ),
-                      textHeightBehavior:
-                          TextHeightBehavior(applyHeightToFirstAscent: false),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 35),
-                    Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                      ' Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        color: const Color(0xff323b4a),
-                        letterSpacing: 0.48,
-                        height: 1.875,
+                      SizedBox(height: 35),
+                      Text(
+                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                        ' Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          color: const Color(0xff323b4a),
+                          letterSpacing: 0.48,
+                          height: 1.875,
+                        ),
+                        textHeightBehavior:
+                            TextHeightBehavior(applyHeightToFirstAscent: false),
+                        textAlign: TextAlign.center,
                       ),
-                      textHeightBehavior:
-                          TextHeightBehavior(applyHeightToFirstAscent: false),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

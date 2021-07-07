@@ -10,7 +10,7 @@ class ServicesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Additional Services'),
+        title: Text('Services'),
         centerTitle: true,
       ),
       body: ListView(

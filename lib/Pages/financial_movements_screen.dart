@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/transaction_card.dart';
+
+enum period { Daily, Monthly, Yearly }
 
 class FinancialMovementsScreen extends StatefulWidget {
   @override
@@ -10,7 +13,7 @@ class FinancialMovementsScreen extends StatefulWidget {
 }
 
 class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
-  var _value;
+  var value = period.Daily;
 
   @override
   Widget build(BuildContext context) {
@@ -118,40 +121,66 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                         ),
                         Expanded(
                           child: Card(
-                            elevation: 6,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                    hint: Text('Select'),
-                                    itemHeight: 50,
-                                    isExpanded: true,
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down_sharp,
-                                      color: Color(0xff08A8FF),
-                                      size: 30,
+                            elevation: 5,
+                            child: InkWell(
+                              onTap: () {
+                                showMaterialModalBottomSheet(
+                                  context: context,
+                                  closeProgressThreshold: 1.5,
+                                  builder: (context) => SingleChildScrollView(
+                                    controller:
+                                        ModalScrollController.of(context),
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            value = period.Daily;
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                          child: ListTile(
+                                            title: Text('Daily'),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            value = period.Monthly;
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                          child: ListTile(
+                                            title: Text('Monthly'),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            value = period.Yearly;
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                          child: ListTile(
+                                            title: Text('Yearly'),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    value: _value,
-                                    items: [
-                                      DropdownMenuItem(
-                                        child: Text('Daily'),
-                                        value: 1,
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text('Monthly'),
-                                        value: 2,
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text('annually'),
-                                        value: 3,
-                                      ),
-                                    ],
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _value = value;
-                                      });
-                                    }),
+                                  ),
+                                );
+                              },
+                              child: ListTile(
+                                title: Text(
+                                  value == period.Daily
+                                      ? 'Daily'
+                                      : value == period.Monthly
+                                          ? 'Monthly'
+                                          : 'Yearly',
+                                  style: TextStyle(color: Color(0xff616161)),
+                                ),
+                                trailing: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  size: 30,
+                                  color: Color(0xff08A8FF),
+                                ),
                               ),
                             ),
                           ),

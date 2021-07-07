@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:toptan/Helper/app_shared.dart';
+import 'package:toptan/Pages/home_screen.dart';
+import 'package:toptan/Pages/login_screen.dart';
 
 import 'welcomeScreen.dart';
 
@@ -15,14 +18,32 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       Duration(seconds: 2),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return WelcomeScreen();
-          },
-        ),
-      ),
+      () => AppShared.sharedPreferencesController!.showIntro()
+          ? Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return WelcomeScreen();
+                },
+              ),
+            )
+          : !AppShared.sharedPreferencesController!.getIsLogin()
+              ? Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return LoginScreen();
+                    },
+                  ),
+                )
+              : Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return HomeScreen();
+                    },
+                  ),
+                ),
     );
   }
 

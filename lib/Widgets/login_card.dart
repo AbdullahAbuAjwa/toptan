@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toptan/Pages/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Provider/login_provider.dart';
+import 'package:toptan/model/user_response.dart';
 
 class LoginCard extends StatefulWidget {
   @override
@@ -8,9 +13,28 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  FocusNode _usernameFocusNode = FocusNode();
+  FocusNode _passwordFocusNode = FocusNode();
+  LoginProvider? loginProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    loginProvider = Provider.of<LoginProvider>(context, listen: false);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameFocusNode.dispose();
+    _passwordFocusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +81,20 @@ class _LoginCardState extends State<LoginCard> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          controller: _usernameController,
+                          controller: _emailController,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Enter username';
                             }
+                            if (value.length <= 5) {
+                              return 'Username must be more than 5 character.';
+                            }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'User Name',
-                            hintText: 'Pankaj_Patel',
+                            labelText: 'Username',
+                            hintText: 'Username',
                           ),
                         ),
                       ),
@@ -76,9 +103,14 @@ class _LoginCardState extends State<LoginCard> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: _passwordController,
+                          textInputAction: TextInputAction.done,
+                          obscureText: true,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter username';
+                              return 'Enter password';
+                            }
+                            if (value.length <= 5) {
+                              return 'Password must be more than 5 character.';
                             }
                             return null;
                           },
@@ -111,6 +143,7 @@ class _LoginCardState extends State<LoginCard> {
               child: ElevatedButton(
                 child: Text(
                   'LOG IN',
+                  //     AppShared.getLanguage(context, 'login'),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
                     fontSize: 18,
@@ -120,24 +153,24 @@ class _LoginCardState extends State<LoginCard> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return HomeScreen();
-                      },
-                    ),
-                  );
+                  login();
+                  setState(() {});
                 },
                 style: ButtonStyle(
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0))),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
                 ),
               ),
             ),
             SizedBox(height: 15),
+            Provider.of<LoginProvider>(context).isLoading
+                ? CircularProgressIndicator()
+                : Container(),
             TextButton(
               onPressed: () {
                 Navigator.of(context)
@@ -158,5 +191,28 @@ class _LoginCardState extends State<LoginCard> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    if (!_formKey.currentState!.validate()) return;
+    _formKey.currentState!.save();
+    try {
+      loginProvider!.isLoading = true;
+      UserResponse userResponse = await loginProvider!.signIn(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      loginProvider!.isLoading = false;
+      if (userResponse.status) {
+        ShowToast.showToast('Login Success', MessageType.Success);
+
+        Navigator.pushReplacementNamed(context, 'move_to_home_screen');
+      } else {
+        ShowToast.showToast(userResponse.message, MessageType.Warning);
+      }
+    } catch (error) {
+      loginProvider!.isLoading = false;
+      throw (error);
+    }
   }
 }

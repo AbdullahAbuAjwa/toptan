@@ -6,6 +6,8 @@ class CartCard extends StatefulWidget {
 }
 
 class _CartCardState extends State<CartCard> {
+  int value = 5;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,18 +48,32 @@ class _CartCardState extends State<CartCard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.add_circle_outline,
-                      color: Color(0xff8B98B4),
+                    IconButton(
+                      onPressed: () {
+                        value++;
+                        setState(() {});
+                      },
+                      icon: Icon(
+                        Icons.add_circle_outline,
+                        color: Color(0xff8B98B4),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text('5'),
+                      child: Text(value.toString()),
                     ),
-                    Icon(
-                      Icons.remove_circle_outline,
-                      color: Color(0xff8B98B4),
-                    )
+                    IconButton(
+                      onPressed: () {
+                        if (value > 0) {
+                          value--;
+                        }
+                        setState(() {});
+                      },
+                      icon: Icon(
+                        Icons.remove_circle_outline,
+                        color: Color(0xff8B98B4),
+                      ),
+                    ),
                   ],
                 )
               ],

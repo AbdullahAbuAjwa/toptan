@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   @override
@@ -7,6 +7,22 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  TextEditingController emailController = TextEditingController();
+  FocusNode focusEmail = FocusNode();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    focusEmail.dispose();
+  }
+
+  //
+  // Future<void> onTap(){
+  //   if()
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,25 +72,43 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             SizedBox(height: 40),
             Container(
               margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
+              height: 70,
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  focusNode: focusEmail,
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      setState(() {});
+                      return 'Please enter your email';
+                    }
+                    if (!value.contains('@')) {
+                      setState(() {});
+                      return 'Please enter valid email';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
                     ),
-                  ),
-                  filled: true,
-                  suffixIcon: Icon(
-                    CustomIcon.ic_devices_mobile,
-                    color: Color(0xff08A8FF),
-                  ),
-                  fillColor: Colors.white,
-                  hintText: '0000-0000-0000',
-                  hintStyle: TextStyle(
-                    color: Color(0xff4A494B),
+                    filled: true,
+                    suffixIcon: Icon(
+                      CustomIcon.ic_contact_mail,
+                      color: Color(0xff08A8FF),
+                      size: 22,
+                    ),
+                    fillColor: Colors.white,
+                    hintText: 'username@gmail.com',
+                    hintStyle: TextStyle(
+                      color: Color(0xff4A494B),
+                    ),
                   ),
                 ),
               ),
@@ -82,9 +116,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             SizedBox(height: 65),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(
-                  'move_to_reset_password_screen',
-                );
+                if (_formKey.currentState!.validate()) {
+                  Navigator.of(context).pushReplacementNamed(
+                    'move_to_reset_password_screen',
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: new RoundedRectangleBorder(

@@ -136,46 +136,52 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 5, bottom: 10, top: 10),
-                      height: 60,
-                      width: double.infinity,
-                      color: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: Color(0xffF3F4F7),
-                                hintStyle: new TextStyle(
-                                    color: Colors.grey, fontSize: 18),
-                                hintText: "Write a replay…",
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.emoji_emotions_outlined),
-                              Icon(Icons.photo),
-                              Icon(Icons.attach_file),
-                            ],
-                          ),
-                        ],
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color(0xffF3F4F7),
+                ),
+                padding: EdgeInsets.only(left: 5, bottom: 10, top: 10),
+                height: 60,
+                width: double.infinity,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        textInputAction: TextInputAction.send,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xffF3F4F7),
+                          hintStyle:
+                              new TextStyle(color: Colors.grey, fontSize: 18),
+                          hintText: "Write a replay…",
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.emoji_emotions_outlined)),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.photo),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.attach_file),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               // child: TextField(
               //   textInputAction: TextInputAction.send,

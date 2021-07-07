@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -10,6 +13,57 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _mobileController = TextEditingController();
+  var imageFile;
+
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+      setState(() {});
+    }
+  }
+
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+      setState(() {});
+    }
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Photo Library'),
+                      onTap: () {
+                        _getFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camera'),
+                    onTap: () {
+                      _getFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +87,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   CircleAvatar(
                     radius: 63,
                     backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/avatar.png'),
-                      radius: 60,
-                    ),
+                    child: imageFile == null
+                        ? CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/avatar.png'),
+                            radius: 60,
+                          )
+                        : CircleAvatar(
+                            backgroundImage: FileImage(imageFile),
+                            radius: 60,
+                          ),
                   ),
                   Positioned(
                     top: 82,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        _showPicker(context);
+                      },
                       child: Container(
                         height: 32,
                         width: 32,
@@ -56,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(height: 25),

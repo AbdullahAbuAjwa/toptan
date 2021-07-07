@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:toptan/Pages/home_screen.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/order_product_card.dart';
 import 'package:toptan/Widgets/search.dart';
+
+enum select { selectAll, waiting, accept, reject }
 
 class OrderScreen extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  var _value;
+  var value;
 
   @override
   Widget build(BuildContext context) {
@@ -38,75 +40,115 @@ class _OrderScreenState extends State<OrderScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Search(),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.only(right: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      color: Colors.white,
-                    ),
-                    padding: EdgeInsets.only(right: 8, left: 8),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                          hint: Text('Select'),
-                          itemHeight: 50,
-                          isExpanded: true,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_sharp,
-                            color: Color(0xff08A8FF),
-                            size: 30,
-                          ),
-                          value: _value,
-                          items: [
-                            DropdownMenuItem(
-                              child: Text('Select All'),
-                              value: 1,
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                  width: MediaQuery.of(context).size.width / 1.7,
+                  child: Search()),
+              Container(
+                width: MediaQuery.of(context).size.width / 2.5,
+                child: InkWell(
+                  onTap: () {
+                    showMaterialModalBottomSheet(
+                      context: context,
+                      builder: (context) => SingleChildScrollView(
+                        controller: ModalScrollController.of(context),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                value = select.selectAll;
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: ListTile(
+                                title: Text('Select All'),
+                              ),
                             ),
-                            DropdownMenuItem(
-                              child: Text('Waiting'),
-                              value: 2,
+                            InkWell(
+                              onTap: () {
+                                value = select.waiting;
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: ListTile(
+                                title: Text('Waiting'),
+                              ),
                             ),
-                            DropdownMenuItem(
-                              child: Text('Accept'),
-                              value: 3,
+                            InkWell(
+                              onTap: () {
+                                value = select.accept;
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: ListTile(
+                                title: Text('Accept'),
+                              ),
                             ),
-                            DropdownMenuItem(
-                              child: Text('Reject'),
-                              value: 4,
+                            InkWell(
+                              onTap: () {
+                                value = select.reject;
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: ListTile(
+                                title: Text('Reject'),
+                              ),
                             ),
                           ],
-                          onChanged: (value) {
-                            setState(() {
-                              _value = value;
-                            });
-                          }),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: Colors.white,
+                    ),
+                    padding: EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          value == select.selectAll
+                              ? 'Select All'
+                              : value == select.waiting
+                                  ? 'Waiting'
+                                  : value == select.waiting
+                                      ? 'Accept'
+                                      : 'Reject',
+                          style: TextStyle(
+                              fontSize: 18, color: Color(0xff323B4A)),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Color(0xff08A8FF),
+                          size: 30,
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-            SizedBox(height: 30),
-            ListView(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              children: [
-                OrderCard(name: 'Name', date: '1/10/2021', status: 'Accept'),
-                OrderCard(name: 'Name', date: '1/10/2021', status: 'Reject'),
-                OrderCard(name: 'Name', date: '3/10/2021', status: 'Waiting'),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          SizedBox(height: 30),
+          ListView(
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            children: [
+              OrderCard(name: 'Name', date: '1/10/2021', status: 'Accept'),
+              OrderCard(name: 'Name', date: '1/10/2021', status: 'Reject'),
+              OrderCard(name: 'Name', date: '3/10/2021', status: 'Waiting'),
+            ],
+          ),
+        ],
       ),
     );
   }

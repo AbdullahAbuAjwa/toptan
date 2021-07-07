@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/googleplay_card.dart';
 import 'package:toptan/Widgets/send_button.dart';
 
@@ -16,7 +16,7 @@ class _SuperBoxScreenState extends State<SuperBoxScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Super Online'),
+        title: Text('Super Box'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -44,6 +44,7 @@ class _SuperBoxScreenState extends State<SuperBoxScreen> {
                     child: Container(
                       height: 50,
                       child: TextField(
+                        keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius:

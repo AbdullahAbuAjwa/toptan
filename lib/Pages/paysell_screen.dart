@@ -40,6 +40,7 @@ class _PaySellScreenState extends State<PaySellScreen> {
                   width: 200,
                   child: Center(
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(

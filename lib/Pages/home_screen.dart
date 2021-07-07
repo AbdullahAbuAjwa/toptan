@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toptan/Icons/custom_icon_icons.dart';
+import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/slider_home.dart';
@@ -10,6 +10,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // print(AppShared.currentUser!.user!.email);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

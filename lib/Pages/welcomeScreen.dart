@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/login_screen.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -79,6 +81,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         slides: this.slides,
         nameDoneBtn: 'Get Started',
         onDonePress: () {
+          AppShared.sharedPreferencesController!.notShowIntro(false);
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

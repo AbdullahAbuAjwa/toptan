@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Expanded(
             flex: 2,
-            child: LoginCard(),
+            child:
+                LoginCard(),
           )
         ],
       ),
