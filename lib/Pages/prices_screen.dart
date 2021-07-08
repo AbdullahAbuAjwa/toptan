@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/price_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PricesScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _PricesScreenState extends State<PricesScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Price\'s'),
+        title: Text('prices'.tr()),
         centerTitle: true,
       ),
       body: GridView.count(

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:toptan/Helper/share_preferences.dart';
 import 'package:toptan/model/user_response.dart';
 
-import '../main.dart';
 
 class AppShared {
   static var baseUrl = 'https://toptan.alberki.com/api/';

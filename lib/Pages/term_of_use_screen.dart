@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class TermOfUseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,7 +8,7 @@ class TermOfUseScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Terms Of Use'),
+        title: Text('terms_of_use'.tr()),
         centerTitle: true,
       ),
       body: Container(
@@ -29,7 +29,7 @@ class TermOfUseScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  'Terms Of Use',
+                  'terms_of_use'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 20,

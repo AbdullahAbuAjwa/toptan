@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -43,16 +44,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Container(
               child: new Wrap(
                 children: <Widget>[
-                  new ListTile(
+                  ListTile(
                       leading: Icon(Icons.photo_library),
-                      title: Text('Photo Library'),
+                      title: Text('photo_library'.tr()),
                       onTap: () {
                         _getFromGallery();
                         Navigator.of(context).pop();
                       }),
-                  new ListTile(
+                  ListTile(
                     leading: Icon(Icons.photo_camera),
-                    title: Text('Camera'),
+                    title: Text('camera'.tr()),
                     onTap: () {
                       _getFromCamera();
                       Navigator.of(context).pop();
@@ -72,7 +73,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('edit_profile'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
@@ -133,12 +134,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: _nameController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your name';
+                            return 'enter_your_email'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Name',
+                          hintText: 'email'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -158,12 +159,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: _mobileController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your mobile';
+                            return 'enter_your_mobile'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Mobile',
+                          hintText: 'mobile'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -195,7 +196,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           fixedSize: Size(250, 55),
                         ),
                         child: Text(
-                          'EDIT PROFILE',
+                          'edit_profile'.tr(),
                           style: TextStyle(
                             fontFamily: 'SF Pro',
                             fontSize: 16,

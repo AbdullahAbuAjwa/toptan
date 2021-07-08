@@ -33,7 +33,8 @@ class SliderHomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0, left: 15),
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 15, right: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

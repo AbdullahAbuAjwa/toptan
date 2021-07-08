@@ -26,7 +26,7 @@ class _NotificationCardState extends State<NotificationCard> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 15, bottom: 18),
+            padding: const EdgeInsets.only(top: 20.0, right: 20, left: 15, bottom: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

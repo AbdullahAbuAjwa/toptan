@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Reset Password'),
+        title: Text('reset_password'.tr()),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -33,7 +34,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
             SizedBox(height: 65),
             Text(
-              'Forgot Password?',
+              'forget_password'.tr(),
               style: TextStyle(
                 fontFamily: 'Roboto',
                 fontSize: 28,
@@ -94,7 +95,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 fixedSize: Size(250, 55),
               ),
               child: Text(
-                'RESET',
+                'reset'.tr(),
                 style: TextStyle(
                   color: Color(0xff08A8FF),
                   fontSize: 16,

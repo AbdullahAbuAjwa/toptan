@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/send_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CreatePOSScreen extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Create POS'),
+        title: Text('create_POS').tr(),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -74,12 +75,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                         controller: _nameController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your name';
+                            return 'enter_your_name'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Name',
+                          hintText: 'name'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -99,12 +100,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                         controller: _mobileController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your mobile';
+                            return 'enter_your_mobile'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Mobile',
+                          hintText: 'mobile'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -128,12 +129,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                         controller: _emailController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your email';
+                            return 'enter_your_email'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'email'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -157,12 +158,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                         controller: _passwordController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your password';
+                            return 'enter_your_password'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Password',
+                          hintText: 'password'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -220,12 +221,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                         controller: _addressController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your address';
+                            return 'enter_your_address'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Address',
+                          hintText: 'address'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(

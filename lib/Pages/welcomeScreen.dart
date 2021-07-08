@@ -3,7 +3,7 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/login_screen.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -79,7 +79,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: IntroSlider(
         slides: this.slides,
-        nameDoneBtn: 'Get Started',
+        nameDoneBtn: 'get_started'.tr(),
         onDonePress: () {
           AppShared.sharedPreferencesController!.notShowIntro(false);
 
@@ -98,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         colorActiveDot: Color(0xff08A8FF),
         borderRadiusSkipBtn: 15,
         showSkipBtn: false,
-        nameNextBtn: 'Skip',
+        nameNextBtn: 'skip'.tr(),
       ),
     );
   }

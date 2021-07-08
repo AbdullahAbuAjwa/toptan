@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'enum.dart';
+import 'package:toptan/Helper/enum.dart';
 
 class ShowToast {
   static void showToast(message, type) {

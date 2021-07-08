@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrderCard extends StatefulWidget {
   final name;
   final date;
@@ -55,9 +55,9 @@ class _OrderCardState extends State<OrderCard> {
               width: 70,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: widget.status == 'Waiting'
+                color: widget.status == 'waiting'.tr()
                     ? Color(0xfff9a22a)
-                    : widget.status == 'Reject'
+                    : widget.status == 'reject'.tr()
                         ? Color(0xffF92A30)
                         : Color(0xff04A35A),
                 boxShadow: [

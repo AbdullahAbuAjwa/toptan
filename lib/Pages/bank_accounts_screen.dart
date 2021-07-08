@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BankAccountsScreen extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _BankAccountsScreenState extends State<BankAccountsScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Bank Accounts'),
+        title: Text('bank_accounts').tr(),
         centerTitle: true,
       ),
     );

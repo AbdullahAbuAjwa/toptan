@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/login_provider.dart';
 import 'package:toptan/model/user_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginCard extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _LoginCardState extends State<LoginCard> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  FocusNode _usernameFocusNode = FocusNode();
+  FocusNode _emailFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
   LoginProvider? loginProvider;
 
@@ -32,7 +32,7 @@ class _LoginCardState extends State<LoginCard> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _usernameFocusNode.dispose();
+    _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
   }
 
@@ -82,19 +82,20 @@ class _LoginCardState extends State<LoginCard> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: _emailController,
+                          focusNode: _emailFocusNode,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter username';
+                              return 'enter_your_email'.tr();
                             }
-                            if (value.length <= 5) {
-                              return 'Username must be more than 5 character.';
+                            if (!value.contains('@')) {
+                              return 'enter_valid_email'.tr();
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'Username',
-                            hintText: 'Username',
+                            labelText: 'email'.tr(),
+                            hintText: 'email'.tr(),
                           ),
                         ),
                       ),
@@ -104,18 +105,19 @@ class _LoginCardState extends State<LoginCard> {
                         child: TextFormField(
                           controller: _passwordController,
                           textInputAction: TextInputAction.done,
+                          focusNode: _passwordFocusNode,
                           obscureText: true,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter password';
+                              return 'enter_your_password'.tr();
                             }
                             if (value.length <= 5) {
-                              return 'Password must be more than 5 character.';
+                              return 'password_more_than_five_character'.tr();
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: 'password'.tr(),
                             hintText: '*********',
                           ),
                         ),
@@ -142,7 +144,7 @@ class _LoginCardState extends State<LoginCard> {
               ),
               child: ElevatedButton(
                 child: Text(
-                  'LOG IN',
+                  'login'.tr(),
                   //     AppShared.getLanguage(context, 'login'),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
@@ -177,7 +179,7 @@ class _LoginCardState extends State<LoginCard> {
                     .pushNamed('move_to_forget_password_screen');
               },
               child: Text(
-                'Forgot password?',
+                'forget_password'.tr(),
                 style: TextStyle(
                   fontFamily: 'SF Pro',
                   fontSize: 18,
@@ -204,7 +206,7 @@ class _LoginCardState extends State<LoginCard> {
       );
       loginProvider!.isLoading = false;
       if (userResponse.status) {
-        ShowToast.showToast('Login Success', MessageType.Success);
+        ShowToast.showToast('login_success'.tr(), MessageType.Success);
 
         Navigator.pushReplacementNamed(context, 'move_to_home_screen');
       } else {

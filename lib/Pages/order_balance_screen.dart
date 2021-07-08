@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OrderBalanceScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Order Balance'),
+        title: Text('order_balance').tr(),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -24,7 +25,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Enter the amount of value:',
+                'enter_amount_of_value'.tr(),
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               SizedBox(height: 20),
@@ -45,7 +46,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                     fillColor: Color(0xFFFAFAFA),
                     hintStyle:
                         new TextStyle(color: Color(0xFFd0cece), fontSize: 18),
-                    hintText: "Amount",
+                    hintText: "amount".tr(),
                   ),
                 ),
               ),
@@ -64,7 +65,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                   ),
                 ),
                 title: Text(
-                  'Select photo',
+                  'select_photo'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 16,
@@ -88,7 +89,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                     fixedSize: Size(250, 55),
                   ),
                   child: Text(
-                    'SEND',
+                    'send'.tr(),
                     style: TextStyle(
                       color: Color(0xff08A8FF),
                       fontSize: 16,

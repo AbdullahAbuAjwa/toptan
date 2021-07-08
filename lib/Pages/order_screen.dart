@@ -3,7 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/order_product_card.dart';
 import 'package:toptan/Widgets/search.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 enum select { selectAll, waiting, accept, reject }
 
 class OrderScreen extends StatefulWidget {
@@ -24,13 +24,13 @@ class _OrderScreenState extends State<OrderScreen> {
       backgroundColor: Color(0xff08A8FF),
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('Order'),
+        title: Text('order'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -65,7 +65,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 Navigator.pop(context);
                               },
                               child: ListTile(
-                                title: Text('Select All'),
+                                title: Text('select_all').tr(),
                               ),
                             ),
                             InkWell(
@@ -75,7 +75,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 Navigator.pop(context);
                               },
                               child: ListTile(
-                                title: Text('Waiting'),
+                                title: Text('waiting'.tr()),
                               ),
                             ),
                             InkWell(
@@ -85,7 +85,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 Navigator.pop(context);
                               },
                               child: ListTile(
-                                title: Text('Accept'),
+                                title: Text('accept'.tr()),
                               ),
                             ),
                             InkWell(
@@ -95,7 +95,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 Navigator.pop(context);
                               },
                               child: ListTile(
-                                title: Text('Reject'),
+                                title: Text('reject'.tr()),
                               ),
                             ),
                           ],
@@ -117,12 +117,12 @@ class _OrderScreenState extends State<OrderScreen> {
                       children: [
                         Text(
                           value == select.selectAll
-                              ? 'Select All'
+                              ? 'select_all'.tr()
                               : value == select.waiting
-                                  ? 'Waiting'
+                                  ? 'waiting'.tr()
                                   : value == select.waiting
-                                      ? 'Accept'
-                                      : 'Reject',
+                                      ? 'accept'.tr()
+                                      : 'reject'.tr(),
                           style: TextStyle(
                               fontSize: 18, color: Color(0xff323B4A)),
                         ),
@@ -143,9 +143,9 @@ class _OrderScreenState extends State<OrderScreen> {
             shrinkWrap: true,
             physics: ScrollPhysics(),
             children: [
-              OrderCard(name: 'Name', date: '1/10/2021', status: 'Accept'),
-              OrderCard(name: 'Name', date: '1/10/2021', status: 'Reject'),
-              OrderCard(name: 'Name', date: '3/10/2021', status: 'Waiting'),
+              OrderCard(name: 'Name', date: '1/10/2021', status: 'accept'.tr()),
+              OrderCard(name: 'Name', date: '1/10/2021', status: 'reject'.tr()),
+              OrderCard(name: 'Name', date: '3/10/2021', status: 'waiting'.tr()),
             ],
           ),
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SendButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SendButton extends StatelessWidget {
         fixedSize: Size(250, 55),
       ),
       child: Text(
-        'SEND',
+        'send'.tr(),
         style: TextStyle(
           color: Color(0xff08A8FF),
           fontSize: 16,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ForgetPasswordScreen extends StatefulWidget {
   @override
   _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
@@ -30,7 +30,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Forget Password'),
+        title: Text('forget_password'.tr()),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -49,7 +49,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ),
             SizedBox(height: 65),
             Text(
-              'Forgot Password?',
+              'forget_password'.tr(),
               style: TextStyle(
                 fontFamily: 'Roboto',
                 fontSize: 28,
@@ -82,11 +82,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       setState(() {});
-                      return 'Please enter your email';
+                      return 'enter_your_email'.tr();
                     }
                     if (!value.contains('@')) {
                       setState(() {});
-                      return 'Please enter valid email';
+                      return 'enter_valid_email'.tr();
                     }
                     return null;
                   },
@@ -130,7 +130,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 fixedSize: Size(250, 55),
               ),
               child: Text(
-                'SEND',
+                'send'.tr(),
                 style: TextStyle(
                   color: Color(0xff08A8FF),
                   fontSize: 16,

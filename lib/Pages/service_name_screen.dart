@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/send_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ServiceNameScreen extends StatefulWidget {
   @override
@@ -90,7 +91,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Mobile NO :',
+                            'mobile_no'.tr(),
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               fontSize: 16,
@@ -119,7 +120,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Photo ID :',
+                              'photo_id'.tr(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: 16,
@@ -135,7 +136,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                                 color: Color(0xff08A8FF),
                               ),
                               title: Text(
-                                'Edit',
+                                'edit'.tr(),
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 12,
@@ -168,7 +169,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Photo Sim card :',
+                              'photo_QR_code'.tr(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: 16,
@@ -184,7 +185,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                                 color: Color(0xff08A8FF),
                               ),
                               title: Text(
-                                'Edit',
+                                'edit'.tr(),
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 12,
@@ -257,7 +258,10 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
               ),
             ),
             SizedBox(height: 30),
-            SendButton(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: SendButton(),
+            ),
           ],
         ),
       ),

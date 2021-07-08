@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AdditionalServicesScreen extends StatelessWidget {
   @override
@@ -8,13 +9,13 @@ class AdditionalServicesScreen extends StatelessWidget {
       backgroundColor: Color(0xff08A8FF),
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('Additional Services'),
+        title: Text('additional_services').tr(),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -43,7 +44,7 @@ class AdditionalServicesScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed('move_to_prices_screen');
                   },
                   child: ListTile(
-                    title: Text('Price\'s'),
+                    title: Text('prices'.tr()),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 18,
@@ -60,7 +61,7 @@ class AdditionalServicesScreen extends StatelessWidget {
                         .pushNamed('move_to_service_prices_screen');
                   },
                   child: ListTile(
-                    title: Text('Service Prices'),
+                    title: Text('service_prices').tr(),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 18,
@@ -77,7 +78,7 @@ class AdditionalServicesScreen extends StatelessWidget {
                         .pushNamed('move_to_bank_accounts_screen');
                   },
                   child: ListTile(
-                    title: Text('Bank Accounts'),
+                    title: Text('bank_accounts').tr(),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 18,
@@ -94,7 +95,7 @@ class AdditionalServicesScreen extends StatelessWidget {
                         .pushNamed('move_to_order_balance_screen');
                   },
                   child: ListTile(
-                    title: Text('Order Balance'),
+                    title: Text('order_balance'.tr()),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 18,

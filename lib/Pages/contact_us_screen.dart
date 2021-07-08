@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ContactUsScreen extends StatefulWidget {
   @override
@@ -12,7 +13,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   final _nameController = TextEditingController();
   final _mobileController = TextEditingController();
   final _emailController = TextEditingController();
-  final _addressController = TextEditingController();
+  final _messageController = TextEditingController();
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _mobileFocusNode = FocusNode();
+  FocusNode _emailFocusNode = FocusNode();
+  FocusNode _messageFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _nameController.dispose();
+    _mobileController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    _nameFocusNode.dispose();
+    _mobileFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _messageFocusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +41,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('About Us'),
+        title: Text('contact_us').tr(),
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -60,7 +79,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 color: Color(0xff08A8FF),
               ),
               title: Text(
-                'Email',
+                'email'.tr(),
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 16,
@@ -83,7 +102,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 color: Color(0xff08A8FF),
               ),
               title: Text(
-                'Mobile',
+                'mobile'.tr(),
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 16,
@@ -114,14 +133,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       child: TextFormField(
                         textInputAction: TextInputAction.next,
                         controller: _nameController,
+                        focusNode: _nameFocusNode,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your name';
+                            return 'enter_your_name'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Name',
+                          hintText: 'name'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -145,14 +165,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
+                        focusNode: _emailFocusNode,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your email';
+                            return 'enter_your_email';
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'email'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -179,14 +200,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.phone,
                         controller: _mobileController,
+                        focusNode: _mobileFocusNode,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter your mobile';
+                            return 'enter_your_mobile'.tr();
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Mobile',
+                          hintText: 'mobile'.tr(),
                           filled: true,
                           fillColor: Colors.white,
                           suffixIcon: Icon(
@@ -214,15 +236,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         child: TextFormField(
                           keyboardType: TextInputType.multiline,
                           textInputAction: TextInputAction.done,
-                          controller: _addressController,
+                          controller: _messageController,
+                          focusNode: _messageFocusNode,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter your address';
+                              return 'enter_your_message'.tr();
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            hintText: 'Message',
+                            hintText: 'message'.tr(),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -242,9 +265,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(
-                            'move_to_home_screen',
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.of(context).pushReplacementNamed(
+                              'move_to_home_screen',
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
@@ -254,7 +279,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           fixedSize: Size(250, 55),
                         ),
                         child: Text(
-                          'SEND',
+                          'send'.tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,

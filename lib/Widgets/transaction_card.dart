@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TransactionCard extends StatelessWidget {
   final name, date, previousPrice, price, isPositive;
@@ -32,7 +33,7 @@ class TransactionCard extends StatelessWidget {
               ),
               // Adobe XD layer: 'New Text Document' (text)
               Text(
-                ' Previous \$$previousPrice',
+                'Previous'.tr() + ' \$$previousPrice',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 14,

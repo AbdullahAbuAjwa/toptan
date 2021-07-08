@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SendRequestOrderScreen extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class SendRequestOrderScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Send Request'),
+        title: Text('send_request'.tr()),
         centerTitle: true,
       ),
       body: Padding(
@@ -36,7 +37,7 @@ class SendRequestOrderScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: Text(
-                    'Thank You',
+                    'thank_you'.tr(),
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 40,
@@ -48,7 +49,7 @@ class SendRequestOrderScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'For Your Order',
+                'for_your_order'.tr(),
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 18,
@@ -70,7 +71,7 @@ class SendRequestOrderScreen extends StatelessWidget {
                   fixedSize: Size(250, 55),
                 ),
                 child: Text(
-                  'GO TO HOME',
+                  'go_to_home'.tr(),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
                     fontSize: 16,

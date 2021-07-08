@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class Search extends StatefulWidget {
   @override
   _SearchState createState() => _SearchState();
@@ -28,7 +28,7 @@ class _SearchState extends State<Search> {
             ),
             fillColor: Color(0xFFFAFAFA),
             hintStyle: new TextStyle(color: Color(0xFFd0cece), fontSize: 18),
-            hintText: "Search",
+            hintText: "search".tr(),
           ),
         ),
       ),

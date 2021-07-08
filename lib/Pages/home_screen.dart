@@ -3,6 +3,7 @@ import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/slider_home.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CompaniesCard(
                   image: 'assets/images/line.png',
-                  title: 'Line',
+                  title: 'line'.tr(),
                   onPress: () {
                     Navigator.of(context).pushNamed(
                       'move_to_super_line_screen',
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CompaniesCard(
                   image: 'assets/images/products.png',
-                  title: 'Products',
+                  title: 'products'.tr(),
                   onPress: () {
                     Navigator.of(context).pushNamed(
                       'move_to_products_screen',
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CompaniesCard(
                   image: 'assets/images/services.png',
-                  title: 'Services',
+                  title: 'services'.tr(),
                   onPress: () {
                     Navigator.of(context).pushNamed(
                       'move_to_services_screen',
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CompaniesCard(
                   image: 'assets/images/mobile2.png',
-                  title: 'Mobile',
+                  title: 'mobile'.tr(),
                   onPress: () {
                     Navigator.of(context).pushNamed(
                       'move_to_mobile_screen',
@@ -84,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
       centerTitle: true,
       elevation: 0,
       backgroundColor: Color(0xff08A8FF),
-      title: Text('Home Screen'),
+      title: Text('home_screen'.tr()),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: InkWell(
             onTap: () {
               Navigator.of(context)

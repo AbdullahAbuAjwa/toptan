@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/chat_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -14,13 +15,13 @@ class _ChatScreenState extends State<ChatScreen> {
       backgroundColor: Color(0xff08A8FF),
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('Chat'),
+        title: Text('chat'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -157,7 +158,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           fillColor: Color(0xffF3F4F7),
                           hintStyle:
                               new TextStyle(color: Colors.grey, fontSize: 18),
-                          hintText: "Write a replay…",
+                          hintText: "write_reply".tr(),
                         ),
                       ),
                     ),
@@ -183,30 +184,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
-              // child: TextField(
-              //   textInputAction: TextInputAction.send,
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.all(Radius.circular(25.0)),
-              //       borderSide: BorderSide(
-              //         width: 1,
-              //         style: BorderStyle.solid,
-              //       ),
-              //     ),
-              //     suffix: Row(
-              //       mainAxisAlignment: MainAxisAlignment.end,
-              //       children: [
-              //         Icon(Icons.emoji_emotions_outlined),
-              //         Icon(Icons.photo),
-              //         Icon(Icons.attach_file),
-              //       ],
-              //     ),
-              //     filled: true,
-              //     fillColor: Color(0xffF3F4F7),
-              //     hintStyle: new TextStyle(color: Colors.grey, fontSize: 18),
-              //     hintText: "Write a replay…",
-              //   ),
-              // ),
             ),
           ],
         ),

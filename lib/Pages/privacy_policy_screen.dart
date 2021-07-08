@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class PrivacyPolicyScreen extends StatefulWidget {
   @override
   _PrivacyPolicyScreenState createState() => _PrivacyPolicyScreenState();
@@ -13,7 +13,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Privacy Policy'),
+        title: Text('privacy_policy'.tr()),
         centerTitle: true,
       ),
       body: Container(
@@ -34,7 +34,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  'Privacy Policy',
+                  'privacy_policy'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 20,

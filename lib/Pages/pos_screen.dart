@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/pos_card.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class POSScreen extends StatefulWidget {
   @override
   _POSScreenState createState() => _POSScreenState();
@@ -16,7 +16,7 @@ class _POSScreenState extends State<POSScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('POS'),
+        title: Text('pos'.tr()),
         centerTitle: true,
         actions: [
           Padding(

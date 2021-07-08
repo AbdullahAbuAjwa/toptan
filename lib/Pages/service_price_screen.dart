@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ServicePriceScreen extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _ServicePriceScreenState extends State<ServicePriceScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Service Price'),
+        title: Text('service_prices'.tr()),
         centerTitle: true,
       ),
     );

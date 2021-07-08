@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
-import 'package:toptan/Helper/enum.dart';
-import 'package:toptan/Helper/show_toast.dart';
-import 'package:toptan/Provider/login_provider.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -14,6 +11,7 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   bool notificationsEnable = true;
+  var langValue;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +21,11 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Setting'),
+        title: Text('setting'.tr()),
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -52,33 +50,28 @@ class _SettingScreenState extends State<SettingScreen> {
             children: [
               ListTile(
                 title: Text(
-                  'Language',
+                  'language'.tr(),
                   style: titleTextStyle(),
                 ),
-                subtitle: Text('English'),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Change',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 14,
-                      color: const Color(0xff616161),
-                      letterSpacing: 0.168,
-                    ),
-                  ),
+                subtitle: Text(
+                  'setting'.tr() == 'الإعدادات'
+                      ? 'arabic'.tr()
+                      : 'setting'.tr() == 'Setting'
+                          ? 'english'.tr()
+                          : 'turkish'.tr(),
                 ),
+                trailing: popupMenu(),
               ),
               ListTile(
                 title: Text(
-                  'Password',
+                  'password'.tr(),
                   style: titleTextStyle(),
                 ),
                 subtitle: Text('********'),
                 trailing: TextButton(
                   onPressed: () {},
                   child: Text(
-                    'Change',
+                    'change'.tr(),
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 14,
@@ -96,7 +89,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   });
                 },
                 title: Text(
-                  'Notifications',
+                  'notification'.tr(),
                   style: titleTextStyle(),
                 ),
                 activeColor: Color(0xff08A8FF),
@@ -109,7 +102,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   );
                 },
                 title: Text(
-                  'FAQ',
+                  'faq'.tr(),
                   style: titleTextStyle(),
                 ),
                 trailing: Icon(
@@ -125,7 +118,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   );
                 },
                 title: Text(
-                  'Privacy Policy',
+                  'privacy_policy'.tr(),
                   style: titleTextStyle(),
                 ),
                 trailing: Icon(
@@ -141,7 +134,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   );
                 },
                 title: Text(
-                  'Terms Of Use',
+                  'terms_of_use'.tr(),
                   style: titleTextStyle(),
                 ),
                 trailing: Icon(
@@ -155,7 +148,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   signOut();
                 },
                 title: Text(
-                  'Log out',
+                  'log_out'.tr(),
                   style: titleTextStyle(),
                 ),
                 trailing: Icon(
@@ -166,6 +159,34 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget popupMenu() {
+    return PopupMenuButton<String>(
+      itemBuilder: (_) => <PopupMenuItem<String>>[
+        PopupMenuItem<String>(child: const Text('English').tr(), value: 'en'),
+        PopupMenuItem<String>(child: const Text('Arabic').tr(), value: 'ar'),
+        PopupMenuItem<String>(child: const Text('Turkish').tr(), value: 'tr'),
+      ],
+      onSelected: (value) {
+        value == 'ar'
+            ? context.setLocale(Locale('ar'))
+            : value == 'en'
+                ? context.setLocale(Locale('en'))
+                : context.setLocale(Locale('tr'));
+        langValue = value;
+        setState(() {});
+      },
+      child: Text(
+        'change'.tr(),
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: const Color(0xff616161),
         ),
       ),
     );

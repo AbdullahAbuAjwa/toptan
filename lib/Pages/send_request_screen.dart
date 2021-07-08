@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SendRequestScreen extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class SendRequestScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Send Request'),
+        title: Text('send_request'.tr()),
         centerTitle: true,
       ),
       body: Padding(
@@ -32,7 +33,7 @@ class SendRequestScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
-                  'The request was sent pending administration approval',
+                  'request_sent_approval'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 22,
@@ -55,7 +56,7 @@ class SendRequestScreen extends StatelessWidget {
                   fixedSize: Size(250, 55),
                 ),
                 child: Text(
-                  'GO TO HOME',
+                  'go_to_home'.tr(),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
                     fontSize: 16,

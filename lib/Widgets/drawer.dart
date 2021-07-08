@@ -8,6 +8,7 @@ import 'package:toptan/Pages/my_cart_screen.dart';
 import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
 import 'package:toptan/Pages/pos_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -68,7 +69,7 @@ class _AppDrawerState extends State<AppDrawer> {
               endIndent: 50,
             ),
             DrawerTile(
-              title: 'Home',
+              title: 'home'.tr(),
               icon: Icons.home_outlined,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -78,14 +79,14 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Notification',
+              title: 'notification'.tr(),
               icon: Icons.notifications_none_outlined,
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
               },
             ),
             DrawerTile(
-              title: 'My Cart',
+              title: 'my_cart'.tr(),
               icon: CustomIcon.ic_ecommerce_cart,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -98,7 +99,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Chat',
+              title: 'chat'.tr(),
               icon: CustomIcon.ic_contact_chat,
               onTap: () {
                 Navigator.of(context)
@@ -106,7 +107,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Order',
+              title: 'order'.tr(),
               icon: Icons.view_compact,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -119,7 +120,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Order Products',
+              title: 'order_products'.tr(),
               icon: Icons.checklist,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -132,7 +133,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Additional Services',
+              title: 'additional_services'.tr(),
               icon: Icons.monetization_on_outlined,
               onTap: () {
                 Navigator.of(context)
@@ -140,7 +141,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'POS',
+              title: 'pos'.tr(),
               icon: CustomIcon.ic_contact_map_pin,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -153,7 +154,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Contact Us',
+              title: 'contact_us'.tr(),
               icon: Icons.contact_phone,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -166,7 +167,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'About Us',
+              title: 'aboutUs'.tr(),
               icon: Icons.info_outline,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -179,7 +180,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             DrawerTile(
-              title: 'Setting',
+              title: 'setting'.tr(),
               icon: Icons.settings,
               onTap: () {
                 Navigator.of(context).pushReplacement(
@@ -202,7 +203,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     height: 15,
                   ),
                   Text(
-                    'Powered By',
+                    'powered_by'.tr(),
                     style: TextStyle(
                       fontFamily: 'Arial',
                       fontSize: 13,

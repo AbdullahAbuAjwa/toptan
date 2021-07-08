@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/search.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ServicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class ServicesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Services'),
+        title: Text('services'.tr()),
         centerTitle: true,
       ),
       body: ListView(

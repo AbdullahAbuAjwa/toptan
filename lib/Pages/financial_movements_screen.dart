@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/transaction_card.dart';
-
-enum period { Daily, Monthly, Yearly }
 
 class FinancialMovementsScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Financial Movements'),
+        title: Text('financial_movements'.tr()),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -44,7 +44,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                         ),
                         title: RichText(
                           text: TextSpan(
-                            text: 'You\'re spent',
+                            text: 'spent'.tr(),
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               fontSize: 13,
@@ -53,7 +53,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                             ),
                             children: const <TextSpan>[
                               TextSpan(
-                                text: '\n\$2000',
+                                text: '\n\/\$2000',
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 28,
@@ -62,14 +62,13 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: '\nof \$3000',
+                                text: '\n\$3000',
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 14,
                                   color: const Color(0xffffffff),
-                                  letterSpacing: 0.42,
                                   fontWeight: FontWeight.w300,
-                                  height: 1.1428571428571428,
+                                  height: 1.5,
                                 ),
                               ),
                             ],
@@ -106,17 +105,19 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(
-                            'Transactions',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 20,
-                              color: const Color(0xff000000),
-                              letterSpacing: 0.3,
-                              fontWeight: FontWeight.w500,
-                              height: 0.95,
+                          child: Center(
+                            child: Text(
+                              'transactions'.tr(),
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20,
+                                color: const Color(0xff000000),
+                                letterSpacing: 0.3,
+                                fontWeight: FontWeight.w500,
+                                height: 0.95,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
                         ),
                         Expanded(
@@ -139,7 +140,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                             Navigator.pop(context);
                                           },
                                           child: ListTile(
-                                            title: Text('Daily'),
+                                            title: Text('daily'.tr()),
                                           ),
                                         ),
                                         InkWell(
@@ -149,7 +150,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                             Navigator.pop(context);
                                           },
                                           child: ListTile(
-                                            title: Text('Monthly'),
+                                            title: Text('monthly'.tr()),
                                           ),
                                         ),
                                         InkWell(
@@ -159,7 +160,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                             Navigator.pop(context);
                                           },
                                           child: ListTile(
-                                            title: Text('Yearly'),
+                                            title: Text('yearly'.tr()),
                                           ),
                                         ),
                                       ],
@@ -170,10 +171,10 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                               child: ListTile(
                                 title: Text(
                                   value == period.Daily
-                                      ? 'Daily'
+                                      ? 'daily'.tr()
                                       : value == period.Monthly
-                                          ? 'Monthly'
-                                          : 'Yearly',
+                                          ? 'monthly'.tr()
+                                          : 'yearly'.tr(),
                                   style: TextStyle(color: Color(0xff616161)),
                                 ),
                                 trailing: Icon(

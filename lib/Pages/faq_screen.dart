@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FaqScreen extends StatefulWidget {
   @override
   _FaqScreenState createState() => _FaqScreenState();
@@ -13,7 +13,7 @@ class _FaqScreenState extends State<FaqScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('FAQ'),
+        title: Text('faq'.tr()),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

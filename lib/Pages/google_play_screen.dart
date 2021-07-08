@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/googleplay_card.dart';
 import 'package:toptan/Widgets/send_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class GooglePlayScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _GooglePlayScreenState extends State<GooglePlayScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('Google Play'),
+        title: Text('google_play'.tr()),
         centerTitle: true,
       ),
       body: Column(
@@ -26,7 +27,7 @@ class _GooglePlayScreenState extends State<GooglePlayScreen> {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Choose the right price :',
+                'choose_right_price'.tr(),
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 18,

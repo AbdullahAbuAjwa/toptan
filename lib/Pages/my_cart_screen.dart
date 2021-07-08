@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/my_cart_card.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class MyCartScreen extends StatefulWidget {
   @override
   _MyCartScreenState createState() => _MyCartScreenState();
@@ -14,13 +14,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
       backgroundColor: Color(0xff08A8FF),
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('My Cart'),
+        title: Text('my_cart'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -44,7 +44,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
             CartCard(),
             CartCard(),
             Text(
-              'TOTAL AMOUNT',
+              'total_amount'.tr(),
               style: TextStyle(
                 fontFamily: 'SF Pro',
                 fontSize: 17,
@@ -80,7 +80,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'MAKE ORDER',
+                      'make_order'.tr(),
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 16,
@@ -90,7 +90,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       textAlign: TextAlign.left,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
+                      padding: const EdgeInsets.only(left: 16.0,right: 16),
                       child: Icon(Icons.arrow_forward_outlined),
                     )
                   ],

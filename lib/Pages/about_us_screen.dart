@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/drawer.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,11 +10,11 @@ class AboutUsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff08A8FF),
         elevation: 0,
-        title: Text('About Us'),
+        title: Text('aboutUs').tr(),
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 12.0,left: 12),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('move_to_notification_screen');
@@ -58,7 +58,7 @@ class AboutUsScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 20),
                       Text(
-                        'About us',
+                        'aboutUs'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 20,

@@ -6,8 +6,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/invoice_line_card.dart';
 import 'package:toptan/Widgets/send_button.dart';
-
-enum line { newline, transformLine, invoiceLine }
+import 'package:easy_localization/easy_localization.dart';
+import 'package:toptan/Helper/enum.dart';
 
 class LineScreen extends StatefulWidget {
   @override
@@ -48,14 +48,14 @@ class _LineScreenState extends State<LineScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: Icon(Icons.photo_library),
-                      title: Text('Photo Library'),
+                      title: Text('photo_library'.tr()),
                       onTap: () {
                         _getFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: Icon(Icons.photo_camera),
-                    title: Text('Camera'),
+                    title: Text('camera'.tr()),
                     onTap: () {
                       _getFromCamera();
                       Navigator.of(context).pop();
@@ -73,7 +73,7 @@ class _LineScreenState extends State<LineScreen> {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
       appBar: AppBar(
-        title: Text('Lines'),
+        title: Text('line'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xff08A8FF),
@@ -86,44 +86,43 @@ class _LineScreenState extends State<LineScreen> {
                 showMaterialModalBottomSheet(
                   context: context,
                   closeProgressThreshold: 1.5,
-                  builder: (context) =>
-                      SingleChildScrollView(
-                        controller: ModalScrollController.of(context),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                valueLine = line.newline;
-                                setState(() {});
-                                Navigator.pop(context);
-                              },
-                              child: ListTile(
-                                title: Text('New line'),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                valueLine = line.transformLine;
-                                setState(() {});
-                                Navigator.pop(context);
-                              },
-                              child: ListTile(
-                                title: Text('Transform line'),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                valueLine = line.invoiceLine;
-                                setState(() {});
-                                Navigator.pop(context);
-                              },
-                              child: ListTile(
-                                title: Text('Invoice line'),
-                              ),
-                            ),
-                          ],
+                  builder: (context) => SingleChildScrollView(
+                    controller: ModalScrollController.of(context),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            valueLine = line.newline;
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          child: ListTile(
+                            title: Text('New line'),
+                          ),
                         ),
-                      ),
+                        InkWell(
+                          onTap: () {
+                            valueLine = line.transformLine;
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          child: ListTile(
+                            title: Text('Transform line'),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            valueLine = line.invoiceLine;
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          child: ListTile(
+                            title: Text('Invoice line'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
               child: Container(
@@ -142,8 +141,8 @@ class _LineScreenState extends State<LineScreen> {
                       valueLine == line.newline
                           ? 'New line'
                           : valueLine == line.transformLine
-                          ? 'Transform line'
-                          : 'Invoice line',
+                              ? 'Transform line'
+                              : 'Invoice line',
                       style: TextStyle(fontSize: 18, color: Color(0xff323B4A)),
                     ),
                     Icon(
@@ -260,7 +259,7 @@ class _LineScreenState extends State<LineScreen> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      'Photo ID :',
+                      'photo_id'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 18,
@@ -293,7 +292,7 @@ class _LineScreenState extends State<LineScreen> {
                       title: Text(
                         imageFile != null
                             ? imageFile.toString()
-                            : 'Attach the photo ID',
+                            : 'attach_photo_id'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 16,
@@ -313,7 +312,7 @@ class _LineScreenState extends State<LineScreen> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      'Photo QR Code :',
+                      'photo_QR_code'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 18,
@@ -341,7 +340,7 @@ class _LineScreenState extends State<LineScreen> {
                         ),
                       ),
                       title: Text(
-                        'Attach QR Code',
+                        'attach_QR_code'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 16,
@@ -354,11 +353,13 @@ class _LineScreenState extends State<LineScreen> {
               ),
             ),
             Align(
-              alignment: Alignment.topLeft,
+              alignment: 'available_packages'.tr() == 'الحزم المتوفرة :'
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Available packages :',
+                  'available_packages'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 18,
@@ -389,7 +390,7 @@ class _LineScreenState extends State<LineScreen> {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  hintText: 'comment...',
+                  hintText: 'comment'.tr(),
                   hintStyle: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 16,

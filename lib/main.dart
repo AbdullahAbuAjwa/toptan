@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
@@ -34,10 +33,7 @@ import 'Pages/splash_screen.dart';
 import 'Pages/super_box_screen.dart';
 import 'Pages/super_online_screen.dart';
 import 'Pages/term_of_use_screen.dart';
-import 'Provider/lang_provider.dart';
 import 'Provider/login_provider.dart';
-
-
 
 class MyApp extends StatefulWidget {
   @override
@@ -45,16 +41,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //LangProvider langProvider = LangProvider();
-
-  // void getCurrentLang() {
-  //   langProvider.language = AppShared.sharedPreferencesController!.getLang();
-  // }
-
   @override
   void initState() {
-   // getCurrentLang();
-
     super.initState();
   }
 
@@ -64,10 +52,8 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider.value(value: LoginProvider()),
-        // ChangeNotifierProvider.value(value: langProvider),
-
-        Provider<LoginProvider>(create: (_) => LoginProvider()),
+        ChangeNotifierProvider.value(value: LoginProvider()),
+        //  Provider<LoginProvider>(create: (_) => LoginProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -75,8 +61,10 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         home: SplashScreen(),
-
         routes: {
           'move_to_mobile_screen': (ctx) => MobileScreen(),
           'move_to_services_screen': (ctx) => ServicesScreen(),
@@ -115,7 +103,18 @@ class _MyAppState extends State<MyApp> {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   AppShared.sharedPreferencesController =
       await SharedPreferencesController.instance;
-  runApp(MyApp());
+  runApp(EasyLocalization(
+    supportedLocales: [
+      Locale('en'),
+      Locale('ar'),
+      Locale('tr'),
+    ],
+    fallbackLocale: Locale('en'),
+    path: 'assets/lang',
+    saveLocale: true,
+    child: MyApp(),
+  ));
 }
