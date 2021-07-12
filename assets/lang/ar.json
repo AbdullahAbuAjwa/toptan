@@ -87,5 +87,7 @@
   "available_packages": "الحزم المتوفرة :",
   "comment": "التعليق...",
   "attach_photo_id": "أرفق الصورة الشخصية",
-  "attach_QR_code": "أرفق رمز QR"
+  "attach_QR_code": "أرفق رمز QR",
+  "check_internet": "الرجاء التأكد من الاتصال بالانترنت!"
+
 }

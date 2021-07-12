@@ -20,17 +20,18 @@ class UserResponse {
     this.message,
   });
 
-  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
-        status: json["status"],
-        code: json["code"],
-        user: User.fromJson(json["user"] ?? {}),
-        message: json["message"],
-      );
 
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "code": code,
-        "user": user!.toJson(),
-        "message": message,
-      };
+factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
+      status: json["status"],
+      code: json["code"],
+      user: User.fromJson(json["user"] ?? {}),
+      message: json["message"],
+    );
+
+Map<String, dynamic> toJson() => {
+      "status": status,
+      "code": code,
+      "user": user.toJson(),
+      "message": message,
+    };
 }

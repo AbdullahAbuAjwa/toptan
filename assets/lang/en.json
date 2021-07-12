@@ -54,7 +54,7 @@
   "accept": "Accept",
   "reject": "Reject",
   "pos": "POS",
-  "prices": "Price\\'s",
+  "prices": "Prices",
   "privacy_policy": "Privacy Policy",
   "reset_password": "Reset Password",
   "reset": "RESET",
@@ -87,5 +87,6 @@
   "available_packages": "Available packages :",
   "comment": "comment...",
   "attach_photo_id": "Attach the photo ID",
-  "attach_QR_code": "Attach QR Code"
+  "attach_QR_code": "Attach QR Code",
+  "check_internet": "Please make sure you are connected to the Internet!"
 }

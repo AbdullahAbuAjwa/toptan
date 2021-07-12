@@ -36,6 +36,8 @@ dependencies:
   dio: ^4.0.0
   fluttertoast: ^8.0.7
   easy_localization: ^3.0.0
+  cached_network_image: ^3.0.0
+  webview_flutter: ^2.0.9
 
 
 

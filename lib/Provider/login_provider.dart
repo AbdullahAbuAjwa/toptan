@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/model/login.dart';
 import 'package:toptan/model/user_response.dart';
@@ -15,48 +14,47 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<UserResponse> signIn({
-    var email,
-    var password,
-  }) async {
+  Future<UserResponse> signIn(locale, {var email, var password}) async {
     Login loginRequest = Login(
       deviceType: AppShared.deviceType,
       email: email,
       password: password,
     );
 
-    var response = await AppShared.dio!.post(
+    Response response = await AppShared.dio!.post(
       '${AppShared.baseUrl}login',
       data: loginRequest.toJson(),
+      options: Options(
+        headers: {
+          'Accept-Language': locale,
+        },
+      ),
     );
-
-    UserResponse userResponse = UserResponse.fromJson(response.data);
+    UserResponse? userResponse = UserResponse.fromJson(response.data);
     if (userResponse.status) {
       AppShared.currentUser = userResponse;
       await AppShared.sharedPreferencesController!.setIsLogin(true);
+      await AppShared.sharedPreferencesController?.setUserData(userResponse);
+      // print('ssss' + AppShared.currentUser!.user.email);
       notifyListeners();
     }
     return userResponse;
   }
 
-  Future<UserResponse> logout() async {
+  Future<UserResponse> logout(locale) async {
     var response = await AppShared.dio!.get(
       '${AppShared.baseUrl}logout',
       options: Options(
         headers: {
           "Authorization": 'Bearer ${AppShared.currentUser!.user!.accessToken}',
-          // 'Accept-Language': AppShared.sharedPreferencesController.getAppLang()
+          'Accept-Language': locale
         },
       ),
     );
-
     UserResponse logoutResponse = UserResponse.fromJson(response.data);
-
     if (logoutResponse.status) {
-      //  String appLang = AppShared.sharedPreferencesController.getAppLang();
       AppShared.sharedPreferencesController!.clear();
       await AppShared.sharedPreferencesController!.setIsLogin(false);
-      // await AppShared.sharedPreferencesController.setAppLang(appLang);
       print(logoutResponse.status.toString());
     }
     return logoutResponse;

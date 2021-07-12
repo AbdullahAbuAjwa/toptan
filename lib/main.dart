@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:toptan/Pages/web_view_screen.dart';
+import 'package:toptan/Provider/faq_provider.dart';
+import 'package:toptan/Provider/slider_provider.dart';
 
 import 'Helper/app_shared.dart';
 import 'Helper/share_preferences.dart';
@@ -34,6 +38,7 @@ import 'Pages/super_box_screen.dart';
 import 'Pages/super_online_screen.dart';
 import 'Pages/term_of_use_screen.dart';
 import 'Provider/login_provider.dart';
+import 'Provider/notification_provider.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -53,6 +58,9 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: LoginProvider()),
+        ChangeNotifierProvider.value(value: NotificationProvider()),
+        ChangeNotifierProvider.value(value: SliderProvider()),
+        ChangeNotifierProvider.value(value: FAQProvider()),
         //  Provider<LoginProvider>(create: (_) => LoginProvider()),
       ],
       child: MaterialApp(
@@ -95,6 +103,7 @@ class _MyAppState extends State<MyApp> {
           'move_to_privacy_policy_screen': (ctx) => PrivacyPolicyScreen(),
           'move_to_additional_services_screen': (ctx) =>
               AdditionalServicesScreen(),
+          'move_to_webView_screen': (ctx) => WebViewScreen(),
         },
       ),
     );
@@ -104,8 +113,10 @@ class _MyAppState extends State<MyApp> {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   AppShared.sharedPreferencesController =
       await SharedPreferencesController.instance;
+
   runApp(EasyLocalization(
     supportedLocales: [
       Locale('en'),

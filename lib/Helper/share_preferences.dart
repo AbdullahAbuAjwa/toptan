@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toptan/model/user.dart';
+import 'package:toptan/model/user_response.dart';
 
 class SharedPreferencesController {
   static Future<SharedPreferencesController>? _instance;
@@ -37,25 +39,39 @@ class SharedPreferencesController {
     await _sharedPreferences?.setBool('isLogin', isLogin);
   }
 
-  Future<void> setLang(value) async {
-    await _sharedPreferences?.setString('lang', value);
+
+  getUserData() {
+    return UserResponse()
+      ..user = User(
+        id: _sharedPreferences?.getInt('id'),
+        name: _sharedPreferences?.getString('name'),
+        email: _sharedPreferences?.getString('email'),
+        mobile: _sharedPreferences?.getString('mobile'),
+        imageProfile: _sharedPreferences?.getString('profile_image'),
+        cityId: _sharedPreferences?.getInt('city_id'),
+        countryId: _sharedPreferences?.getInt('country_id'),
+        groupId: _sharedPreferences?.getInt('group_id'),
+        status: _sharedPreferences?.getString('status'),
+        address: _sharedPreferences?.getString('address'),
+        accessToken: _sharedPreferences?.getString('access_token'),
+      );
   }
 
-  String getLang() {
-    return _sharedPreferences?.getString('lang') ?? 'en';
+  Future<void> setUserData(UserResponse userResponse) async {
+    await _sharedPreferences?.setInt('id', userResponse.user!.id);
+    await _sharedPreferences?.setString('name', userResponse.user!.name);
+    await _sharedPreferences?.setString('email', userResponse.user.email);
+    await _sharedPreferences?.setString('mobile', userResponse.user.mobile);
+    await _sharedPreferences?.setString(
+        'profile_image', userResponse.user!.imageProfile);
+    await _sharedPreferences?.setInt('city_id', userResponse.user.cityId);
+    await _sharedPreferences?.setInt('country_id', userResponse.user.countryId);
+    await _sharedPreferences?.setInt('group_id', userResponse.user.groupId);
+    await _sharedPreferences?.setString('status', userResponse.user.status);
+    await _sharedPreferences?.setString('address', userResponse.user.address);
+    await _sharedPreferences?.setString(
+        'access_token', userResponse.user.accessToken);
   }
-
-  //
-  // String getAppLang() {
-  //   return _sharedPreferences?.getString('lang') ?? 'en';
-  //   //?? Constants.SHARED_APP_LANG_DEFAULT_VALUE;
-  // }
-  //
-  // // set the current app lang
-  // Future<void> setAppLang(lang) async {
-  //   await _sharedPreferences?.setString('lang', lang);
-  //   Helpers.changeAppLang(lang);
-  // }
 
   Future<void> clear() async {
     await _sharedPreferences!.clear();

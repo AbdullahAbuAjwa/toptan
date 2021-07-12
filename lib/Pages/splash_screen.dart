@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/login_screen.dart';
@@ -14,10 +15,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  @override
   void initState() {
     super.initState();
+
     Timer(
-      Duration(seconds: 2),
+      Duration(milliseconds: 1200),
       () => AppShared.sharedPreferencesController!.showIntro()
           ? Navigator.pushReplacement(
               context,
@@ -43,7 +50,12 @@ class _SplashScreenState extends State<SplashScreen> {
                       return HomeScreen();
                     },
                   ),
-                ),
+                )
+                  .then(
+                    (_) => AppShared.currentUser =
+                        AppShared.sharedPreferencesController?.getUserData(),
+                  )
+
     );
   }
 

@@ -1,15 +1,15 @@
-
 class User {
-  var id;
-  var name;
-  var email;
-  var mobile;
-  var imageProfile;
-  var cityId;
-  var groupId;
-  var status;
-  var type;
-  var accessToken;
+  int? id;
+  String? name;
+  String? email;
+  String? mobile;
+  String? imageProfile;
+  int? cityId;
+  int? countryId;
+  int? groupId;
+  String? status;
+  String? address;
+  String? accessToken;
 
   User({
     this.id,
@@ -18,9 +18,10 @@ class User {
     this.mobile,
     this.imageProfile,
     this.cityId,
+    this.countryId,
     this.groupId,
     this.status,
-    this.type,
+    this.address,
     this.accessToken,
   });
 
@@ -29,10 +30,12 @@ class User {
         name: json["name"],
         email: json["email"],
         mobile: json["mobile"],
-        imageProfile: json["image_profile"],
+        imageProfile: json["profile_image"],
         cityId: json["city_id"],
+        countryId: json["country_id"],
         status: json["status"],
-        type: json["type"],
+        accessToken: json['access_token'],
+        address: json["address"],
         groupId: json['group_id'],
       );
 
@@ -41,11 +44,12 @@ class User {
         "name": name,
         "email": email,
         "mobile": mobile,
-        "image_profile": imageProfile,
+        "profile_image": imageProfile,
         "city_id": cityId,
+        "country_id": countryId,
         "status": status,
-        "type": type,
         "access_token": accessToken,
+        "address": address,
         "group_id": groupId,
       };
 }

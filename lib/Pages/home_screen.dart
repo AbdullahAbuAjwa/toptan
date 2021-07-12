@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Provider/notification_provider.dart';
+import 'package:toptan/Provider/slider_provider.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/slider_home.dart';
@@ -13,8 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // print(AppShared.currentUser!.user!.email);
     super.initState();
+    setState(() {});
   }
 
   @override
@@ -25,11 +29,44 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: appBarHomeScreen(),
       body: Column(
         children: [
-          SliderHomeScreen(),
+          Expanded(
+            flex: 1,
+            child: FutureBuilder(
+              future: Provider.of<SliderProvider>(context, listen: false)
+                  .fetchSliders(Localizations.localeOf(context)),
+              builder:
+                  (BuildContext context, AsyncSnapshot<dynamic> snapshot) =>
+                      snapshot.connectionState == ConnectionState.waiting
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Consumer<SliderProvider>(
+                              child: Center(
+                                child: Text('check_internet'.tr(),
+                                    style: TextStyle(fontSize: 22)),
+                              ),
+                              builder:
+                                  (BuildContext context, data, Widget? child) =>
+                                      ListView.builder(
+                                physics: ScrollPhysics(),
+                                itemCount: data.items!.length,
+                                itemBuilder: (ctx, i) =>
+                                    data.items![i].status == 'active'
+                                        ? SliderHomeScreenCard(
+                                            image: data.items![i].img,
+                                            items: data.items,
+                                            link: data.items![i].link,
+                                          )
+                                        : Container(),
+                              ),
+                            ),
+            ),
+          ),
           SizedBox(
             height: 30,
           ),
           Expanded(
+            flex: 2,
             child: GridView.count(
               crossAxisCount: 2,
               crossAxisSpacing: 10,

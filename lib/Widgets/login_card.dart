@@ -53,7 +53,7 @@ class _LoginCardState extends State<LoginCard> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'LOG IN',
+                'login'.tr(),
                 style: TextStyle(
                   fontFamily: 'SF Pro',
                   fontSize: 19,
@@ -200,7 +200,8 @@ class _LoginCardState extends State<LoginCard> {
     _formKey.currentState!.save();
     try {
       loginProvider!.isLoading = true;
-      UserResponse userResponse = await loginProvider!.signIn(
+      UserResponse? userResponse = await loginProvider!.signIn(
+        Localizations.localeOf(context),
         email: _emailController.text,
         password: _passwordController.text,
       );
@@ -214,6 +215,7 @@ class _LoginCardState extends State<LoginCard> {
       }
     } catch (error) {
       loginProvider!.isLoading = false;
+      print('error: ' + error.toString());
       throw (error);
     }
   }

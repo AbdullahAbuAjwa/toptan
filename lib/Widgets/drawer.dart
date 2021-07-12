@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Pages/SettingScreen.dart';
 import 'package:toptan/Pages/about_us_screen.dart';
@@ -9,6 +12,8 @@ import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
 import 'package:toptan/Pages/pos_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:toptan/Provider/notification_provider.dart';
+import 'package:toptan/Provider/slider_provider.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -16,6 +21,13 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  @override
+  void initState() {
+    AppShared.currentUser =
+        AppShared.sharedPreferencesController!.getUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -31,15 +43,18 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
                 currentAccountPictureSize: Size(85, 85),
                 accountEmail: null,
-                accountName: Text(
-                  'Pankaj Patel',
-                  style: TextStyle(
-                    fontFamily: 'SF Pro',
-                    fontSize: 19,
-                    color: const Color(0xffffffff),
-                    fontWeight: FontWeight.w700,
+                accountName: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    AppShared.currentUser!.user.name,
+                    style: TextStyle(
+                      fontFamily: 'SF Pro',
+                      fontSize: 19,
+                      color: const Color(0xffffffff),
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
                 currentAccountPicture: GestureDetector(
                   onTap: () {
@@ -53,11 +68,33 @@ class _AppDrawerState extends State<AppDrawer> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.white, width: 2),
                       borderRadius: BorderRadius.circular(50.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/avatar.png'),
-                        fit: BoxFit.cover,
-                      ),
                     ),
+                    child: Container(
+                      height: 40.0,
+                      width: 65.0,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(50.0),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/avatar.png'),
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    /*   child: CachedNetworkImage(
+                      imageUrl: AppShared.currentUser!.user.imageProfile,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        height: 40.0,
+                        width: 65.0,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 2),
+                            borderRadius: BorderRadius.circular(50.0),
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/avatar.png'),
+                              fit: BoxFit.cover,
+                            )),
+                      ),
+                    ),*/
                   ),
                 ),
               ),
@@ -81,8 +118,11 @@ class _AppDrawerState extends State<AppDrawer> {
             DrawerTile(
               title: 'notification'.tr(),
               icon: Icons.notifications_none_outlined,
-              onTap: () {
-                Navigator.of(context).pushNamed('move_to_notification_screen');
+              onTap: () async {
+                // Provider.of<NotificationProvider>(context, listen: false)
+                //     .fetchNotification();
+                await Navigator.of(context)
+                    .pushNamed('move_to_notification_screen');
               },
             ),
             DrawerTile(
@@ -229,6 +269,16 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
     );
   }
+
+/* getNotifications() async {
+    try {
+      Provider.of<NotificationProvider>(context, listen: false)
+          .fetchNotification();
+      await Navigator.of(context).pushNamed('move_to_notification_screen');
+    } catch (error) {
+      print('eeeee: ' + error.toString());
+    }
+  }*/
 }
 
 class DrawerTile extends StatefulWidget {
