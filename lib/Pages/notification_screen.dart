@@ -1,9 +1,9 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/notification_provider.dart';
 import 'package:toptan/Widgets/notification_card.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:toptan/model/notification.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override
@@ -11,6 +11,13 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('sssssssss: ' + ConnectivityResult.wifi.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,19 +31,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
       body: FutureBuilder(
         future: Provider.of<NotificationProvider>(context, listen: false)
             .fetchNotification(Localizations.localeOf(context)),
-        builder: (ctx, snapshot) =>
+        builder: (ctx, AsyncSnapshot snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? Center(
-                    heightFactor: 15,
-                    widthFactor: 15,
                     child: CircularProgressIndicator(),
                   )
                 : Consumer<NotificationProvider>(
-                    child: Center(
-
-                      child: Text('check_internet'.tr(),
-                          style: TextStyle(fontSize: 22)),
-                    ),
                     builder: (BuildContext context, data, Widget? child) =>
                         ListView.builder(
                       physics: ScrollPhysics(),

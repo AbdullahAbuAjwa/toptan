@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:toptan/model/app_response.dart';
+import 'package:toptan/model/response/app_response.dart';
 
 FAQResponse sliderResponseFromJson(String str) =>
     FAQResponse.fromJson(json.decode(str));
@@ -19,9 +19,9 @@ class FAQResponse extends AppResponse {
     this.faq,
   }) : super(code: code, message: message, status: status);
 
-  bool? status;
-  int? code;
-  String? message;
+  var status;
+  var code;
+  var message;
   List<Faq>? faq;
 
   factory FAQResponse.fromJson(Map<String, dynamic> json) => FAQResponse(

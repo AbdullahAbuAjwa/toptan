@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:toptan/model/app_response.dart';
+import 'package:toptan/model/response/app_response.dart';
 
 SliderResponse sliderResponseFromJson(String str) =>
     SliderResponse.fromJson(json.decode(str));

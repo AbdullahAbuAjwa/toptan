@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/login_provider.dart';
-import 'package:toptan/model/user_response.dart';
+import 'package:toptan/model/response/user.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class LoginCard extends StatefulWidget {
@@ -145,7 +145,6 @@ class _LoginCardState extends State<LoginCard> {
               child: ElevatedButton(
                 child: Text(
                   'login'.tr(),
-                  //     AppShared.getLanguage(context, 'login'),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
                     fontSize: 18,

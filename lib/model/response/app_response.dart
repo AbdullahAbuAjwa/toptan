@@ -1,7 +1,7 @@
 class AppResponse {
-  bool? status;
-  int? code;
-  String? message;
+  var status;
+  var code;
+  var message;
 
   AppResponse({
     this.status,

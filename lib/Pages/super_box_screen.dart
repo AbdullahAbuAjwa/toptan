@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/googleplay_card.dart';
 import 'package:toptan/Widgets/send_button.dart';
-
 class SuperBoxScreen extends StatefulWidget {
   @override
   _SuperBoxScreenState createState() => _SuperBoxScreenState();

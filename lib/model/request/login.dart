@@ -8,13 +8,14 @@ class Login {
   var password;
   var email;
   var deviceType;
+
   // String? fcmToken;
 
   Login({
     this.password,
     this.email,
     this.deviceType,
-   // this.fcmToken,
+    // this.fcmToken,
   });
 
   factory Login.fromJson(Map<String, dynamic> json) => Login(
@@ -28,6 +29,6 @@ class Login {
         "password": password,
         "user": email,
         "device_type": deviceType,
-      //  "fcm_token": fcmToken,
+        //  "fcm_token": fcmToken,
       };
 }

@@ -1,19 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/response/slider.dart';
+import 'package:toptan/model/response/pages.dart';
 
-class SliderProvider with ChangeNotifier {
-  List<Sliders>? _items = [];
+class PagesProvider with ChangeNotifier {
+  PagesResponse? _pagesResponse;
 
-  List<Sliders>? get items {
-    return [...?_items];
-  }
+  PagesResponse? get pagesResponse => _pagesResponse;
 
-  Future<void> fetchSliders(locale) async {
+  Future<void> fetchPages(locale, pageNumber) async {
     try {
       Response response = await AppShared.dio!.get(
-        '${AppShared.baseUrl}getSliders',
+        '${AppShared.baseUrl}getPages/$pageNumber',
         options: Options(
           headers: {
             'Accept-Language': locale,
@@ -21,13 +19,10 @@ class SliderProvider with ChangeNotifier {
           },
         ),
       );
-   //   print(response.data);
-      SliderResponse sliderResponse =
-          SliderResponse.fromJson(response.data);
-      _items = sliderResponse.sliders;
+      // print(response.data);
+      PagesResponse pagesResponse = PagesResponse.fromJson(response.data);
+      _pagesResponse = pagesResponse;
       notifyListeners();
-    } on Exception {
-      throw 'Error';
     } catch (error) {
       print('Error: ' + error.toString());
     }

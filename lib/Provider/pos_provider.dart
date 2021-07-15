@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/response/slider.dart';
+import 'package:toptan/model/response/pos.dart';
 
-class SliderProvider with ChangeNotifier {
-  List<Sliders>? _items = [];
+class PointOfSaleProvider with ChangeNotifier {
+  List<PointOfSale>? _items = [];
 
-  List<Sliders>? get items {
+  List<PointOfSale>? get items {
     return [...?_items];
   }
 
-  Future<void> fetchSliders(locale) async {
+  Future<void> fetchPos(locale) async {
     try {
       Response response = await AppShared.dio!.get(
-        '${AppShared.baseUrl}getSliders',
+        '${AppShared.baseUrl}getPointOfSale',
         options: Options(
           headers: {
             'Accept-Language': locale,
@@ -21,13 +21,11 @@ class SliderProvider with ChangeNotifier {
           },
         ),
       );
-   //   print(response.data);
-      SliderResponse sliderResponse =
-          SliderResponse.fromJson(response.data);
-      _items = sliderResponse.sliders;
+      //  print(response.data);
+      PointOfSaleResponse pointOfSaleResponse =
+          PointOfSaleResponse.fromJson(response.data);
+      _items = pointOfSaleResponse.pointOfSales;
       notifyListeners();
-    } on Exception {
-      throw 'Error';
     } catch (error) {
       print('Error: ' + error.toString());
     }

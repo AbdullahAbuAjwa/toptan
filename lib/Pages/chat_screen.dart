@@ -11,181 +11,189 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff08A8FF),
-      drawer: AppDrawer(),
-      appBar: AppBar(
-        title: Text('chat'.tr()),
-        centerTitle: true,
-        elevation: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, 'move_to_home_screen');
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Color(0xff08A8FF),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0,left: 12),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed('move_to_notification_screen');
-              },
-              child: Icon(Icons.notifications_none_outlined),
-            ),
-          ),
-        ],
-      ),
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: ListView(
-          children: [
+        drawer: AppDrawer(),
+        appBar: AppBar(
+          title: Text('chat'.tr()),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Color(0xff08A8FF),
+          actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: ListTile(
-                leading: CircleAvatar(
-                  radius: 35,
-                  backgroundImage: AssetImage(
-                    'assets/images/avatar.png',
-                  ),
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Text(
-                    'Pankaj joined the chat',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro',
-                      fontSize: 18,
-                      color: const Color(0xaf000000),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                  child: Text(
-                    '2m ago',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro',
-                      fontSize: 16,
-                      color: const Color(0xff707070),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: 500,
-              child: ListView(
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: true,
-                    delivered: true,
-                  ),
-                  ChatCard(
-                    time: '11/10/2020',
-                    message: 'MESSAGE',
-                    isMe: false,
-                    delivered: true,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color(0xffF3F4F7),
-                ),
-                padding: EdgeInsets.only(left: 5, bottom: 10, top: 10),
-                height: 60,
-                width: double.infinity,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        textInputAction: TextInputAction.send,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          filled: true,
-                          fillColor: Color(0xffF3F4F7),
-                          hintStyle:
-                              new TextStyle(color: Colors.grey, fontSize: 18),
-                          hintText: "write_reply".tr(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.emoji_emotions_outlined)),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.photo),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.attach_file),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              padding: const EdgeInsets.only(right: 12.0,left: 12),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed('move_to_notification_screen');
+                },
+                child: Icon(Icons.notifications_none_outlined),
               ),
             ),
           ],
+        ),
+        body: Container(
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 35,
+                      backgroundImage: AssetImage(
+                        'assets/images/avatar.png',
+                      ),
+                    ),
+                    title: Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        'Pankaj joined the chat',
+                        style: TextStyle(
+                          fontFamily: 'SF Pro',
+                          fontSize: 18,
+                          color: const Color(0xaf000000),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                      child: Text(
+                        '2m ago',
+                        style: TextStyle(
+                          fontFamily: 'SF Pro',
+                          fontSize: 16,
+                          color: const Color(0xff707070),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 500,
+                  child: ListView(
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: true,
+                        delivered: true,
+                      ),
+                      ChatCard(
+                        time: '11/10/2020',
+                        message: 'MESSAGE',
+                        isMe: false,
+                        delivered: true,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Color(0xffF3F4F7),
+                    ),
+                    padding: EdgeInsets.only(left: 5, bottom: 10, top: 10),
+                    height: 60,
+                    width: double.infinity,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            textInputAction: TextInputAction.send,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Color(0xffF3F4F7),
+                              hintStyle:
+                                  new TextStyle(color: Colors.grey, fontSize: 18),
+                              hintText: "write_reply".tr(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.emoji_emotions_outlined)),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.photo),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.attach_file),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

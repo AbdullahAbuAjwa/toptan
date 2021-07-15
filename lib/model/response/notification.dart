@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:toptan/model/app_response.dart';
+import 'package:toptan/model/response/app_response.dart';
 
 NotificationResponse notificationResponseFromJson(String str) =>
     NotificationResponse.fromJson(json.decode(str));

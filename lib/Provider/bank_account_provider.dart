@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/response/slider.dart';
+import 'package:toptan/model/response/bank_account.dart';
 
-class SliderProvider with ChangeNotifier {
-  List<Sliders>? _items = [];
+class BankAccountProvider with ChangeNotifier {
+  List<Account>? _items = [];
 
-  List<Sliders>? get items {
+  List<Account>? get items {
     return [...?_items];
   }
 
-  Future<void> fetchSliders(locale) async {
+  Future<void> fetchBankAccounts(locale) async {
     try {
       Response response = await AppShared.dio!.get(
-        '${AppShared.baseUrl}getSliders',
+        '${AppShared.baseUrl}getBankAccounts',
         options: Options(
           headers: {
             'Accept-Language': locale,
@@ -21,13 +21,11 @@ class SliderProvider with ChangeNotifier {
           },
         ),
       );
-   //   print(response.data);
-      SliderResponse sliderResponse =
-          SliderResponse.fromJson(response.data);
-      _items = sliderResponse.sliders;
+      //  print(response.data);
+      BankAccountResponse bankAccountResponse =
+          BankAccountResponse.fromJson(response.data);
+      _items = bankAccountResponse.accounts;
       notifyListeners();
-    } on Exception {
-      throw 'Error';
     } catch (error) {
       print('Error: ' + error.toString());
     }

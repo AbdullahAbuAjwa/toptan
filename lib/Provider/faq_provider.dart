@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/faq.dart';
+import 'package:toptan/model/response/faq.dart';
 
 class FAQProvider with ChangeNotifier {
   List<Faq>? _items = [];

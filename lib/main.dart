@@ -1,44 +1,26 @@
-import 'package:dio/dio.dart';
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Pages/web_view_screen.dart';
+import 'package:toptan/Provider/contact_us_provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
+import 'package:toptan/Provider/pages_provider.dart';
+import 'package:toptan/Provider/pos_provider.dart';
+import 'package:toptan/Provider/service_prices_provider.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 
 import 'Helper/app_shared.dart';
+import 'Helper/routes.dart';
 import 'Helper/share_preferences.dart';
-import 'Pages/addtional_services_screen.dart';
 import 'package:flutter/material.dart';
-import 'Pages/bank_accounts_screen.dart';
-import 'Pages/chat_screen.dart';
-import 'Pages/create_pos_screen.dart';
-import 'Pages/edit_profile_screen.dart';
-import 'Pages/faq_screen.dart';
-import 'Pages/financial_movements_screen.dart';
-import 'Pages/forget_pass_screen.dart';
-import 'Pages/google_play_screen.dart';
-import 'Pages/home_screen.dart';
-import 'Pages/line_screen.dart';
-import 'Pages/login_screen.dart';
-import 'Pages/mobile_screen.dart';
-import 'Pages/notification_screen.dart';
-import 'Pages/order_balance_screen.dart';
-import 'Pages/paysell_screen.dart';
-import 'Pages/prices_screen.dart';
-import 'Pages/privacy_policy_screen.dart';
-import 'Pages/products_screen.dart';
-import 'Pages/reset_pass_wcreen.dart';
-import 'Pages/send_request_screen.dart';
-import 'Pages/service_name_screen.dart';
-import 'Pages/service_price_screen.dart';
-import 'Pages/services_screen.dart';
 import 'Pages/splash_screen.dart';
-import 'Pages/super_box_screen.dart';
-import 'Pages/super_online_screen.dart';
-import 'Pages/term_of_use_screen.dart';
+import 'Provider/bank_account_provider.dart';
+import 'Provider/connect_provider.dart';
 import 'Provider/login_provider.dart';
 import 'Provider/notification_provider.dart';
+import 'Provider/prices_provider.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -46,22 +28,65 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String _connectionStatus = '';
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
   @override
   void initState() {
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = result.toString());
+        break;
+      default:
+        setState(() => _connectionStatus = 'Failed to get connectivity.');
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: LoginProvider()),
         ChangeNotifierProvider.value(value: NotificationProvider()),
         ChangeNotifierProvider.value(value: SliderProvider()),
         ChangeNotifierProvider.value(value: FAQProvider()),
-        //  Provider<LoginProvider>(create: (_) => LoginProvider()),
+        ChangeNotifierProvider.value(value: PagesProvider()),
+        ChangeNotifierProvider.value(value: ContactUsProvider()),
+        ChangeNotifierProvider.value(value: PointOfSaleProvider()),
+        ChangeNotifierProvider.value(value: PricesProvider()),
+        ChangeNotifierProvider.value(value: ServicePricesProvider()),
+        ChangeNotifierProvider.value(value: BankAccountProvider()),
+        ChangeNotifierProvider.value(value: ConnectivityProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -72,39 +97,16 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: SplashScreen(),
-        routes: {
-          'move_to_mobile_screen': (ctx) => MobileScreen(),
-          'move_to_services_screen': (ctx) => ServicesScreen(),
-          'move_to_pay_sell_screen': (ctx) => PaySellScreen(),
-          'move_to_products_screen': (ctx) => ProductsScreen(),
-          'move_to_google_play_screen': (ctx) => GooglePlayScreen(),
-          'move_to_super_box_screen': (ctx) => SuperBoxScreen(),
-          'move_to_financial_movements_screen': (ctx) =>
-              FinancialMovementsScreen(),
-          'move_to_super_online_screen': (ctx) => SuperOnlineScreen(),
-          'move_to_super_line_screen': (ctx) => LineScreen(),
-          'move_to_chat_screen': (ctx) => ChatScreen(),
-          'move_to_send_request_screen': (ctx) => SendRequestScreen(),
-          'move_to_service_name_screen': (ctx) => ServiceNameScreen(),
-          'move_to_home_screen': (ctx) => HomeScreen(),
-          'move_to_login_screen': (ctx) => LoginScreen(),
-          'move_to_term_of_use_screen': (ctx) => TermOfUseScreen(),
-          'move_to_create_pos_screen': (ctx) => CreatePOSScreen(),
-          'move_to_edit_profile_screen': (ctx) => EditProfileScreen(),
-          'move_to_notification_screen': (ctx) => NotificationScreen(),
-          'move_to_prices_screen': (ctx) => PricesScreen(),
-          'move_to_service_prices_screen': (ctx) => ServicePriceScreen(),
-          'move_to_bank_accounts_screen': (ctx) => BankAccountsScreen(),
-          'move_to_order_balance_screen': (ctx) => OrderBalanceScreen(),
-          'move_to_forget_password_screen': (ctx) => ForgetPasswordScreen(),
-          'move_to_reset_password_screen': (ctx) => ResetPasswordScreen(),
-          'move_to_faq_screen': (ctx) => FaqScreen(),
-          'move_to_privacy_policy_screen': (ctx) => PrivacyPolicyScreen(),
-          'move_to_additional_services_screen': (ctx) =>
-              AdditionalServicesScreen(),
-          'move_to_webView_screen': (ctx) => WebViewScreen(),
-        },
+        home: _connectionStatus.toString() == ConnectivityResult.none.toString()
+            ? Scaffold(
+                backgroundColor: Color(0xff08A8FF),
+                body: AlertDialog(
+                  title: Text('no_internet'.tr()),
+                  content: Text('check_internet'.tr()),
+                ),
+              )
+            : SplashScreen(),
+        routes: ROUTES,
       ),
     );
   }
@@ -129,3 +131,6 @@ void main() async {
     child: MyApp(),
   ));
 }
+//todo
+//pushNamedAndRemoveUntil('name',ModalRoute().withName('name'));
+//pushNamedAndRemoveUntil('name',(route) => false);

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
-import 'package:toptan/Provider/notification_provider.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
@@ -16,12 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
@@ -34,21 +26,21 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FutureBuilder(
               future: Provider.of<SliderProvider>(context, listen: false)
                   .fetchSliders(Localizations.localeOf(context)),
-              builder:
-                  (BuildContext context, AsyncSnapshot<dynamic> snapshot) =>
-                      snapshot.connectionState == ConnectionState.waiting
+              builder: (BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot) =>
+                  snapshot.connectionState == ConnectionState.waiting
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : snapshot.connectionState == ConnectionState.none
                           ? Center(
-                              child: CircularProgressIndicator(),
+                              child: Text('check_internet'.tr(),
+                                  style: TextStyle(fontSize: 22)),
                             )
                           : Consumer<SliderProvider>(
-                              child: Center(
-                                child: Text('check_internet'.tr(),
-                                    style: TextStyle(fontSize: 22)),
-                              ),
                               builder:
                                   (BuildContext context, data, Widget? child) =>
                                       ListView.builder(
-                                physics: ScrollPhysics(),
                                 itemCount: data.items!.length,
                                 itemBuilder: (ctx, i) =>
                                     data.items![i].status == 'active'

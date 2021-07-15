@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/response/slider.dart';
+import 'package:toptan/model/response/service_prices.dart';
 
-class SliderProvider with ChangeNotifier {
-  List<Sliders>? _items = [];
+class ServicePricesProvider with ChangeNotifier {
+  List<ServicePricesItem>? _items = [];
 
-  List<Sliders>? get items {
+  List<ServicePricesItem>? get items {
     return [...?_items];
   }
 
-  Future<void> fetchSliders(locale) async {
+  Future<void> fetchServicePrices(locale) async {
     try {
       Response response = await AppShared.dio!.get(
-        '${AppShared.baseUrl}getSliders',
+        '${AppShared.baseUrl}getServicePrices',
         options: Options(
           headers: {
             'Accept-Language': locale,
@@ -21,13 +21,11 @@ class SliderProvider with ChangeNotifier {
           },
         ),
       );
-   //   print(response.data);
-      SliderResponse sliderResponse =
-          SliderResponse.fromJson(response.data);
-      _items = sliderResponse.sliders;
+      //  print(response.data);
+      ServicePricesResponse servicePricesResponse =
+          ServicePricesResponse.fromJson(response.data);
+      _items = servicePricesResponse.items;
       notifyListeners();
-    } on Exception {
-      throw 'Error';
     } catch (error) {
       print('Error: ' + error.toString());
     }

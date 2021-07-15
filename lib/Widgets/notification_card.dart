@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:toptan/model/notification.dart';
 
 class NotificationCard extends StatelessWidget {
   // Notifications? notifications;

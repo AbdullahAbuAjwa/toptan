@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toptan/model/user.dart';
-import 'package:toptan/model/user_response.dart';
+import 'package:toptan/model/response/user.dart';
 
 class SharedPreferencesController {
   static Future<SharedPreferencesController>? _instance;
@@ -46,7 +45,6 @@ class SharedPreferencesController {
         id: _sharedPreferences?.getInt('id'),
         name: _sharedPreferences?.getString('name'),
         email: _sharedPreferences?.getString('email'),
-        mobile: _sharedPreferences?.getString('mobile'),
         imageProfile: _sharedPreferences?.getString('profile_image'),
         cityId: _sharedPreferences?.getInt('city_id'),
         countryId: _sharedPreferences?.getInt('country_id'),
@@ -61,7 +59,6 @@ class SharedPreferencesController {
     await _sharedPreferences?.setInt('id', userResponse.user!.id);
     await _sharedPreferences?.setString('name', userResponse.user!.name);
     await _sharedPreferences?.setString('email', userResponse.user.email);
-    await _sharedPreferences?.setString('mobile', userResponse.user.mobile);
     await _sharedPreferences?.setString(
         'profile_image', userResponse.user!.imageProfile);
     await _sharedPreferences?.setInt('city_id', userResponse.user.cityId);

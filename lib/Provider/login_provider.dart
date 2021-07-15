@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/login.dart';
-import 'package:toptan/model/user_response.dart';
+import 'package:toptan/model/request/login.dart';
+import 'package:toptan/model/response/user.dart';
 
 class LoginProvider with ChangeNotifier {
   bool _isLoading = false;

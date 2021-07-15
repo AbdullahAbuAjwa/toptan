@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Provider/prices_provider.dart';
 import 'package:toptan/Widgets/price_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -18,22 +20,29 @@ class _PricesScreenState extends State<PricesScreen> {
         title: Text('prices'.tr()),
         centerTitle: true,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16),
-        physics: ScrollPhysics(),
-        shrinkWrap: true,
-        crossAxisSpacing: 16,
-        childAspectRatio: 1.4,
-        mainAxisSpacing: 16,
-        children: [
-          PriceCard(price: '75', title: 'New Line'),
-          PriceCard(price: '150', title: 'Golden Line'),
-          PriceCard(price: '30', title: 'Transfer Line'),
-          PriceCard(price: '5', title: 'Commission'),
-          PriceCard(price: '75', title: 'New Line'),
-          PriceCard(price: '150', title: 'Golden Line'),
-        ],
+      body: FutureBuilder(
+        future: Provider.of<PricesProvider>(context, listen: false)
+            .fetchPrices(Localizations.localeOf(context)),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<PricesProvider>(
+                builder: (BuildContext context, data, Widget? child) =>
+                    GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          childAspectRatio: 1.4,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: data.items!.length,
+                        itemBuilder: (ctx, i) => PriceCard(
+                              price: data.items![i].price,
+                              title: data.items![i].lineOperations!.name,
+                            )),
+              ),
       ),
     );
   }

@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Pages/SettingScreen.dart';
@@ -12,8 +10,7 @@ import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
 import 'package:toptan/Pages/pos_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:toptan/Provider/notification_provider.dart';
-import 'package:toptan/Provider/slider_provider.dart';
+
 
 class AppDrawer extends StatefulWidget {
   @override

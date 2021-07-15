@@ -1,8 +1,42 @@
+import 'dart:convert';
+
+UserResponse userResponseFromJson(String str) =>
+    UserResponse.fromJson(json.decode(str));
+
+String userResponseToJson(UserResponse data) => json.encode(data.toJson());
+
+class UserResponse {
+  var status;
+  var code;
+  var user;
+  var message;
+
+  UserResponse({
+    this.status,
+    this.code,
+    this.user,
+    this.message,
+  });
+
+  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
+        status: json["status"],
+        code: json["code"],
+        user: User.fromJson(json["user"] ?? {}),
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "code": code,
+        "user": user.toJson(),
+        "message": message,
+      };
+}
+
 class User {
   int? id;
   String? name;
   String? email;
-  String? mobile;
   String? imageProfile;
   int? cityId;
   int? countryId;
@@ -15,7 +49,6 @@ class User {
     this.id,
     this.name,
     this.email,
-    this.mobile,
     this.imageProfile,
     this.cityId,
     this.countryId,
@@ -29,7 +62,6 @@ class User {
         id: json["id"],
         name: json["name"],
         email: json["email"],
-        mobile: json["mobile"],
         imageProfile: json["profile_image"],
         cityId: json["city_id"],
         countryId: json["country_id"],
@@ -43,7 +75,6 @@ class User {
         "id": id,
         "name": name,
         "email": email,
-        "mobile": mobile,
         "profile_image": imageProfile,
         "city_id": cityId,
         "country_id": countryId,

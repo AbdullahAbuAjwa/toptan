@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/notification.dart';
+import 'package:toptan/model/response/notification.dart';
 
 class NotificationProvider with ChangeNotifier {
   List<Notifications>? _items = [];
