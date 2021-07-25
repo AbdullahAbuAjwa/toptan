@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 import 'package:toptan/Widgets/companies_card.dart';
@@ -29,8 +31,23 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (BuildContext context,
                       AsyncSnapshot<dynamic> snapshot) =>
                   snapshot.connectionState == ConnectionState.waiting
-                      ? Center(
-                          child: CircularProgressIndicator(),
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 18.0, vertical: 10),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0x15000000),
+                                  offset: Offset(0, 1),
+                                  blurRadius: 3,
+                                ),
+                              ],
+                            ),
+                          ),
                         )
                       : snapshot.connectionState == ConnectionState.none
                           ? Center(

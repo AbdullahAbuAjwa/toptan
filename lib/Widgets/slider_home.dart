@@ -19,7 +19,7 @@ class SliderHomeScreenCard extends StatelessWidget {
         margin: EdgeInsets.only(top: 15),
         child: CarouselSlider(
           options: CarouselOptions(
-            height: 185.0,
+            height: 170.0,
             autoPlay: true,
             viewportFraction: 0.9,
           ),
@@ -44,7 +44,7 @@ class SliderHomeScreenCard extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: Image.network(
                       image!,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 );

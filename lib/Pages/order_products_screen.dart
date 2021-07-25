@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/order_product_card.dart';
 import 'package:toptan/Widgets/search.dart';
@@ -24,23 +25,7 @@ class _OrderProductsScreenState extends State<OrderProductsScreen> {
       child: Scaffold(
         backgroundColor: Color(0xff08A8FF),
         drawer: AppDrawer(),
-        appBar: AppBar(
-          title: Text('order_products'.tr()),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Color(0xff08A8FF),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0,left: 12),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBarAppWithNotification('order_products'.tr(), context),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -145,9 +130,12 @@ class _OrderProductsScreenState extends State<OrderProductsScreen> {
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
                 children: [
-                  OrderCard(name: 'Name', date: '1/10/2021', status: 'accept'.tr()),
-                  OrderCard(name: 'Name', date: '1/10/2021', status: 'reject'.tr()),
-                  OrderCard(name: 'Name', date: '3/10/2021', status: 'waiting'.tr()),
+                  OrderCard(
+                      name: 'Name', date: '1/10/2021', status: 'accept'.tr()),
+                  OrderCard(
+                      name: 'Name', date: '1/10/2021', status: 'reject'.tr()),
+                  OrderCard(
+                      name: 'Name', date: '3/10/2021', status: 'waiting'.tr()),
                 ],
               ),
             ],

@@ -33,7 +33,7 @@ class ChatCard extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  blurRadius: .5,
+                  blurRadius: 0.5,
                   spreadRadius: 1.0,
                   color: Colors.black.withOpacity(.12))
             ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/categories_products.dart';
 import 'package:toptan/Widgets/products_card.dart';
 import 'package:toptan/Widgets/search.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ProductsScreen extends StatefulWidget {
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -13,12 +15,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        backgroundColor: Color(0xff08A8FF),
-        elevation: 0,
-        title: Text('products'.tr()),
-        centerTitle: true,
-      ),
+      appBar: appBarApp('products'.tr()),
       body: ListView(
         children: [
           Search(),

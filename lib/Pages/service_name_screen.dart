@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/send_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -13,12 +14,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        title: Text('Service Name'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color(0xff08A8FF),
-      ),
+      appBar: appBarApp('Service Name'),
       body: SingleChildScrollView(
         child: Column(
           children: [

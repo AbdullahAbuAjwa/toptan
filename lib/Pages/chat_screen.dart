@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/chat_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,6 +10,15 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _messageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -17,182 +27,125 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xff08A8FF),
+        backgroundColor: Colors.white,
         drawer: AppDrawer(),
-        appBar: AppBar(
-          title: Text('chat'.tr()),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Color(0xff08A8FF),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0,left: 12),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
-        body: Container(
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 35,
-                      backgroundImage: AssetImage(
-                        'assets/images/avatar.png',
-                      ),
+        appBar: appBarAppWithNotification('chat'.tr(), context),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+                child: ListView(
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: false,
+                      delivered: true,
                     ),
-                    title: Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Text(
-                        'Pankaj joined the chat',
-                        style: TextStyle(
-                          fontFamily: 'SF Pro',
-                          fontSize: 18,
-                          color: const Color(0xaf000000),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                      child: Text(
-                        '2m ago',
-                        style: TextStyle(
-                          fontFamily: 'SF Pro',
-                          fontSize: 16,
-                          color: const Color(0xff707070),
-                        ),
-                      ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
                     ),
-                  ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: false,
+                      delivered: false,
+                    ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
+                    ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
+                    ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
+                    ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: true,
+                      delivered: true,
+                    ),
+                    ChatCard(
+                      time: '11/10/2020',
+                      message: 'MESSAGE',
+                      isMe: false,
+                      delivered: true,
+                    ),
+                  ],
                 ),
-                Container(
-                  height: 500,
-                  child: ListView(
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14.0, vertical: 12),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color(0xffF3F4F7),
+                  ),
+                  padding: EdgeInsets.only(left: 5, bottom: 5),
+                  height: 60,
+                  width: double.infinity,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 4,
+                        child: TextField(
+                          controller: _messageController,
+                          autofocus: false,
+                          textInputAction: TextInputAction.newline,
+                          maxLines: 40,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            filled: true,
+                            fillColor: Color(0xffF3F4F7),
+                            hintStyle:
+                                new TextStyle(color: Colors.grey, fontSize: 18),
+                            hintText: "write_reply".tr(),
+                          ),
+                        ),
                       ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: true,
-                        delivered: true,
-                      ),
-                      ChatCard(
-                        time: '11/10/2020',
-                        message: 'MESSAGE',
-                        isMe: false,
-                        delivered: true,
-                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Icon(Icons.photo),
+                              ),
+                              SizedBox(width: 12),
+                              InkWell(
+                                onTap: () {},
+                                child: Icon(Icons.send),
+                              ),
+                            ],
+                          )),
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Color(0xffF3F4F7),
-                    ),
-                    padding: EdgeInsets.only(left: 5, bottom: 10, top: 10),
-                    height: 60,
-                    width: double.infinity,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            textInputAction: TextInputAction.send,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              filled: true,
-                              fillColor: Color(0xffF3F4F7),
-                              hintStyle:
-                                  new TextStyle(color: Colors.grey, fontSize: 18),
-                              hintText: "write_reply".tr(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.emoji_emotions_outlined)),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.photo),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.attach_file),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/contact_us_provider.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/button.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,7 +31,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     contactUsProvider = Provider.of<ContactUsProvider>(context, listen: false);
   }
@@ -58,24 +59,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       child: Scaffold(
         drawer: AppDrawer(),
         backgroundColor: Color(0xff08A8FF),
-        appBar: AppBar(
-          backgroundColor: Color(0xff08A8FF),
-          elevation: 0,
-          title: Text('contact_us').tr(),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0, left: 12),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBarAppWithNotification('contact_us'.tr(), context),
         body: Container(
           width: double.infinity,
           margin: EdgeInsets.only(top: 15),
@@ -86,204 +70,213 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               topRight: Radius.circular(20.0),
             ),
           ),
-          child: ListView(
+          child: Stack(
             children: [
-              Image.asset(
-                'assets/images/contact.png',
-                width: 300,
-                height: 200,
-                fit: BoxFit.scaleDown,
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.email_outlined,
-                  color: Color(0xff08A8FF),
-                ),
-                title: Text(
-                  'email'.tr(),
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16,
-                    color: const Color(0xff323b4a),
-                    fontWeight: FontWeight.w500,
+              ListView(
+                children: [
+                  Image.asset(
+                    'assets/images/contact.png',
+                    width: 300,
+                    height: 200,
+                    fit: BoxFit.scaleDown,
                   ),
-                ),
-                trailing: Text(
-                  'username@gmail.com',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16,
-                    color: const Color(0xff323b4a),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.phone,
-                  color: Color(0xff08A8FF),
-                ),
-                title: Text(
-                  'mobile'.tr(),
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16,
-                    color: const Color(0xff323b4a),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                trailing: Text(
-                  '000000000000',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16,
-                    color: const Color(0xff323b4a),
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        controller: _nameController,
-                        focusNode: _nameFocusNode,
-                        decoration: InputDecoration(
-                          hintText: 'name'.tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'enter_your_name'.tr();
-                          }
-                        },
+                  ListTile(
+                    leading: Icon(
+                      Icons.email_outlined,
+                      color: Color(0xff08A8FF),
+                    ),
+                    title: Text(
+                      'email'.tr(),
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        color: const Color(0xff323b4a),
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 15),
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        focusNode: _emailFocusNode,
-                        decoration: InputDecoration(
-                          hintText: 'email'.tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          suffixIcon: Icon(
-                            CustomIcon.ic_contact_mail,
-                            color: Color(0xff08A8FF),
-                            size: 18,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'enter_your_email'.tr();
-                          }
-                        },
+                    ),
+                    trailing: Text(
+                      'username@gmail.com',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        color: const Color(0xff323b4a),
                       ),
-                      SizedBox(height: 15),
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.phone,
-                        controller: _mobileController,
-                        focusNode: _mobileFocusNode,
-                        decoration: InputDecoration(
-                          hintText: 'mobile'.tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          suffixIcon: Icon(
-                            CustomIcon.ic_contact_mobile,
-                            color: Color(0xff08A8FF),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(
-                              width: 1,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'enter_your_mobile'.tr();
-                          }
-                        },
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                      color: Color(0xff08A8FF),
+                    ),
+                    title: Text(
+                      'mobile'.tr(),
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        color: const Color(0xff323b4a),
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 15),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          height: 150,
-                          child: TextFormField(
-                            keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.newline,
-                            controller: _messageController,
-                            focusNode: _messageFocusNode,
-                            maxLines: 8,
+                    ),
+                    trailing: Text(
+                      '000000000000',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        color: const Color(0xff323b4a),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            controller: _nameController,
+                            focusNode: _nameFocusNode,
                             decoration: InputDecoration(
-                              hintText: 'message'.tr(),
+                              hintText: 'name'.tr(),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
+                                    BorderRadius.all(Radius.circular(30.0)),
                                 borderSide: BorderSide(
-                                  width: 0,
+                                  width: 1,
                                   style: BorderStyle.none,
                                 ),
                               ),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'enter_your_message'.tr();
+                                return 'enter_your_name'.tr();
                               }
                             },
                           ),
-                        ),
+                          SizedBox(height: 15),
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: _emailController,
+                            focusNode: _emailFocusNode,
+                            decoration: InputDecoration(
+                              hintText: 'email'.tr(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              suffixIcon: Icon(
+                                CustomIcon.ic_contact_mail,
+                                color: Color(0xff08A8FF),
+                                size: 18,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter_your_email'.tr();
+                              }
+                            },
+                          ),
+                          SizedBox(height: 15),
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.phone,
+                            controller: _mobileController,
+                            focusNode: _mobileFocusNode,
+                            decoration: InputDecoration(
+                              hintText: 'mobile'.tr(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              suffixIcon: Icon(
+                                CustomIcon.ic_contact_mobile,
+                                color: Color(0xff08A8FF),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter_your_mobile'.tr();
+                              }
+                            },
+                          ),
+                          SizedBox(height: 15),
+                          Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0)),
+                            ),
+                            elevation: 2,
+                            child: Container(
+                              height: 150,
+                              child: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                textInputAction: TextInputAction.newline,
+                                controller: _messageController,
+                                focusNode: _messageFocusNode,
+                                maxLines: 8,
+                                decoration: InputDecoration(
+                                  hintText: 'message'.tr(),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15.0)),
+                                    borderSide: BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'enter_your_message'.tr();
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 8, bottom: 12.0),
+                            child: ButtonSend(
+                              onTap: () {
+                                // if (contactUsProvider!
+                                //     .isLoading) return;
+                                sendMessage();
+                              },
+                              text: 'send'.tr(),
+                              textColor: Colors.white,
+                              buttonColor: Color(0xff08A8FF),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 30),
-                      contactUsProvider!.isLoading
-                          ? CircularProgressIndicator()
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8, bottom: 12.0),
-                        child: ButtonSend(
-                          onTap: () {
-                            sendMessage();
-                            setState(() {});
-                          },
-                          text: 'send'.tr(),
-                          textColor: Colors.white,
-                          buttonColor: Color(0xff08A8FF),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
+              if (Provider.of<ContactUsProvider>(context).isLoading)
+                Center(
+                  child: SpinKitDualRing(
+                    color: Colors.blue,
+                  ),
+                )
             ],
           ),
         ),
@@ -291,11 +284,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     );
   }
 
-  sendMessage() {
+  Future<void> sendMessage() async {
     if (!_formKey.currentState!.validate()) return;
     try {
       contactUsProvider!.isLoading = true;
-      contactUsProvider!.contactUs(
+      await contactUsProvider!.contactUs(
           _nameController.text.trim(),
           _mobileController.text.trim(),
           _emailController.text.trim(),

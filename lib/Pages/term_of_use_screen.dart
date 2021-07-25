@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 
 class TermOfUseScreen extends StatefulWidget {
   @override
@@ -23,12 +25,7 @@ class _TermOfUseScreenState extends State<TermOfUseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        backgroundColor: Color(0xff08A8FF),
-        elevation: 0,
-        title: Text('terms_of_use'.tr()),
-        centerTitle: true,
-      ),
+      appBar: appBarApp('terms_of_use'.tr()),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -45,13 +42,11 @@ class _TermOfUseScreenState extends State<TermOfUseScreen> {
           builder: (ctx, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: SpinKitDualRing(
+                        color: Colors.blue,
+                      ),
                     )
                   : Consumer<PagesProvider>(
-                      // child: Center(
-                      //   child: Text('check_internet'.tr(),
-                      //       style: TextStyle(fontSize: 22)),
-                      // ),
                       builder: (context, data, child) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: SingleChildScrollView(

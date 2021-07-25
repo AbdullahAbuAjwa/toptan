@@ -89,5 +89,9 @@
   "attach_photo_id": "Attach the photo ID",
   "attach_QR_code": "Attach QR Code",
   "check_internet": "Please make sure you are connected to the Internet!",
-  "no_internet": "No internet connection :("
+  "no_internet": "No internet connection :(",
+  "no_notification": "No notifications yet :(",
+  "enter_amount": "Enter amount",
+  "government": "Government"
+
 }

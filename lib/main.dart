@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/contact_us_provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
+import 'package:toptan/Provider/order_balance_provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
 import 'package:toptan/Provider/pos_provider.dart';
 import 'package:toptan/Provider/service_prices_provider.dart';
@@ -18,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'Pages/splash_screen.dart';
 import 'Provider/bank_account_provider.dart';
 import 'Provider/connect_provider.dart';
-import 'Provider/login_provider.dart';
+import 'Provider/user_provider.dart';
 import 'Provider/notification_provider.dart';
 import 'Provider/prices_provider.dart';
 
@@ -76,7 +77,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: LoginProvider()),
+        ChangeNotifierProvider.value(value: UserProvider()),
         ChangeNotifierProvider.value(value: NotificationProvider()),
         ChangeNotifierProvider.value(value: SliderProvider()),
         ChangeNotifierProvider.value(value: FAQProvider()),
@@ -87,6 +88,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider.value(value: ServicePricesProvider()),
         ChangeNotifierProvider.value(value: BankAccountProvider()),
         ChangeNotifierProvider.value(value: ConnectivityProvider()),
+        ChangeNotifierProvider.value(value: OrderBalanceProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -134,3 +136,4 @@ void main() async {
 //todo
 //pushNamedAndRemoveUntil('name',ModalRoute().withName('name'));
 //pushNamedAndRemoveUntil('name',(route) => false);
+//mobile in shared preference

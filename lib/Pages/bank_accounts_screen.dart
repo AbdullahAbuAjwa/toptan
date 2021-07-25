@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/bank_account_provider.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/banck_account%20card.dart';
 
 class BankAccountsScreen extends StatefulWidget {
@@ -14,19 +16,14 @@ class _BankAccountsScreenState extends State<BankAccountsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        backgroundColor: Color(0xff08A8FF),
-        elevation: 0,
-        title: Text('bank_accounts').tr(),
-        centerTitle: true,
-      ),
+      appBar: appBarApp('bank_accounts'.tr()),
       body: FutureBuilder(
         future: Provider.of<BankAccountProvider>(context, listen: false)
             .fetchBankAccounts(Localizations.localeOf(context)),
         builder: (ctx, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? Center(
-                    child: CircularProgressIndicator(),
+                    child: SpinKitDualRing(color: Colors.white),
                   )
                 : Consumer<BankAccountProvider>(
                     builder: (BuildContext context, data, Widget? child) =>

@@ -4,6 +4,7 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/transaction_card.dart';
 
 class FinancialMovementsScreen extends StatefulWidget {
@@ -19,12 +20,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        backgroundColor: Color(0xff08A8FF),
-        elevation: 0,
-        title: Text('financial_movements'.tr()),
-        centerTitle: true,
-      ),
+      appBar: appBarApp('financial_movements'.tr()),
       body: SingleChildScrollView(
         child: Column(
           children: [

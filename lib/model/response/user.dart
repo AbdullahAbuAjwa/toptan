@@ -33,6 +33,35 @@ class UserResponse {
       };
 }
 
+class EditProfileResponse {
+  var status;
+  int? code;
+  User? user;
+  String? message;
+
+  EditProfileResponse({
+    this.status,
+    this.code,
+    this.user,
+    this.message,
+  });
+
+  factory EditProfileResponse.fromJson(Map<String, dynamic> json) =>
+      EditProfileResponse(
+        status: json["status"],
+        code: json["code"],
+        user: User.fromJson(json["user"]),
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "code": code,
+        "user": user!.toJson(),
+        "message": message,
+      };
+}
+
 class User {
   int? id;
   String? name;
@@ -44,19 +73,20 @@ class User {
   String? status;
   String? address;
   String? accessToken;
+  String? mobile;
 
-  User({
-    this.id,
-    this.name,
-    this.email,
-    this.imageProfile,
-    this.cityId,
-    this.countryId,
-    this.groupId,
-    this.status,
-    this.address,
-    this.accessToken,
-  });
+  User(
+      {this.id,
+      this.name,
+      this.email,
+      this.imageProfile,
+      this.cityId,
+      this.countryId,
+      this.groupId,
+      this.status,
+      this.address,
+      this.accessToken,
+      this.mobile});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -69,6 +99,7 @@ class User {
         accessToken: json['access_token'],
         address: json["address"],
         groupId: json['group_id'],
+        mobile: json['mobile'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -82,5 +113,6 @@ class User {
         "access_token": accessToken,
         "address": address,
         "group_id": groupId,
+        "mobile": mobile,
       };
 }

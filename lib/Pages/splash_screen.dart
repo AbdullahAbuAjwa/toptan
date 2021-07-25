@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/home_screen.dart';
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(milliseconds: 1200),
+      Duration(milliseconds: 2000),
       () => AppShared.sharedPreferencesController!.showIntro()
           ? Navigator.pushReplacement(
               context,
@@ -53,15 +54,24 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
       body: Center(
-        child: Text(
-          'TopTan',
+        child: DefaultTextStyle(
           style: TextStyle(
             fontFamily: 'SF Pro',
             fontSize: 65,
             color: const Color(0x99000000),
             fontWeight: FontWeight.w700,
           ),
-          textAlign: TextAlign.center,
+          child: AnimatedTextKit(
+            animatedTexts: [
+              TyperAnimatedText(
+                '',
+              ),
+              TyperAnimatedText(
+                'TopTan',
+                speed: Duration(milliseconds: 100),
+              ),
+            ],
+          ),
         ),
       ),
     );

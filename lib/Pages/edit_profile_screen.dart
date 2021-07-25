@@ -1,9 +1,16 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Provider/user_provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -15,6 +22,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   final _mobileController = TextEditingController();
   var imageFile;
+  UserProvider? userProvider;
 
   _getFromGallery() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -67,9 +75,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _nameController.text = AppShared.currentUser!.user.name;
+    _mobileController.text = AppShared.currentUser!.user.mobile;
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // final args =
-    //     ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
       appBar: AppBar(
@@ -79,140 +93,208 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: Color(0xff08A8FF),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(height: 45),
-              Stack(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Center(
+              child: Column(
                 children: [
-                  CircleAvatar(
-                    radius: 63,
-                    backgroundColor: Colors.white,
-                    child: imageFile == null
-                        ? CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/avatar.png'),
-                            radius: 60,
-                          )
-                        : CircleAvatar(
-                            backgroundImage: FileImage(imageFile),
-                            radius: 60,
-                          ),
-                  ),
-                  Positioned(
-                    top: 82,
-                    child: GestureDetector(
-                      onTap: () {
-                        _showPicker(context);
-                      },
-                      child: Container(
-                        height: 32,
-                        width: 32,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                          color: const Color(0xffffffff),
-                        ),
-                        child: Icon(
-                          CustomIcon.ic_devices_camera,
-                          size: 18,
-                          color: Color(0xff08A8FF),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
+                  SizedBox(height: 45),
+                  Stack(
                     children: [
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        controller: _nameController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'enter_your_email'.tr();
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'email'.tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0)),
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
+                      CircleAvatar(
+                        radius: 60,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 2),
+                            borderRadius: BorderRadius.circular(60.0),
+                            image: imageFile == null
+                                ? DecorationImage(
+                                    image: NetworkImage(
+                                      AppShared.currentUser!.user.imageProfile,
+                                    ),
+                                    fit: BoxFit.cover,
+                                    onError: (_, a) => Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.white, width: 2),
+                                        borderRadius:
+                                            BorderRadius.circular(60.0),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/avatar.png'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : DecorationImage(
+                                    image: FileImage(imageFile),
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 40),
-                      TextFormField(
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.phone,
-                        controller: _mobileController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'enter_your_mobile'.tr();
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'mobile'.tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          suffixIcon: Icon(
-                            CustomIcon.ic_contact_mobile,
-                            color: Color(0xff08A8FF),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0)),
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
+                      Positioned(
+                        top: 82,
+                        child: GestureDetector(
+                          onTap: () {
+                            _showPicker(context);
+                          },
+                          child: Container(
+                            height: 32,
+                            width: 32,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
+                              color: const Color(0xffffffff),
                             ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 50),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Navigator.of(context).pushReplacementNamed(
-                          //   'move_to_send_request_screen',
-                          // );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(70.0),
-                          ),
-                          primary: Colors.white,
-                          fixedSize: Size(250, 55),
-                        ),
-                        child: Text(
-                          'edit_profile'.tr(),
-                          style: TextStyle(
-                            fontFamily: 'SF Pro',
-                            fontSize: 16,
-                            color: const Color(0xff08a8ff),
-                            fontWeight: FontWeight.w700,
+                            child: Icon(
+                              CustomIcon.ic_devices_camera,
+                              size: 18,
+                              color: Color(0xff08A8FF),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                  SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            controller: _nameController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter_your_name'.tr();
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'name'.tr(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0)),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 40),
+                          TextFormField(
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.phone,
+                            controller: _mobileController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter_your_mobile'.tr();
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'mobile'.tr(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              suffixIcon: Icon(
+                                CustomIcon.ic_contact_mobile,
+                                color: Color(0xff08A8FF),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0)),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          ElevatedButton(
+                            onPressed: () {
+                              editProfile();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(70.0),
+                              ),
+                              primary: Colors.white,
+                              fixedSize: Size(250, 55),
+                            ),
+                            child: Text(
+                              'edit_profile'.tr(),
+                              style: TextStyle(
+                                fontFamily: 'SF Pro',
+                                fontSize: 16,
+                                color: const Color(0xff08a8ff),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            if (Provider.of<UserProvider>(context).isLoading)
+              Center(
+                child: SpinKitDualRing(
+                  color: Colors.blue,
+                ),
+              )
+          ],
         ),
       ),
     );
+  }
+
+  Future<void> editProfile() async {
+    if (!_formKey.currentState!.validate()) return;
+    if (_nameController.text == AppShared.currentUser!.user.name &&
+        _mobileController.text == AppShared.currentUser!.user.mobile &&
+        imageFile == null) {
+      ShowToast.showToast('Nothing to update', MessageType.Failed);
+      return;
+    }
+    userProvider!.isLoading = true;
+    MultipartFile? img;
+     try {
+    if (imageFile != null) {
+      img = await MultipartFile.fromFile(imageFile!.path);
+    }
+    userProvider!.isLoading = true;
+
+    await userProvider!.editUserProfile(
+      Localizations.localeOf(context),
+      name: _nameController.text.trim(),
+      image:  img,
+      mobile: _mobileController.text.trim(),
+    );
+    userProvider!.isLoading = false;
+
+    if (userProvider!.editProfileResponse!.status) {
+      ShowToast.showToast(
+          userProvider!.editProfileResponse!.message, MessageType.Success);
+      Navigator.pushReplacementNamed(context, 'move_to_home_screen');
+    } else {
+      ShowToast.showToast(
+          userProvider!.editProfileResponse!.message, MessageType.Warning);
+    }
+    } catch (error) {
+      userProvider!.isLoading = false;
+      print('error: ' + error.toString());
+      throw (error);
+    }
   }
 }

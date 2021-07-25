@@ -37,6 +37,9 @@ dependencies:
   webview_flutter: ^2.0.9
   flutter_html: ^2.0.0
   connectivity: ^3.0.6
+  flutter_spinkit: ^5.0.0
+  animated_text_kit: ^4.2.1
+  flutter_native_splash:
 
 
 

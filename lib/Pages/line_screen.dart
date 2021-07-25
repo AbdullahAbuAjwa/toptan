@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/invoice_line_card.dart';
 import 'package:toptan/Widgets/send_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -72,12 +73,7 @@ class _LineScreenState extends State<LineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        title: Text('line'.tr()),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color(0xff08A8FF),
-      ),
+      appBar: appBarApp('line'.tr()),
       body: SingleChildScrollView(
         child: Column(
           children: [

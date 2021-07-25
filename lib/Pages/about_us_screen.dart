@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -29,24 +31,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       child: Scaffold(
         drawer: AppDrawer(),
         backgroundColor: Color(0xff08A8FF),
-        appBar: AppBar(
-          backgroundColor: Color(0xff08A8FF),
-          elevation: 0,
-          title: Text('aboutUs').tr(),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0, left: 12),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBarAppWithNotification('aboutUs'.tr(), context),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -64,7 +49,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             builder: (ctx, snapshot) =>
                 snapshot.connectionState == ConnectionState.waiting
                     ? Center(
-                        child: CircularProgressIndicator(),
+                        child: SpinKitDualRing(
+                          color: Colors.blue,
+                        ),
                       )
                     : Consumer<PagesProvider>(
                         // child: Center(

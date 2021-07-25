@@ -28,10 +28,11 @@ class _POSCARDState extends State<POSCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CircleAvatar(
-                  radius: 35,
-                  backgroundImage: NetworkImage(
-                    widget.image,
-                  )),
+                radius: 35,
+                backgroundImage: NetworkImage(
+                  widget.image,
+                ),
+              ),
               Text(
                 widget.name,
                 style: TextStyle(

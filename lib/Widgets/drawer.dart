@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -8,9 +9,8 @@ import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/my_cart_screen.dart';
 import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
-import 'package:toptan/Pages/pos_screen.dart';
+import 'package:toptan/Pages/point_of_sales_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -59,39 +59,30 @@ class _AppDrawerState extends State<AppDrawer> {
                       'move_to_edit_profile_screen',
                     );
                   },
-                  child: Container(
-                    height: 40.0,
-                    width: 65.0,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2),
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
+                  child: CircleAvatar(
+                    radius: 50,
                     child: Container(
-                      height: 40.0,
-                      width: 65.0,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(50.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/avatar.png'),
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    /*   child: CachedNetworkImage(
-                      imageUrl: AppShared.currentUser!.user.imageProfile,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        height: 40.0,
-                        width: 65.0,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(50.0),
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/avatar.png'),
-                              fit: BoxFit.cover,
-                            )),
+                        border: Border.all(color: Colors.white, width: 2),
+                        borderRadius: BorderRadius.circular(50.0),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            AppShared.currentUser!.user.imageProfile,
+                          ),
+                          fit: BoxFit.cover,
+                          onError: (_, a) => Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                  image: AssetImage('assets/images/avatar.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                        ),
                       ),
-                    ),*/
+                    ),
                   ),
                 ),
               ),
@@ -184,7 +175,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return POSScreen();
+                      return PointOfSalesScreen();
                     },
                   ),
                 );

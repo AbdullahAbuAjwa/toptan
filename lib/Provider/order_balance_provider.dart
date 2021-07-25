@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
-import 'package:toptan/model/request/contact_us.dart';
+import 'package:toptan/model/request/order_balance.dart';
 import 'package:toptan/model/response/app_response.dart';
 
-class ContactUsProvider with ChangeNotifier {
+class OrderBalanceProvider with ChangeNotifier {
   AppResponse? _appResponse;
 
   AppResponse? get appResponse => _appResponse;
@@ -18,16 +20,12 @@ class ContactUsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<AppResponse> contactUs(name, mobile, email, message, locale) async {
-    ContactUs contact = ContactUs(
-      name: name,
-      mobile: mobile,
-      email: email,
-      message: message,
-    );
+  Future<AppResponse> createOrderBalance(
+      amount, MultipartFile image, locale) async {
+    OrderBalance orderBalance = OrderBalance(amount: amount, image: image);
     Response response = await AppShared.dio!.post(
-      '${AppShared.baseUrl}contactUs',
-      data: contact.toJson(),
+      '${AppShared.baseUrl}orderBalance',
+      data: FormData.fromMap(orderBalance.toJson()),
       options: Options(
         headers: {
           'Accept-Language': locale,
@@ -37,7 +35,6 @@ class ContactUsProvider with ChangeNotifier {
     );
     AppResponse appResponse = AppResponse.fromJson(response.data);
     _appResponse = appResponse;
-
     return appResponse;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -13,23 +14,8 @@ class AdditionalServicesScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Color(0xff08A8FF),
         drawer: AppDrawer(),
-        appBar: AppBar(
-          title: Text('additional_services').tr(),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Color(0xff08A8FF),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0,left: 12),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBarAppWithNotification('additional_services'.tr(), context),
+
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(

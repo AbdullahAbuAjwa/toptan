@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -23,24 +24,7 @@ class _SettingScreenState extends State<SettingScreen> {
       child: Scaffold(
         drawer: AppDrawer(),
         backgroundColor: Color(0xff08A8FF),
-        appBar: AppBar(
-          backgroundColor: Color(0xff08A8FF),
-          elevation: 0,
-          title: Text('setting'.tr()),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed('move_to_notification_screen');
-                },
-                child: Icon(Icons.notifications_none_outlined),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBarAppWithNotification('setting'.tr(), context),
         body: Container(
           decoration: BoxDecoration(
             color: Colors.white,
