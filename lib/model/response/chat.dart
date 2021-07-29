@@ -40,7 +40,18 @@ class ChatResponse extends AppResponse {
 }
 
 class Chat {
+  int? userId;
+  String? message;
+  int? sender;
+  int? read;
+  int? type;
+  DateTime? createdAt;
+  String? userName;
+  DateTime? date;
+  String? time;
+
   Chat({
+    this.userId,
     this.message,
     this.sender,
     this.read,
@@ -51,16 +62,8 @@ class Chat {
     this.time,
   });
 
-  String? message;
-  int? sender;
-  int? read;
-  int? type;
-  DateTime? createdAt;
-  String? userName;
-  DateTime? date;
-  String? time;
-
   factory Chat.fromJson(Map<String, dynamic> json) => Chat(
+        userId: json["user_id"],
         message: json["message"],
         sender: json["sender"],
         read: json["read"],
@@ -72,6 +75,7 @@ class Chat {
       );
 
   Map<String, dynamic> toJson() => {
+        "user_id": userId,
         "message": message,
         "sender": sender,
         "read": read,

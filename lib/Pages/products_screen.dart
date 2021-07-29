@@ -18,7 +18,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: appBarApp('products'.tr()),
       body: ListView(
         children: [
-          Search(),
+       //   Search(),
           Container(
             height: 60,
             margin: EdgeInsets.only(top: 25),

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/faq_card.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 
 class FaqScreen extends StatefulWidget {
   @override
@@ -22,18 +23,8 @@ class _FaqScreenState extends State<FaqScreen> {
             .fetchFAQ(Localizations.localeOf(context)),
         builder: (ctx, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
-                ? Center(
-                    child: SpinKitDualRing(
-                      color: Colors.white,
-                    ),
-                  )
+                ? loadingFaq()
                 : Consumer<FAQProvider>(
-                    child: Center(
-                      child: Text(
-                        'check_internet'.tr(),
-                        style: TextStyle(fontSize: 22),
-                      ),
-                    ),
                     builder: (BuildContext context, data, Widget? child) =>
                         ListView.builder(
                       physics: ScrollPhysics(),

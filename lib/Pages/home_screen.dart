@@ -6,6 +6,7 @@ import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:toptan/Widgets/home_cards.dart';
 import 'package:toptan/Widgets/slider_home.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSpacing: 10,
               childAspectRatio: 1.2,
               children: [
-                CompaniesCard(
+                HomeCards(
                   image: 'assets/images/line.png',
                   title: 'line'.tr(),
                   onPress: () {
@@ -91,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                CompaniesCard(
+                HomeCards(
                   image: 'assets/images/products.png',
                   title: 'products'.tr(),
                   onPress: () {
@@ -100,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                CompaniesCard(
+                HomeCards(
                   image: 'assets/images/services.png',
                   title: 'services'.tr(),
                   onPress: () {
@@ -109,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                CompaniesCard(
+                HomeCards(
                   image: 'assets/images/mobile2.png',
                   title: 'mobile'.tr(),
                   onPress: () {

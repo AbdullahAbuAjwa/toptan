@@ -92,5 +92,6 @@
   "no_internet": "لا يوجد اتصال بالانترنت :(",
   "no_notification": "لا يوجد إشعارات!",
   "enter_amount": "أدخل الكمية",
-  "government": "المحافظة"
+  "government": "المحافظة",
+  "no_messages": "لا يوجد رسائل بعد!"
 }

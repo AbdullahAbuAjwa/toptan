@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/notification_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 import 'package:toptan/Widgets/notification_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -23,11 +24,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
             .fetchNotification(Localizations.localeOf(context)),
         builder: (ctx, AsyncSnapshot snapshot) => snapshot.connectionState ==
                 ConnectionState.waiting
-            ? Center(
-                child: SpinKitDualRing(
-                  color: Colors.white,
-                ),
-              )
+            ? loadingNotifications()
+            // Center(
+            //         child: SpinKitDualRing(
+            //           color: Colors.white,
+            //         ),
+            //       )
             : Consumer<NotificationProvider>(
                 builder: (BuildContext context, data, Widget? child) =>
                     data.items!.length == 0

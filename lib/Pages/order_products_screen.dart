@@ -32,9 +32,10 @@ class _OrderProductsScreenState extends State<OrderProductsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width / 1.7,
-                      child: Search()),
+                  // Container(
+                  //   width: MediaQuery.of(context).size.width / 1.7,
+                  //   child: Search(),
+                  // ),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
                     child: InkWell(

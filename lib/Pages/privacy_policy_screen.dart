@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
   @override
@@ -26,8 +27,6 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
       appBar: appBarApp('privacy_policy'.tr()),
-
-
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -43,11 +42,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           future: pagesProvider!.fetchPages(Localizations.localeOf(context), 2),
           builder: (ctx, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: SpinKitDualRing(
-                        color: Colors.blue,
-                      ),
-                    )
+                  ? loadingPages(context)
                   : Consumer<PagesProvider>(
                       builder: (context, data, child) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),

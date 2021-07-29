@@ -4,12 +4,15 @@ import 'package:connectivity/connectivity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:toptan/Provider/chat_provider.dart';
+import 'package:toptan/Provider/company_provider.dart';
 import 'package:toptan/Provider/contact_us_provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
 import 'package:toptan/Provider/order_balance_provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
 import 'package:toptan/Provider/pos_provider.dart';
 import 'package:toptan/Provider/service_prices_provider.dart';
+import 'package:toptan/Provider/service_provider.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 
 import 'Helper/app_shared.dart';
@@ -89,6 +92,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider.value(value: BankAccountProvider()),
         ChangeNotifierProvider.value(value: ConnectivityProvider()),
         ChangeNotifierProvider.value(value: OrderBalanceProvider()),
+        ChangeNotifierProvider.value(value: ChatProvider()),
+        ChangeNotifierProvider.value(value: ServiceProvider()),
+        ChangeNotifierProvider.value(value: CompanyProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

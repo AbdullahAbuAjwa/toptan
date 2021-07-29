@@ -6,6 +6,7 @@ import 'package:toptan/Provider/pages_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -48,11 +49,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 pagesProvider!.fetchPages(Localizations.localeOf(context), 4),
             builder: (ctx, snapshot) =>
                 snapshot.connectionState == ConnectionState.waiting
-                    ? Center(
-                        child: SpinKitDualRing(
-                          color: Colors.blue,
-                        ),
-                      )
+                    ? loadingPages(context)
                     : Consumer<PagesProvider>(
                         // child: Center(
                         //   child: Text('check_internet'.tr(),

@@ -42,9 +42,12 @@ class SliderHomeScreenCard extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Image.network(
-                      image!,
-                      fit: BoxFit.fill,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        image!,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 );

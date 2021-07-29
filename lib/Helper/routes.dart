@@ -8,14 +8,13 @@ import 'package:toptan/Pages/edit_profile_screen.dart';
 import 'package:toptan/Pages/faq_screen.dart';
 import 'package:toptan/Pages/financial_movements_screen.dart';
 import 'package:toptan/Pages/forget_pass_screen.dart';
-import 'package:toptan/Pages/google_play_screen.dart';
+import 'package:toptan/Pages/service_details_screen.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/line_screen.dart';
 import 'package:toptan/Pages/login_screen.dart';
 import 'package:toptan/Pages/mobile_screen.dart';
 import 'package:toptan/Pages/notification_screen.dart';
 import 'package:toptan/Pages/order_balance_screen.dart';
-import 'package:toptan/Pages/paysell_screen.dart';
 import 'package:toptan/Pages/prices_screen.dart';
 import 'package:toptan/Pages/privacy_policy_screen.dart';
 import 'package:toptan/Pages/products_screen.dart';
@@ -24,20 +23,16 @@ import 'package:toptan/Pages/send_request_screen.dart';
 import 'package:toptan/Pages/service_name_screen.dart';
 import 'package:toptan/Pages/service_price_screen.dart';
 import 'package:toptan/Pages/services_screen.dart';
-import 'package:toptan/Pages/super_box_screen.dart';
-import 'package:toptan/Pages/super_online_screen.dart';
+
 import 'package:toptan/Pages/term_of_use_screen.dart';
 import 'package:toptan/Pages/web_view_screen.dart';
 
 Map<String, Widget Function(BuildContext)> ROUTES = {
   'move_to_mobile_screen': (ctx) => MobileScreen(),
   'move_to_services_screen': (ctx) => ServicesScreen(),
-  'move_to_pay_sell_screen': (ctx) => PaySellScreen(),
   'move_to_products_screen': (ctx) => ProductsScreen(),
-  'move_to_google_play_screen': (ctx) => GooglePlayScreen(),
-  'move_to_super_box_screen': (ctx) => SuperBoxScreen(),
+  'move_to_service_details_screen': (ctx) => ServiceDetailsScreen(),
   'move_to_financial_movements_screen': (ctx) => FinancialMovementsScreen(),
-  'move_to_super_online_screen': (ctx) => SuperOnlineScreen(),
   'move_to_super_line_screen': (ctx) => LineScreen(),
   'move_to_chat_screen': (ctx) => ChatScreen(),
   'move_to_send_request_screen': (ctx) => SendRequestScreen(),

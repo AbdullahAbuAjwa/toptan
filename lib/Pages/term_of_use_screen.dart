@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/pages_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 
 class TermOfUseScreen extends StatefulWidget {
   @override
@@ -41,11 +42,7 @@ class _TermOfUseScreenState extends State<TermOfUseScreen> {
           future: pagesProvider!.fetchPages(Localizations.localeOf(context), 3),
           builder: (ctx, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: SpinKitDualRing(
-                        color: Colors.blue,
-                      ),
-                    )
+                  ? loadingPages(context)
                   : Consumer<PagesProvider>(
                       builder: (context, data, child) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),

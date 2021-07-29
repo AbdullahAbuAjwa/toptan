@@ -48,7 +48,7 @@ class ServicePricesItem {
   int? serviceId;
   int? price;
   String? status;
-  Service? service;
+  ServiceDetails? service;
 
   ServicePricesItem({
     this.id,
@@ -65,7 +65,7 @@ class ServicePricesItem {
         serviceId: json["service_id"],
         price: json["price"],
         status: json["status"],
-        service: Service.fromJson(json["service"]),
+        service: ServiceDetails.fromJson(json["service"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,18 +78,18 @@ class ServicePricesItem {
       };
 }
 
-class Service {
+class ServiceDetails {
   String? name;
   String? details;
   String? status;
 
-  Service({
+  ServiceDetails({
     this.name,
     this.details,
     this.status,
   });
 
-  factory Service.fromJson(Map<String, dynamic> json) => Service(
+  factory ServiceDetails.fromJson(Map<String, dynamic> json) => ServiceDetails(
         name: json["name"],
         details: json["details"],
         status: json["status"],

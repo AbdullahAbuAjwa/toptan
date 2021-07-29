@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FAQCard extends StatelessWidget {
-  String? question;
-  String? answer;
+  final question;
+  final answer;
 
   FAQCard({required this.question, required this.answer});
 
