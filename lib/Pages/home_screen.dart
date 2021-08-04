@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Provider/slider_provider.dart';
-import 'package:toptan/Widgets/companies_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/home_cards.dart';
 import 'package:toptan/Widgets/slider_home.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,18 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       AsyncSnapshot<dynamic> snapshot) =>
                   snapshot.connectionState == ConnectionState.waiting
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 18.0, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 18.0.w, vertical: 10.h),
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: const Color(0x15000000),
                                   offset: Offset(0, 1),
-                                  blurRadius: 3,
+                                  blurRadius: 3.r,
                                 ),
                               ],
                             ),
@@ -54,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       : snapshot.connectionState == ConnectionState.none
                           ? Center(
                               child: Text('check_internet'.tr(),
-                                  style: TextStyle(fontSize: 22)),
+                                  style: TextStyle(fontSize: 22.sp)),
                             )
                           : Consumer<SliderProvider>(
                               builder:
@@ -73,16 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
+          SizedBox(height: 30.h),
           Expanded(
             flex: 2,
             child: GridView.count(
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.2,
+              crossAxisSpacing: 10.w,
+              mainAxisSpacing: 10.h,
+              childAspectRatio: 1.2.h,
               children: [
                 HomeCards(
                   image: 'assets/images/line.png',
@@ -133,10 +128,13 @@ class _HomeScreenState extends State<HomeScreen> {
       centerTitle: true,
       elevation: 0,
       backgroundColor: Color(0xff08A8FF),
-      title: Text('home_screen'.tr()),
+      title: Text(
+        'home_screen'.tr(),
+        style: TextStyle(fontSize: 22.sp),
+      ),
       actions: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.w),
           child: InkWell(
             onTap: () {
               Navigator.of(context)
@@ -148,15 +146,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   '\$2000',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     color: const Color(0xffefff02),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 10.w),
                 Icon(
                   CustomIcon.ic_shopping_wallet,
                   color: Colors.white,
+                  size: 25.sp,
                 ),
               ],
             ),

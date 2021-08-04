@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/categories_products.dart';
 import 'package:toptan/Widgets/products_card.dart';
-import 'package:toptan/Widgets/search.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/Widgets/search.dart';
 
 class ProductsScreen extends StatefulWidget {
   @override
@@ -18,10 +19,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: appBarApp('products'.tr()),
       body: ListView(
         children: [
-       //   Search(),
+          Search(),
           Container(
             height: 60,
-            margin: EdgeInsets.only(top: 25),
+            margin: EdgeInsets.only(top: 25.h),
             child: ListView(
               scrollDirection: Axis.horizontal,
               physics: ScrollPhysics(),
@@ -36,13 +37,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 8, right: 8, top: 25, bottom: 8),
+            margin:
+                EdgeInsets.only(left: 8.w, right: 8.w, top: 25.h, bottom: 8.w),
             child: GridView.count(
               physics: ScrollPhysics(),
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.6,
+              crossAxisSpacing: 10.w,
+              mainAxisSpacing: 10.h,
+              childAspectRatio: 0.5.h,
               shrinkWrap: true,
               children: [
                 ProductsCard(oPrice: '1000', rPrice: '2000', sPrice: '898'),

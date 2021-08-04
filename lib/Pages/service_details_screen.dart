@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -12,6 +13,7 @@ import 'package:toptan/Widgets/button.dart';
 import 'package:toptan/Widgets/loading_list.dart';
 import 'package:toptan/Widgets/service_details_card.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServiceDetailsScreen extends StatefulWidget {
   @override
@@ -99,8 +101,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
             Column(
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 16.0, left: 12, right: 12),
+                  padding: EdgeInsets.only(top: 16.h, left: 12.w, right: 12.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -110,7 +111,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           'mobile_no'.tr(),
                           style: TextStyle(
                             fontFamily: 'Roboto',
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: const Color(0xffffffff),
                           ),
                           textAlign: TextAlign.left,
@@ -119,14 +120,14 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          height: 50,
+                          height: 50.h,
                           child: TextFormField(
                             controller: _mobileController,
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
+                                    BorderRadius.all(Radius.circular(15.0.r)),
                                 borderSide: BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -136,12 +137,12 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                               suffixIcon: Icon(
                                 CustomIcon.ic_devices_mobile,
                                 color: Color(0xff08A8FF),
+                                size: 25.sp,
                               ),
                               fillColor: Colors.white,
                               hintText: '0000-0000-0000',
                               hintStyle: TextStyle(
-                                color: Color(0xffc4c1c4),
-                              ),
+                                  color: Color(0xffc4c1c4), fontSize: 18.sp),
                             ),
                           ),
                         ),
@@ -150,8 +151,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 16.0, left: 12),
+                  padding: EdgeInsets.only(top: 16.h, left: 12.h),
                   child: GestureDetector(
                     onTap: () {
                       _showPicker(context);
@@ -165,7 +165,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                             'photo_id'.tr(),
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               color: const Color(0xffffffff),
                             ),
                             textAlign: TextAlign.left,
@@ -175,16 +175,17 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           flex: 2,
                           child: ListTile(
                             leading: Container(
-                              height: 45,
-                              width: 45,
+                              height: 45.h,
+                              width: 45.w,
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
+                                    BorderRadius.all(Radius.circular(50.r)),
                                 color: const Color(0xffffffff),
                               ),
                               child: Icon(
                                 CustomIcon.ic_devices_camera,
                                 color: Color(0xff08A8FF),
+                                size: 25.sp,
                               ),
                             ),
                             title: Text(
@@ -193,7 +194,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                   : imageFile!.path.toString(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: const Color(0xffffffff),
                               ),
                             ),
@@ -208,12 +209,13 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       ? Alignment.topRight
                       : Alignment.topLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 15,right: 12),
+                    padding:
+                        EdgeInsets.only(left: 12.w, top: 15.h, right: 12.w),
                     child: Text(
                       'available_packages'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.left,
@@ -255,18 +257,19 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(15.r),
                     color: Colors.white,
                   ),
-                  height: 150,
-                  margin: EdgeInsets.all(15),
+                  height: 150.h,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
                   child: TextFormField(
                     keyboardType: TextInputType.multiline,
                     controller: _commentController,
                     maxLines: null,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(15.r)),
                         borderSide: BorderSide(
                           width: 0,
                           style: BorderStyle.none,
@@ -277,7 +280,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       hintText: 'comment'.tr(),
                       hintStyle: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xff323b4a),
                         fontStyle: FontStyle.italic,
                       ),
@@ -285,10 +288,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 25, bottom: 15),
+                    margin: EdgeInsets.only(top: 25.h, bottom: 15.h),
                     child: ButtonSend(
                       onTap: () {
-                        //  print(idSelected);
                         orderService(data['id'], idSelected);
                       },
                       buttonColor: Colors.white,
@@ -298,7 +300,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
               ],
             ),
             if (Provider.of<ServiceProvider>(context, listen: false).isLoading)
-              CircularProgressIndicator()
+              SpinKitDualRing(
+                color: Colors.blue,
+              ),
           ],
         ),
       ),

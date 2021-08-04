@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Widgets/login_card.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -17,12 +17,12 @@ class _LoginScreenState extends State<LoginScreen> {
           Expanded(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.only(top: 90),
+              margin: EdgeInsets.only(top: 90.h),
               child: Text(
                 'Toptan',
                 style: TextStyle(
                   fontFamily: 'SF Pro',
-                  fontSize: 72,
+                  fontSize: 72.sp,
                   color: const Color(0x99000000),
                   fontWeight: FontWeight.w700,
                 ),

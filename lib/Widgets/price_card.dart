@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PriceCard extends StatefulWidget {
   final price;
@@ -14,14 +15,14 @@ class _PriceCardState extends State<PriceCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+      padding: EdgeInsets.symmetric(horizontal: 6.w),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(25.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          padding: EdgeInsets.symmetric(vertical: 12.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -29,7 +30,7 @@ class _PriceCardState extends State<PriceCard> {
                 '${widget.price}\$',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 23,
+                  fontSize: 23.sp,
                   color: const Color(0xff08a8ff),
                 ),
               ),
@@ -37,7 +38,7 @@ class _PriceCardState extends State<PriceCard> {
                 widget.title,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: const Color(0xff445570),
                 ),
               ),

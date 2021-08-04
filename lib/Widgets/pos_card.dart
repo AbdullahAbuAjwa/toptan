@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class POSCard extends StatefulWidget {
   final image;
@@ -16,19 +17,19 @@ class _POSCARDState extends State<POSCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          padding: EdgeInsets.symmetric(vertical: 12.h),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CircleAvatar(
-                radius: 35,
+                radius: 35.r,
                 backgroundImage: NetworkImage(
                   widget.image,
                 ),
@@ -37,7 +38,7 @@ class _POSCARDState extends State<POSCard> {
                 widget.name,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: const Color(0xff445570),
                 ),
               ),
@@ -45,7 +46,7 @@ class _POSCARDState extends State<POSCard> {
                 '${widget.phoneNumber}',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: const Color(0xff08a8ff),
                 ),
               ),

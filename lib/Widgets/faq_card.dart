@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FAQCard extends StatelessWidget {
   final question;
@@ -9,18 +10,22 @@ class FAQCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 12.h),
           child: ExpansionTile(
             trailing: Icon(
               Icons.keyboard_arrow_down,
               color: Color(0xff08A8FF),
-              size: 26,
+              size: 26.sp,
             ),
-            title: Text(question!),
+            title: Text(
+              question!,
+              style: TextStyle(fontSize: 18.sp),
+            ),
             children: <Widget>[
               Align(
                 alignment:
@@ -29,14 +34,15 @@ class FAQCard extends StatelessWidget {
                         ? Alignment.topRight
                         : Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: EdgeInsets.symmetric(horizontal: 4.0.w),
                   child: Text(
                     answer!,
+                    textScaleFactor: 1,
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: const Color(0xff323b4a),
-                      height: 1.3,
+                      //    height: 1.3,
                     ),
                   ),
                 ),

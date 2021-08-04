@@ -3,8 +3,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/order_product_card.dart';
-import 'package:toptan/Widgets/search.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum select { selectAll, waiting, accept, reject }
 
@@ -93,13 +93,15 @@ class _OrderScreenState extends State<OrderScreen> {
                     },
                     child: Container(
                       width: double.infinity,
-                      height: 50,
-                      margin: EdgeInsets.all(16),
+                      height: 50.h,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 16.h),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.0.r),
                         color: Colors.white,
                       ),
-                      padding: EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.0.w, vertical: 12.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -112,12 +114,12 @@ class _OrderScreenState extends State<OrderScreen> {
                                         ? 'accept'.tr()
                                         : 'reject'.tr(),
                             style: TextStyle(
-                                fontSize: 18, color: Color(0xff323B4A)),
+                                fontSize: 18.sp, color: Color(0xff323B4A)),
                           ),
                           Icon(
                             Icons.keyboard_arrow_down_sharp,
                             color: Color(0xff08A8FF),
-                            size: 30,
+                            size: 30.sp,
                           )
                         ],
                       ),
@@ -126,7 +128,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 30.h),
             ListView(
               shrinkWrap: true,
               physics: ScrollPhysics(),

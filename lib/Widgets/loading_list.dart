@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget loadingNotifications() {
   return Container(
     width: double.infinity,
-    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
     child: Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
@@ -17,17 +18,17 @@ Widget loadingNotifications() {
               itemCount: 10,
               itemBuilder: (_, __) => Container(
                 width: double.infinity,
-                height: 160.0,
-                margin:
-                    EdgeInsets.only(left: 12.0, right: 12, top: 16, bottom: 8),
+                height: 160.h,
+                margin: EdgeInsets.only(
+                    left: 12.w, right: 12.w, top: 16.h, bottom: 8.h),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0x15000000),
                       offset: Offset(0, 1),
-                      blurRadius: 3,
+                      blurRadius: 3.r,
                     ),
                   ],
                 ),
@@ -53,21 +54,21 @@ Widget loadingChat(context) {
           itemCount: 10,
           itemBuilder: (_, __) => Align(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
               child: Container(
-                height: 60,
+                height: 60.h,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                        blurRadius: 0.5,
-                        spreadRadius: 1.0,
+                        blurRadius: 0.5.r,
+                        spreadRadius: 1.0.r,
                         color: Colors.black.withOpacity(0.12))
                   ],
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
+                    topLeft: Radius.circular(20.r),
+                    bottomLeft: Radius.circular(20.r),
+                    bottomRight: Radius.circular(20.r),
                   ),
                 ),
               ),
@@ -86,20 +87,20 @@ Widget loadingPages(context) {
       highlightColor: Color(0xffdcdcdc),
       enabled: true,
       child: Container(
-        height: 300,
+        height: 300.h,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                blurRadius: 0.5,
-                spreadRadius: 1.0,
+                blurRadius: 0.5.r,
+                spreadRadius: 1.r,
                 color: Colors.black.withOpacity(0.12))
           ],
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.r),
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
+            topRight: Radius.circular(20.r),
           ),
         ),
       ),
@@ -110,7 +111,7 @@ Widget loadingPages(context) {
 Widget loadingFaq() {
   return Container(
     width: double.infinity,
-    padding: const EdgeInsets.all(8.0),
+    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
     child: Column(
       children: <Widget>[
         Expanded(
@@ -122,17 +123,17 @@ Widget loadingFaq() {
               itemCount: 10,
               itemBuilder: (_, __) => Container(
                 width: double.infinity,
-                height: 80.0,
-                margin:
-                    EdgeInsets.only(left: 12.0, right: 12, top: 8, bottom: 8),
+                height: 80.h,
+                margin: EdgeInsets.only(
+                    left: 12.w, right: 12.w, top: 8.h, bottom: 8.h),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0x15000000),
                       offset: Offset(0, 1),
-                      blurRadius: 3,
+                      blurRadius: 3.r,
                     ),
                   ],
                 ),

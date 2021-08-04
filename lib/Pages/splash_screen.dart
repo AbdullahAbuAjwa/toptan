@@ -5,6 +5,7 @@ import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/login_screen.dart';
 import 'welcomeScreen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: DefaultTextStyle(
           style: TextStyle(
             fontFamily: 'SF Pro',
-            fontSize: 65,
+            fontSize: 65.sp,
             color: const Color(0x99000000),
             fontWeight: FontWeight.w700,
           ),

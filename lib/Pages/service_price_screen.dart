@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:toptan/Provider/service_prices_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/service_price_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServicePriceScreen extends StatefulWidget {
   @override
@@ -30,9 +31,9 @@ class _ServicePriceScreenState extends State<ServicePriceScreen> {
                     GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          childAspectRatio: 0.9,
-                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8.w,
+                          childAspectRatio: 0.9.h,
+                          mainAxisSpacing: 8.h,
                         ),
                         itemCount: data.items!.length,
                         itemBuilder: (ctx, i) => ServicePricesCard(

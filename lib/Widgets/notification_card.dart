@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationCard extends StatelessWidget {
   // Notifications? notifications;
@@ -14,20 +15,20 @@ class NotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(left: 12.0, right: 12, top: 16, bottom: 8),
+      margin: EdgeInsets.only(left: 12.w, right: 12.w, top: 16.h, bottom: 8.h),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
             color: const Color(0x15000000),
             offset: Offset(0, 1),
-            blurRadius: 3,
+            blurRadius: 3.r,
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -40,19 +41,18 @@ class NotificationCard extends StatelessWidget {
                     title!,
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 24,
-                      height: 1,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
                       color: const Color(0xff4a494b),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 25),
+                    margin: EdgeInsets.only(top: 25.h),
                     child: Text(
                       message!,
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: const Color(0xff4a494b),
                       ),
                       textAlign: TextAlign.left,
@@ -64,19 +64,19 @@ class NotificationCard extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 12),
+                  padding: EdgeInsets.only(right: 12.w),
                   child: Column(
                     children: [
                       Image.asset(
                         'assets/images/mobile.png',
-                        height: 120,
-                        width: 120,
+                        height: 120.h,
+                        width: 120.w,
                       ),
                       Text(
                         createdAt!,
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: const Color(0xff323b4a),
                           letterSpacing: 0.4,
                           height: 1.5,

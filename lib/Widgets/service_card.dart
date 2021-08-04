@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServiceCard extends StatefulWidget {
   final image;
@@ -18,38 +19,38 @@ class _ServiceCardState extends State<ServiceCard> {
     return GestureDetector(
       onTap: widget.onPress,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 8),
+        margin: EdgeInsets.symmetric(horizontal: 8.w),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(15.r),
           ),
           child: Container(
             alignment: Alignment.center,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: EdgeInsets.only(top: 16.h),
                   child: Image.network(
                     widget.image,
-                    height: 80,
+                    height: 80.h,
                     fit: BoxFit.contain,
-                    width: 90,
+                    width: 90.w,
                     errorBuilder: (BuildContext context, Object error,
                             StackTrace? stackTrace) =>
                         Image.asset(
                       'assets/images/paysell.png',
-                      height: 90,
+                      height: 90.h,
                       fit: BoxFit.contain,
-                      width: 90,
+                      width: 90.w,
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 Text(
                   widget.name,
                   style: TextStyle(
                     fontFamily: 'SF Pro',
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: const Color(0xfe000000),
                   ),
                   textAlign: TextAlign.center,

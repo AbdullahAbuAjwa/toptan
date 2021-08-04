@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -11,6 +10,7 @@ import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
 import 'package:toptan/Pages/point_of_sales_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -33,20 +33,20 @@ class _AppDrawerState extends State<AppDrawer> {
         child: ListView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 12.0),
+              padding: EdgeInsets.only(top: 12.h),
               child: UserAccountsDrawerHeader(
                 decoration: BoxDecoration(
                   color: Color(0xff08A8FF),
                 ),
-                currentAccountPictureSize: Size(85, 85),
+                currentAccountPictureSize: Size(80.w, 80.h),
                 accountEmail: null,
                 accountName: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Text(
                     AppShared.currentUser!.user.name,
                     style: TextStyle(
                       fontFamily: 'SF Pro',
-                      fontSize: 19,
+                      fontSize: 19.sp,
                       color: const Color(0xffffffff),
                       fontWeight: FontWeight.w700,
                     ),
@@ -60,11 +60,11 @@ class _AppDrawerState extends State<AppDrawer> {
                     );
                   },
                   child: CircleAvatar(
-                    radius: 50,
+                    radius: 50.r,
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 2),
-                        borderRadius: BorderRadius.circular(50.0),
+                        border: Border.all(color: Colors.white, width: 2.w),
+                        borderRadius: BorderRadius.circular(50.r),
                         image: DecorationImage(
                           image: NetworkImage(
                             AppShared.currentUser!.user.imageProfile,
@@ -73,8 +73,8 @@ class _AppDrawerState extends State<AppDrawer> {
                           onError: (_, a) => Container(
                             decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.white, width: 2),
-                                borderRadius: BorderRadius.circular(50.0),
+                                    Border.all(color: Colors.white, width: 2.w),
+                                borderRadius: BorderRadius.circular(50.r),
                                 image: DecorationImage(
                                   image: AssetImage('assets/images/avatar.png'),
                                   fit: BoxFit.cover,
@@ -89,7 +89,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             Divider(
               color: Colors.white,
-              thickness: 1,
+              thickness: 1.h,
               indent: 50,
               endIndent: 50,
             ),
@@ -107,8 +107,6 @@ class _AppDrawerState extends State<AppDrawer> {
               title: 'notification'.tr(),
               icon: Icons.notifications_none_outlined,
               onTap: () async {
-                // Provider.of<NotificationProvider>(context, listen: false)
-                //     .fetchNotification();
                 await Navigator.of(context)
                     .pushNamed('move_to_notification_screen');
               },
@@ -221,20 +219,18 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             Container(
-              height: 100,
+              height: 100.h,
               decoration: BoxDecoration(
                 color: const Color(0xffffffff),
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 15.h),
                   Text(
                     'powered_by'.tr(),
                     style: TextStyle(
                       fontFamily: 'Arial',
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       color: const Color(0xff08a8ff),
                     ),
                     textAlign: TextAlign.left,
@@ -242,8 +238,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   Expanded(
                     child: Container(
                       child: Image(
-                        height: 100,
-                        width: 100,
+                        height: 100.h,
+                        width: 100.w,
                         image: AssetImage('assets/images/hexalogo.png'),
                         fit: BoxFit.contain,
                       ),
@@ -257,16 +253,6 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
     );
   }
-
-/* getNotifications() async {
-    try {
-      Provider.of<NotificationProvider>(context, listen: false)
-          .fetchNotification();
-      await Navigator.of(context).pushNamed('move_to_notification_screen');
-    } catch (error) {
-      print('eeeee: ' + error.toString());
-    }
-  }*/
 }
 
 class DrawerTile extends StatefulWidget {
@@ -291,9 +277,13 @@ class _DrawerTileState extends State<DrawerTile> {
       child: ListTile(
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 14.sp),
         ),
-        leading: Icon(widget.icon, color: Colors.white),
+        leading: Icon(
+          widget.icon,
+          color: Colors.white,
+          size: 26.sp,
+        ),
       ),
       onTap: widget.onTap,
     );

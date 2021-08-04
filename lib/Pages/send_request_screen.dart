@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SendRequestScreen extends StatelessWidget {
   @override
@@ -13,12 +14,12 @@ class SendRequestScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(45.0),
+        padding: EdgeInsets.symmetric(vertical: 45.0.h, horizontal: 45.w),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(15.r),
             ),
           ),
           child: Column(
@@ -26,17 +27,17 @@ class SendRequestScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/send.png',
-                height: 250,
-                width: 200,
+                height: 250.h,
+                width: 200.w,
                 fit: BoxFit.contain,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: EdgeInsets.symmetric(horizontal: 12.0.w),
                 child: Text(
                   'request_sent_approval'.tr(),
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     color: const Color(0xff323b4a),
                   ),
                   textAlign: TextAlign.center,
@@ -50,16 +51,16 @@ class SendRequestScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
+                    borderRadius: new BorderRadius.circular(30.0.r),
                   ),
                   primary: Color(0xff08A8FF),
-                  fixedSize: Size(250, 55),
+                  fixedSize: Size(250.w, 55.h),
                 ),
                 child: Text(
                   'go_to_home'.tr(),
                   style: TextStyle(
                     fontFamily: 'SF Pro',
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: const Color(0xffffffff),
                     fontWeight: FontWeight.w700,
                   ),

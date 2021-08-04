@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BankAccountCard extends StatelessWidget {
   final nameBank;
@@ -10,14 +11,14 @@ class BankAccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: EdgeInsets.symmetric(horizontal: 4.0.w),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(25.0.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,7 +27,7 @@ class BankAccountCard extends StatelessWidget {
                 nameBank,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 21,
+                  fontSize: 21.sp,
                   fontWeight: FontWeight.w600,
                   color: const Color(0xff08a8ff),
                 ),
@@ -38,7 +39,7 @@ class BankAccountCard extends StatelessWidget {
                       text: 'Account Name: ',
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: const Color(0xff445570),
                         fontWeight: FontWeight.w600,
                       ),
@@ -47,7 +48,7 @@ class BankAccountCard extends StatelessWidget {
                       text: nameAccount,
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: const Color(0xff445570),
                       ),
                     ),
@@ -70,7 +71,7 @@ class BankAccountCard extends StatelessWidget {
                       text: numAccount,
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: const Color(0xff445570),
                       ),
                     ),

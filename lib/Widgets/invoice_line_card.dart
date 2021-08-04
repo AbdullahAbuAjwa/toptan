@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class InvoiceLineCard extends StatefulWidget {
   @override
   _InvoiceLineCardState createState() => _InvoiceLineCardState();
@@ -9,13 +9,13 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 220,
-      margin: EdgeInsets.only(top: 15),
+      height: 200.h,
+      width: 220.w,
+      margin: EdgeInsets.only(top: 15.h),
       child: Card(
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.r),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,13 +33,13 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
                       TextSpan(
                         text: '2',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                       TextSpan(
                         text: 'GB',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ],
@@ -55,13 +55,13 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
                       TextSpan(
                         text: '500',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                       TextSpan(
                         text: 'DK',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ],
@@ -77,13 +77,13 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
                       TextSpan(
                         text: '100',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                       TextSpan(
                         text: 'SMS',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ],
@@ -95,7 +95,7 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
               '29\$',
               style: TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 35,
+                fontSize: 35.sp,
                 color: const Color(0xff08a8ff),
               ),
             ),
@@ -103,7 +103,7 @@ class _InvoiceLineCardState extends State<InvoiceLineCard> {
               'Package Name',
               style: TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 17,
+                fontSize: 17.sp,
                 color: const Color(0xff445570),
               ),
             ),

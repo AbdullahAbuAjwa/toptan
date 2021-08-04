@@ -4,6 +4,7 @@ import 'package:intro_slider/slide_object.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Pages/login_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           'iOS 11 Wireframes\nfor iPhone X',
           style: TextStyle(
             fontFamily: 'Roboto',
-            fontSize: 28,
+            fontSize: 28.sp,
             color: const Color(0xff323b4a),
             letterSpacing: 0.336,
             height: 1.2142857142857142,
@@ -34,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Roboto',
-            fontSize: 15,
+            fontSize: 15.sp,
             color: const Color(0xff323b4a),
           ),
         ),
@@ -49,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       new Slide(
         backgroundColor: Colors.white,
         pathImage: 'assets/images/welcome1.png',
-        heightImage: 300,
+        heightImage: 200.h,
         backgroundImageFit: BoxFit.scaleDown,
         widgetDescription: description(),
       ),
@@ -58,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       new Slide(
         backgroundColor: Colors.white,
         pathImage: 'assets/images/welcome2.png',
-        heightImage: 200,
+        heightImage: 200.h,
         backgroundImageFit: BoxFit.scaleDown,
         widgetDescription: description(),
       ),
@@ -67,7 +68,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       new Slide(
         backgroundColor: Colors.white,
         pathImage: 'assets/images/welcome3.png',
-        heightImage: 300,
+        heightImage: 200.h,
         backgroundImageFit: BoxFit.scaleDown,
         widgetDescription: description(),
       ),
@@ -80,6 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: IntroSlider(
         slides: this.slides,
         nameDoneBtn: 'get_started'.tr(),
+        styleDoneBtn: TextStyle(fontSize: 15.sp, color: Colors.white),
         onDonePress: () {
           AppShared.sharedPreferencesController!.notShowIntro(false);
 
@@ -96,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         colorDoneBtn: Color(0xff08A8FF),
         colorPrevBtn: Color(0xff08A8FF),
         colorActiveDot: Color(0xff08A8FF),
-        borderRadiusSkipBtn: 15,
+        borderRadiusSkipBtn: 15.r,
         showSkipBtn: false,
         nameNextBtn: 'skip'.tr(),
       ),

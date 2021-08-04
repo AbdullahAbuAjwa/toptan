@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/order_balance_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderBalanceScreen extends StatefulWidget {
   @override
@@ -98,17 +98,17 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
           alignment: Alignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 16.0.h, left: 20.w, right: 20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'enter_amount_of_value'.tr(),
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style: TextStyle(color: Colors.white, fontSize: 18.sp),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Container(
-                    width: 250,
+                    width: 250.w,
                     child: Form(
                       key: formKey,
                       child: TextFormField(
@@ -123,7 +123,7 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
+                                BorderRadius.all(Radius.circular(15.0.r)),
                             borderSide: BorderSide(
                               width: 0,
                               style: BorderStyle.none,
@@ -131,21 +131,21 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                           ),
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
-                          hintStyle:
-                              TextStyle(color: Color(0xFFd0cece), fontSize: 18),
+                          hintStyle: TextStyle(
+                              color: Color(0xFFd0cece), fontSize: 18.sp),
                           hintText: "amount".tr(),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   ListTile(
                     onTap: () {
                       _showPicker(context);
                     },
                     leading: Container(
-                      height: 45,
-                      width: 45,
+                      height: 45.h,
+                      width: 45.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         color: const Color(0xffffffff),
@@ -153,18 +153,19 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                       child: Icon(
                         CustomIcon.ic_devices_camera,
                         color: Color(0xff08A8FF),
+                        size: 25.sp,
                       ),
                     ),
                     title: Text(
                       imageFile == null ? 'select_photo'.tr() : imageFile!.path,
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xffffffff),
                       ),
                     ),
                   ),
-                  SizedBox(height: 320),
+                  SizedBox(height: 280.h),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
@@ -175,16 +176,16 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
+                          borderRadius: new BorderRadius.circular(30.0.r),
                         ),
                         primary: Colors.white,
-                        fixedSize: Size(250, 55),
+                        fixedSize: Size(250.w, 55.h),
                       ),
                       child: Text(
                         'send'.tr(),
                         style: TextStyle(
                           color: Color(0xff08A8FF),
-                          fontSize: 16,
+                          fontSize: 16.sp,
                         ),
                       ),
                     ),

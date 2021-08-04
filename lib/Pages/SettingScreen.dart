@@ -4,6 +4,7 @@ import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -29,12 +30,12 @@ class _SettingScreenState extends State<SettingScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
+              topLeft: Radius.circular(20.0.r),
+              topRight: Radius.circular(20.0.r),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10, top: 30),
+            padding: EdgeInsets.only(left: 10.0.w, right: 10.w, top: 30.h),
             child: ListView(
               physics: ScrollPhysics(),
               children: [
@@ -64,9 +65,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       'change'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: const Color(0xff616161),
-                        letterSpacing: 0.168,
                       ),
                     ),
                   ),
@@ -84,7 +84,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   activeColor: Color(0xff08A8FF),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 50.h),
                 ListTile(
                   onTap: () {
                     Navigator.of(context).pushNamed(
@@ -98,7 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,
                     color: Color(0xff08A8FF),
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
                 ListTile(
@@ -144,7 +144,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   trailing: Icon(
                     CustomIcon.ic_security_locked,
                     color: Color(0xff08A8FF),
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
               ],
@@ -158,9 +158,15 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget popupMenu() {
     return PopupMenuButton<String>(
       itemBuilder: (_) => <PopupMenuItem<String>>[
-        PopupMenuItem<String>(child: const Text('English').tr(), value: 'en'),
-        PopupMenuItem<String>(child: const Text('Arabic').tr(), value: 'ar'),
-        PopupMenuItem<String>(child: const Text('Turkish').tr(), value: 'tr'),
+        PopupMenuItem<String>(
+            child: Text('English'.tr(), style: TextStyle(fontSize: 18.sp)),
+            value: 'en'),
+        PopupMenuItem<String>(
+            child: Text('Arabic'.tr(), style: TextStyle(fontSize: 18.sp)),
+            value: 'ar'),
+        PopupMenuItem<String>(
+            child: Text('Turkish'.tr(), style: TextStyle(fontSize: 18.sp)),
+            value: 'tr'),
       ],
       onSelected: (value) {
         value == 'ar'
@@ -175,7 +181,7 @@ class _SettingScreenState extends State<SettingScreen> {
         'change'.tr(),
         style: TextStyle(
           fontFamily: 'Roboto',
-          fontSize: 14,
+          fontSize: 14.sp,
           fontWeight: FontWeight.w600,
           color: const Color(0xff616161),
         ),
@@ -183,25 +189,24 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  // signOut() {
-  //   Navigator.of(context).pushReplacementNamed('move_to_login_screen');
-  //   try {
-  //     Provider.of<LoginProvider>(context, listen: false)
-  //         .logout(Localizations.localeOf(context));
-  //     ShowToast.showToast('Logout success', MessageType.Success);
-  //     Navigator.of(context).pushReplacementNamed('move_to_login_screen');
-  //   } catch (error) {
-  //     ShowToast.showToast('Logout Failed', MessageType.Failed);
-  //     print('error: ' + error.toString());
-  //   }
-  // }
+  /* signOut() {
+    Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+    try {
+      Provider.of<LoginProvider>(context, listen: false)
+          .logout(Localizations.localeOf(context));
+      ShowToast.showToast('Logout success', MessageType.Success);
+      Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+    } catch (error) {
+      ShowToast.showToast('Logout Failed', MessageType.Failed);
+      print('error: ' + error.toString());
+    }
+  }*/
 
   titleTextStyle() {
     return TextStyle(
       fontFamily: 'Roboto',
-      fontSize: 16,
+      fontSize: 16.sp,
       color: const Color(0xff000000),
-      letterSpacing: 0.192,
       fontWeight: FontWeight.w500,
     );
   }

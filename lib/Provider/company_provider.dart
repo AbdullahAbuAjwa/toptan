@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/model/response/company.dart';
-import 'package:toptan/model/response/faq.dart';
 
 class CompanyProvider with ChangeNotifier {
   List<Company>? _items = [];
@@ -11,10 +10,10 @@ class CompanyProvider with ChangeNotifier {
     return [...?_items];
   }
 
-  List<Company>? _itemsFounded = [];
+  List<Company> _itemsFounded = [];
 
-  List<Company>? get itemsFounded {
-    return [...?_itemsFounded];
+  List<Company> get itemsFounded {
+    return [..._itemsFounded];
   }
 
   Future<void> fetchCompanies(locale) async {
@@ -39,7 +38,7 @@ class CompanyProvider with ChangeNotifier {
   }
 
   Future<void> onSearchTextChanged(String text) async {
-    _itemsFounded!.clear();
+    _itemsFounded.clear();
     if (text.isEmpty) {
       notifyListeners();
       return;

@@ -3,6 +3,7 @@ import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/send_button.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServiceNameScreen extends StatefulWidget {
   @override
@@ -19,26 +20,26 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(vertical: 12.r, horizontal: 12.r),
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(15.r),
                 ),
                 child: ListTile(
                   leading: CircleAvatar(
-                    radius: 35,
+                    radius: 35.r,
                     backgroundImage: AssetImage(
                       'assets/images/avatar.png',
                     ),
                   ),
                   title: Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
+                    padding: EdgeInsets.only(top: 15.h),
                     child: Text(
                       'manager Name',
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         color: const Color(0xff323b4a),
                         letterSpacing: 0.51,
                         fontWeight: FontWeight.w500,
@@ -51,20 +52,20 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                     '10/09/2019',
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: const Color(0xff323b4a),
                       letterSpacing: 0.42,
                       height: 1.6428571428571428,
                     ),
                   ),
                   subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                    padding: EdgeInsets.only(top: 8.h, bottom: 8.h),
                     child: Text(
                       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s'
                       'standard dummy text ever since the 1500s,',
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: const Color(0xff445570),
                       ),
                     ),
@@ -73,14 +74,15 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.0.w, vertical: 12.h),
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(15.r),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.0.w, vertical: 12.h),
                   child: Column(
                     children: [
                       Row(
@@ -90,7 +92,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                             'mobile_no'.tr(),
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               color: const Color(0xff323b4a),
                             ),
                             textAlign: TextAlign.left,
@@ -99,7 +101,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                             '0000-0000-0000',
                             style: TextStyle(
                               fontFamily: 'Arial',
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: const Color(0xff4a494b),
                             ),
                           ),
@@ -109,9 +111,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      SizedBox(height: 15.h),
                       Row(
                         children: [
                           Expanded(
@@ -119,7 +119,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                               'photo_id'.tr(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: const Color(0xff323b4a),
                               ),
                               textAlign: TextAlign.left,
@@ -135,9 +135,8 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                                 'edit'.tr(),
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   color: const Color(0xff8d8d8d),
-                                  letterSpacing: 0.14400000000000002,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 textAlign: TextAlign.left,
@@ -149,18 +148,15 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                               'image10001.jpg',
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: const Color(0xff323b4a),
-                                letterSpacing: 0.168,
                               ),
                               textAlign: TextAlign.right,
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      SizedBox(height: 15.h),
                       Row(
                         children: [
                           Expanded(
@@ -168,7 +164,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                               'photo_QR_code'.tr(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: const Color(0xff323b4a),
                               ),
                               textAlign: TextAlign.left,
@@ -184,9 +180,8 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                                 'edit'.tr(),
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   color: const Color(0xff8d8d8d),
-                                  letterSpacing: 0.14400000000000002,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 textAlign: TextAlign.left,
@@ -198,7 +193,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                               'image10002.jpg',
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: const Color(0xff323b4a),
                                 letterSpacing: 0.168,
                               ),
@@ -207,18 +202,18 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 15.h),
                       Text(
                         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: const Color(0xff445570),
                           letterSpacing: 0.42,
                           height: 1.4285714285714286,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 15.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -226,7 +221,7 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                             'Package Name',
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               color: const Color(0xff445570),
                               letterSpacing: 0.51,
                               fontWeight: FontWeight.w500,
@@ -235,12 +230,12 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                           ),
                           Text(
                             '29\$',
+                            textScaleFactor: 1.sp,
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 25,
+                              fontSize: 25.sp,
                               color: const Color(0xff08a8ff),
                               letterSpacing: 0.75,
-                              height: 1.2,
                             ),
                             textHeightBehavior: TextHeightBehavior(
                                 applyHeightToFirstAscent: false),
@@ -253,9 +248,9 @@ class _ServiceNameScreenState extends State<ServiceNameScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 30.h),
             Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: EdgeInsets.only(bottom: 16.0.h),
               child: SendButton(),
             ),
           ],

@@ -93,7 +93,11 @@
   "no_notification": "No notifications yet :(",
   "enter_amount": "Enter amount",
   "government": "Government",
-  "no_messages": "No messages yet"
-
-
+  "no_messages": "No messages yet",
+  "choose_line": "Choose line",
+  "golden_number": "Golden Number",
+  "silver_number": "Silver Number",
+  "normal_number": "Normal Number",
+  "choose_number": "Choose number",
+  "available_numbers": "Available Numbers"
 }

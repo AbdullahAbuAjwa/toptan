@@ -11,6 +11,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/user_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/Widgets/app_bar.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -86,12 +88,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        title: Text('edit_profile'.tr()),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color(0xff08A8FF),
-      ),
+      appBar: appBarApp('edit_profile'.tr()),
       body: SingleChildScrollView(
         child: Stack(
           alignment: Alignment.center,
@@ -99,15 +96,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: 45),
+                  SizedBox(height: 45.h),
                   Stack(
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 60.r,
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(60.0),
+                            border: Border.all(color: Colors.white, width: 2.w),
+                            borderRadius: BorderRadius.circular(60.0.r),
                             image: imageFile == null
                                 ? DecorationImage(
                                     image: NetworkImage(
@@ -117,9 +114,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     onError: (_, a) => Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: Colors.white, width: 2),
+                                            color: Colors.white, width: 2.w),
                                         borderRadius:
-                                            BorderRadius.circular(60.0),
+                                            BorderRadius.circular(60.0.r),
                                         image: DecorationImage(
                                           image: AssetImage(
                                               'assets/images/avatar.png'),
@@ -136,14 +133,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                       Positioned(
-                        top: 82,
+                        top: 82.sp,
                         child: GestureDetector(
                           onTap: () {
                             _showPicker(context);
                           },
                           child: Container(
-                            height: 32,
-                            width: 32,
+                            height: 32.h,
+                            width: 32.w,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
@@ -151,7 +148,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             child: Icon(
                               CustomIcon.ic_devices_camera,
-                              size: 18,
+                              size: 18.sp,
                               color: Color(0xff08A8FF),
                             ),
                           ),
@@ -161,7 +158,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   SizedBox(height: 25),
                   Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 18.0.sp, vertical: 18.sp),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -177,11 +175,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             },
                             decoration: InputDecoration(
                               hintText: 'name'.tr(),
+                              hintStyle: TextStyle(fontSize: 17.sp),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0)),
+                                    BorderRadius.all(Radius.circular(12.0.r)),
                                 borderSide: BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -189,7 +188,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 40),
+                          SizedBox(height: 40.h),
                           TextFormField(
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.phone,
@@ -203,14 +202,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             decoration: InputDecoration(
                               hintText: 'mobile'.tr(),
                               filled: true,
+                              hintStyle: TextStyle(fontSize: 17.sp),
                               fillColor: Colors.white,
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_mobile,
                                 color: Color(0xff08A8FF),
+                                size: 27.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0)),
+                                    BorderRadius.all(Radius.circular(12.0.r)),
                                 borderSide: BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -225,16 +226,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(70.0),
+                                borderRadius: new BorderRadius.circular(70.0.r),
                               ),
                               primary: Colors.white,
-                              fixedSize: Size(250, 55),
+                              fixedSize: Size(250.w, 55.h),
                             ),
                             child: Text(
                               'edit_profile'.tr(),
                               style: TextStyle(
                                 fontFamily: 'SF Pro',
-                                fontSize: 16,
+                                fontSize: 17.sp,
                                 color: const Color(0xff08a8ff),
                                 fontWeight: FontWeight.w700,
                               ),
@@ -269,28 +270,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
     userProvider!.isLoading = true;
     MultipartFile? img;
-     try {
-    if (imageFile != null) {
-      img = await MultipartFile.fromFile(imageFile!.path);
-    }
-    userProvider!.isLoading = true;
+    try {
+      if (imageFile != null) {
+        img = await MultipartFile.fromFile(imageFile!.path);
+      }
+      userProvider!.isLoading = true;
 
-    await userProvider!.editUserProfile(
-      Localizations.localeOf(context),
-      name: _nameController.text.trim(),
-      image:  img,
-      mobile: _mobileController.text.trim(),
-    );
-    userProvider!.isLoading = false;
+      await userProvider!.editUserProfile(
+        Localizations.localeOf(context),
+        name: _nameController.text.trim(),
+        image: img,
+        mobile: _mobileController.text.trim(),
+      );
+      userProvider!.isLoading = false;
 
-    if (userProvider!.editProfileResponse!.status) {
-      ShowToast.showToast(
-          userProvider!.editProfileResponse!.message, MessageType.Success);
-      Navigator.pushReplacementNamed(context, 'move_to_home_screen');
-    } else {
-      ShowToast.showToast(
-          userProvider!.editProfileResponse!.message, MessageType.Warning);
-    }
+      if (userProvider!.editProfileResponse!.status) {
+        ShowToast.showToast(
+            userProvider!.editProfileResponse!.message, MessageType.Success);
+        Navigator.pushReplacementNamed(context, 'move_to_home_screen');
+      } else {
+        ShowToast.showToast(
+            userProvider!.editProfileResponse!.message, MessageType.Warning);
+      }
     } catch (error) {
       userProvider!.isLoading = false;
       print('error: ' + error.toString());

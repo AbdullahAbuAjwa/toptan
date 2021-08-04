@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServicePricesCard extends StatefulWidget {
   final name;
@@ -16,20 +17,20 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(25.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 6),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Row(
                   children: [
                     Expanded(
@@ -38,7 +39,7 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
                         '${widget.name}',
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 21,
+                          fontSize: 21.sp,
                           fontWeight: FontWeight.w600,
                           color: const Color(0xff08a8ff),
                         ),
@@ -51,7 +52,7 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w600,
-                          fontSize: 21,
+                          fontSize: 21.sp,
                           color: const Color(0xff08a8ff),
                         ),
                       ),
@@ -63,7 +64,7 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
                 widget.nameService,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: const Color(0xff445570),
                 ),
               ),
@@ -71,7 +72,7 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
                 widget.details,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: const Color(0xff445570),
                 ),
               ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class OrderCard extends StatefulWidget {
   final name;
   final date;
@@ -20,41 +22,41 @@ class _OrderCardState extends State<OrderCard> {
         Navigator.of(context).pushNamed('move_to_service_name_screen');
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
         child: Card(
           color: Colors.white,
           elevation: 3,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: ListTile(
             title: Text(
               widget.name,
               style: TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 17,
+                fontSize: 17.sp,
                 color: const Color(0xff323b4a),
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.left,
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 8.h),
               child: Text(
                 widget.date,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   color: const Color(0xff445570),
                 ),
               ),
             ),
             trailing: Container(
-              margin: EdgeInsets.only(top: 25),
-              height: 25,
-              width: 70,
+              margin: EdgeInsets.only(top: 25.h),
+              height: 25.h,
+              width: 70.w,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10.r),
                 color: widget.status == 'waiting'.tr()
                     ? Color(0xfff9a22a)
                     : widget.status == 'reject'.tr()
@@ -64,7 +66,7 @@ class _OrderCardState extends State<OrderCard> {
                   BoxShadow(
                     color: const Color(0x15000000),
                     offset: Offset(0, 1),
-                    blurRadius: 3,
+                    blurRadius: 3.r,
                   ),
                 ],
               ),

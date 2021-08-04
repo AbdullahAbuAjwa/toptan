@@ -11,6 +11,7 @@ import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/button.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContactUsScreen extends StatefulWidget {
   @override
@@ -37,7 +38,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _nameController.dispose();
     _mobileController.dispose();
@@ -62,12 +62,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         appBar: appBarAppWithNotification('contact_us'.tr(), context),
         body: Container(
           width: double.infinity,
-          margin: EdgeInsets.only(top: 15),
+          margin: EdgeInsets.only(top: 13.h),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
+              topLeft: Radius.circular(20.0.r),
+              topRight: Radius.circular(20.0.r),
             ),
           ),
           child: Stack(
@@ -76,20 +76,21 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 children: [
                   Image.asset(
                     'assets/images/contact.png',
-                    width: 300,
-                    height: 200,
+                    width: 300.w,
+                    height: 200.h,
                     fit: BoxFit.scaleDown,
                   ),
                   ListTile(
                     leading: Icon(
                       Icons.email_outlined,
                       color: Color(0xff08A8FF),
+                      size: 30.sp,
                     ),
                     title: Text(
                       'email'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xff323b4a),
                         fontWeight: FontWeight.w500,
                       ),
@@ -98,7 +99,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       'username@gmail.com',
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xff323b4a),
                       ),
                     ),
@@ -107,12 +108,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     leading: Icon(
                       Icons.phone,
                       color: Color(0xff08A8FF),
+                      size: 30.sp,
                     ),
                     title: Text(
                       'mobile'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xff323b4a),
                         fontWeight: FontWeight.w500,
                       ),
@@ -121,14 +123,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       '000000000000',
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: const Color(0xff323b4a),
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -141,9 +143,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               hintText: 'name'.tr(),
                               filled: true,
                               fillColor: Colors.white,
+                              hintStyle: TextStyle(fontSize: 17.sp),
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0)),
+                                    BorderRadius.all(Radius.circular(30.0.r)),
                                 borderSide: BorderSide(
                                   width: 1,
                                   style: BorderStyle.none,
@@ -156,7 +159,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               }
                             },
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           TextFormField(
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
@@ -165,15 +168,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             decoration: InputDecoration(
                               hintText: 'email'.tr(),
                               filled: true,
+                              hintStyle: TextStyle(fontSize: 17.sp),
                               fillColor: Colors.white,
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_mail,
                                 color: Color(0xff08A8FF),
-                                size: 18,
+                                size: 18.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0)),
+                                    BorderRadius.all(Radius.circular(30.0.r)),
                                 borderSide: BorderSide(
                                   width: 1,
                                   style: BorderStyle.none,
@@ -186,7 +190,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               }
                             },
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           TextFormField(
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.phone,
@@ -195,10 +199,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             decoration: InputDecoration(
                               hintText: 'mobile'.tr(),
                               filled: true,
+                              hintStyle: TextStyle(fontSize: 17.sp),
                               fillColor: Colors.white,
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_mobile,
                                 color: Color(0xff08A8FF),
+                                size: 25.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -215,7 +221,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               }
                             },
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius:
@@ -223,7 +229,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             ),
                             elevation: 2,
                             child: Container(
-                              height: 150,
+                              height: 150.h,
                               child: TextFormField(
                                 keyboardType: TextInputType.multiline,
                                 textInputAction: TextInputAction.newline,
@@ -233,6 +239,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 decoration: InputDecoration(
                                   hintText: 'message'.tr(),
                                   filled: true,
+                                  hintStyle: TextStyle(fontSize: 17.sp),
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                     borderRadius:
@@ -252,8 +259,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.only(top: 8, bottom: 12.0),
+                            padding: EdgeInsets.only(top: 8.h, bottom: 12.0.h),
                             child: ButtonSend(
                               onTap: () {
                                 // if (contactUsProvider!

@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/transaction_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FinancialMovementsScreen extends StatefulWidget {
   @override
@@ -32,27 +33,28 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                 innerWidget: (double value) {
                   return Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
+                      padding: EdgeInsets.only(left: 10.0.w),
                       child: ListTile(
                         leading: Icon(
                           CustomIcon.ic_shopping_wallet,
                           color: Colors.white,
+                          size:35.sp,
                         ),
                         title: RichText(
                           text: TextSpan(
                             text: 'spent'.tr(),
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: const Color(0xffffffff),
                               fontWeight: FontWeight.w300,
                             ),
-                            children: const <TextSpan>[
+                            children: <TextSpan>[
                               TextSpan(
                                 text: '\n\/\$2000',
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
-                                  fontSize: 28,
+                                  fontSize: 27.sp,
                                   color: const Color(0xffefff02),
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -61,10 +63,10 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                 text: '\n\$3000',
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   color: const Color(0xffffffff),
                                   fontWeight: FontWeight.w300,
-                                  height: 1.5,
+                                  height: 1.5.h,
                                 ),
                               ),
                             ],
@@ -75,9 +77,9 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                   );
                 },
                 appearance: CircularSliderAppearance(
-                  size: 200,
-                  customWidths:
-                      CustomSliderWidths(progressBarWidth: 6, trackWidth: 6),
+                  size: 200.w,
+                  customWidths: CustomSliderWidths(
+                      progressBarWidth: 6.w, trackWidth: 6.h),
                   customColors: CustomSliderColors(
                     progressBarColor: Color(0xff01396A),
                     trackColor: Colors.white,
@@ -90,12 +92,13 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(vertical: 12.0.h, horizontal: 12.w),
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding:
+                    EdgeInsets.symmetric(vertical: 12.0.h, horizontal: 12.w),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(15.r)),
                 child: Column(
                   children: [
                     Row(
@@ -106,11 +109,9 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                               'transactions'.tr(),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 color: const Color(0xff000000),
-                                letterSpacing: 0.3,
                                 fontWeight: FontWeight.w500,
-                                height: 0.95,
                               ),
                               textAlign: TextAlign.left,
                             ),
@@ -175,7 +176,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                                 ),
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
-                                  size: 30,
+                                  size: 30.sp,
                                   color: Color(0xff08A8FF),
                                 ),
                               ),
@@ -184,7 +185,7 @@ class _FinancialMovementsScreenState extends State<FinancialMovementsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 30.h),
                     ListView(
                       shrinkWrap: true,
                       physics: ScrollPhysics(),

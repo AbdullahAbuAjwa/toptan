@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatImageCard extends StatelessWidget {
   final userId, message, sender, read, type, date, time;
@@ -26,21 +27,21 @@ class ChatImageCard extends StatelessWidget {
             : Icons.done;
     final radius = sender == 1
         ? BorderRadius.only(
-            topRight: Radius.circular(20.0),
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
+            topRight: Radius.circular(20.r),
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
           )
         : BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.r),
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
           );
     final radiusImage = sender == 1
         ? BorderRadius.only(
-            topRight: Radius.circular(20.0),
+            topRight: Radius.circular(20.r),
           )
         : BorderRadius.only(
-            topLeft: Radius.circular(20.0),
+            topLeft: Radius.circular(20.r),
           );
     return Column(
       crossAxisAlignment: align,
@@ -48,8 +49,8 @@ class ChatImageCard extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height * 0.38,
           width: MediaQuery.of(context).size.width / 2,
-          margin: const EdgeInsets.all(12.0),
-          padding: const EdgeInsets.only(bottom: 5.0),
+          margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+          padding: EdgeInsets.only(bottom: 5.0.h),
           decoration: BoxDecoration(
             borderRadius: radius,
             color: bg,
@@ -70,7 +71,7 @@ class ChatImageCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0, right: 8, left: 8),
+                padding: EdgeInsets.only(bottom: 4.h, right: 8.w, left: 8.w),
                 child: Row(
                   mainAxisAlignment: mainAlignment,
                   children: <Widget>[
@@ -82,10 +83,10 @@ class ChatImageCard extends StatelessWidget {
                         color: sender == 1 ? Colors.black : Color(0xffffffff),
                       ),
                     ),
-                    SizedBox(width: 3.0),
+                    SizedBox(width: 3.w),
                     Icon(
                       icon,
-                      size: 12.0,
+                      size: 12.sp,
                       color: Colors.white,
                     )
                   ],

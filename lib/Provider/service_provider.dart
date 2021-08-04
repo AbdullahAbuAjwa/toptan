@@ -10,7 +10,7 @@ class ServiceProvider with ChangeNotifier {
   AppResponse? _appResponse;
   List<Service>? _items = [];
   List<ServiceElement>? _serviceItems = [];
-  List<Service>? _serviceItemsFounded = [];
+  List<Service> _serviceItemsFounded = [];
   bool _isLoading = false;
 
   List<Service>? get items {
@@ -21,8 +21,8 @@ class ServiceProvider with ChangeNotifier {
     return [...?_serviceItems];
   }
 
-  List<Service>? get serviceItemsFounded {
-    return [...?_serviceItemsFounded];
+  List<Service> get serviceItemsFounded {
+    return [..._serviceItemsFounded];
   }
 
   set serviceItemsFounded(value) {
@@ -107,7 +107,7 @@ class ServiceProvider with ChangeNotifier {
   }
 
   Future<void> onSearchTextChanged(String text) async {
-    _serviceItemsFounded!.clear();
+    _serviceItemsFounded.clear();
     if (text.isEmpty) {
       notifyListeners();
 

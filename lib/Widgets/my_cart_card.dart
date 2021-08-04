@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartCard extends StatefulWidget {
   @override
@@ -11,15 +12,15 @@ class _CartCardState extends State<CartCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(12),
+      margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
       child: Card(
         elevation: 0,
         child: Row(
           children: [
             Image.asset(
               'assets/images/product.png',
-              height: 150,
-              width: 150,
+              height: 150.h,
+              width: 150.w,
             ),
             Column(
               children: [
@@ -27,24 +28,24 @@ class _CartCardState extends State<CartCard> {
                   'Product Name',
                   style: TextStyle(
                     fontFamily: 'SF Pro',
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: const Color(0xfe000000),
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 Text(
                   '\$1700',
                   style: TextStyle(
                     fontFamily: 'SF Pro',
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: const Color(0xff8b98b4),
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -56,10 +57,11 @@ class _CartCardState extends State<CartCard> {
                       icon: Icon(
                         Icons.add_circle_outline,
                         color: Color(0xff8B98B4),
+                        size: 24.sp,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: Text(value.toString()),
                     ),
                     IconButton(
@@ -72,6 +74,7 @@ class _CartCardState extends State<CartCard> {
                       icon: Icon(
                         Icons.remove_circle_outline,
                         color: Color(0xff8B98B4),
+                        size: 24.sp,
                       ),
                     ),
                   ],

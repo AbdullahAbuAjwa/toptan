@@ -5,7 +5,7 @@ import 'package:toptan/Provider/prices_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/price_card.dart';
 import 'package:easy_localization/easy_localization.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PricesScreen extends StatefulWidget {
   @override
   _PricesScreenState createState() => _PricesScreenState();
@@ -30,9 +30,9 @@ class _PricesScreenState extends State<PricesScreen> {
                     GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          childAspectRatio: 1.4,
-                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8.w,
+                          childAspectRatio: 1.4.h,
+                          mainAxisSpacing: 8.h,
                         ),
                         itemCount: data.items!.length,
                         itemBuilder: (ctx, i) => PriceCard(

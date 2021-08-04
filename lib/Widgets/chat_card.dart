@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatCard extends StatelessWidget {
   final userId, message, sender, read, type, date, time;
@@ -26,27 +27,27 @@ class ChatCard extends StatelessWidget {
             : Icons.done;
     final radius = sender == 1
         ? BorderRadius.only(
-            topRight: Radius.circular(20.0),
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
+            topRight: Radius.circular(20.r),
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
           )
         : BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0.r),
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
           );
     return Column(
       crossAxisAlignment: align,
       children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width / 2,
-          margin: const EdgeInsets.all(12.0),
-          padding: const EdgeInsets.all(12.0),
+          margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  blurRadius: 0.5,
-                  spreadRadius: 1.0,
+                  blurRadius: 0.5.r,
+                  spreadRadius: 1.0.r,
                   color: Colors.black.withOpacity(0.12))
             ],
             color: bg,
@@ -56,22 +57,23 @@ class ChatCard extends StatelessWidget {
             crossAxisAlignment: align,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(right: 5.0),
+                padding: EdgeInsets.only(right: 5.0.w),
                 // : EdgeInsets.only(left: 10.0),
                 child: Text(
                   message,
+                  textScaleFactor: 1,
                   style: TextStyle(
                     fontFamily: 'SF Pro',
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: sender == 1 ? Colors.black : Color(0xffffffff),
                     fontWeight: FontWeight.w500,
-                    height: 1.5,
+                    //height: 1.5,
                   ),
                   textAlign: TextAlign.left,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: EdgeInsets.only(top: 8.h),
                 child: Row(
                   mainAxisAlignment: mainAlignment,
                   children: <Widget>[
@@ -79,14 +81,14 @@ class ChatCard extends StatelessWidget {
                       date + ' ' + time,
                       style: TextStyle(
                         fontFamily: 'SF Pro',
-                        fontSize: 11,
+                        fontSize: 11.sp,
                         color: sender == 1 ? Colors.black : Color(0xffffffff),
                       ),
                     ),
-                    SizedBox(width: 3.0),
+                    SizedBox(width: 3.w),
                     Icon(
                       icon,
-                      size: 12.0,
+                      size: 12.sp,
                       color: Colors.white,
                     )
                   ],

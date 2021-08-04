@@ -4,27 +4,14 @@ import 'package:connectivity/connectivity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Provider/chat_provider.dart';
-import 'package:toptan/Provider/company_provider.dart';
-import 'package:toptan/Provider/contact_us_provider.dart';
-import 'package:toptan/Provider/faq_provider.dart';
-import 'package:toptan/Provider/order_balance_provider.dart';
-import 'package:toptan/Provider/pages_provider.dart';
-import 'package:toptan/Provider/pos_provider.dart';
-import 'package:toptan/Provider/service_prices_provider.dart';
-import 'package:toptan/Provider/service_provider.dart';
-import 'package:toptan/Provider/slider_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Helper/app_shared.dart';
+import 'Helper/providers.dart';
 import 'Helper/routes.dart';
 import 'Helper/share_preferences.dart';
 import 'package:flutter/material.dart';
 import 'Pages/splash_screen.dart';
-import 'Provider/bank_account_provider.dart';
-import 'Provider/connect_provider.dart';
-import 'Provider/user_provider.dart';
-import 'Provider/notification_provider.dart';
-import 'Provider/prices_provider.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -78,43 +65,31 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: UserProvider()),
-        ChangeNotifierProvider.value(value: NotificationProvider()),
-        ChangeNotifierProvider.value(value: SliderProvider()),
-        ChangeNotifierProvider.value(value: FAQProvider()),
-        ChangeNotifierProvider.value(value: PagesProvider()),
-        ChangeNotifierProvider.value(value: ContactUsProvider()),
-        ChangeNotifierProvider.value(value: PointOfSaleProvider()),
-        ChangeNotifierProvider.value(value: PricesProvider()),
-        ChangeNotifierProvider.value(value: ServicePricesProvider()),
-        ChangeNotifierProvider.value(value: BankAccountProvider()),
-        ChangeNotifierProvider.value(value: ConnectivityProvider()),
-        ChangeNotifierProvider.value(value: OrderBalanceProvider()),
-        ChangeNotifierProvider.value(value: ChatProvider()),
-        ChangeNotifierProvider.value(value: ServiceProvider()),
-        ChangeNotifierProvider.value(value: CompanyProvider()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Toptan',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return ScreenUtilInit(
+      designSize: Size(411.5, 683.5),
+      builder: () => MultiProvider(
+        providers: providers,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Toptan',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          home:
+              _connectionStatus.toString() == ConnectivityResult.none.toString()
+                  ? Scaffold(
+                      backgroundColor: Color(0xff08A8FF),
+                      body: AlertDialog(
+                        title: Text('no_internet'.tr()),
+                        content: Text('check_internet'.tr()),
+                      ),
+                    )
+                  : SplashScreen(),
+          routes: ROUTES,
         ),
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        home: _connectionStatus.toString() == ConnectivityResult.none.toString()
-            ? Scaffold(
-                backgroundColor: Color(0xff08A8FF),
-                body: AlertDialog(
-                  title: Text('no_internet'.tr()),
-                  content: Text('check_internet'.tr()),
-                ),
-              )
-            : SplashScreen(),
-        routes: ROUTES,
       ),
     );
   }

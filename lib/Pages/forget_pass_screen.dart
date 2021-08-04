@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/Widgets/app_bar.dart';
+
 class ForgetPasswordScreen extends StatefulWidget {
   @override
   _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
@@ -18,61 +21,50 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     focusEmail.dispose();
   }
 
-  //
-  // Future<void> onTap(){
-  //   if()
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff08A8FF),
-      appBar: AppBar(
-        backgroundColor: Color(0xff08A8FF),
-        elevation: 0,
-        title: Text('forget_password'.tr()),
-        centerTitle: true,
-      ),
+      appBar: appBarApp('forget_password'.tr()),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 60),
+        padding: EdgeInsets.only(top: 60.h),
         child: Column(
           children: [
             Text(
               'Toptan',
               style: TextStyle(
                 fontFamily: 'SF Pro',
-                fontSize: 72,
+                fontSize: 72.sp,
                 color: const Color(0x99000000),
                 fontWeight: FontWeight.w700,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 65),
+            SizedBox(height: 65.h),
             Text(
               'forget_password'.tr(),
               style: TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 28,
+                fontSize: 28.sp,
                 color: const Color(0xff323b4a),
-                letterSpacing: 0.336,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Text(
               'Make amazing and clean iOS 11 \nwireframes for your next app project.',
+              textScaleFactor: 1.5.sp,
               style: TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 15,
+                fontSize: 15.sp,
                 color: const Color(0xff323b4a),
-                height: 1.5,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 40.h),
             Container(
-              margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-              height: 70,
+              margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h),
+              height: 70.h,
               child: Form(
                 key: _formKey,
                 child: TextFormField(
@@ -92,7 +84,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0.r)),
                       borderSide: BorderSide(
                         width: 0,
                         style: BorderStyle.none,
@@ -102,18 +94,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     suffixIcon: Icon(
                       CustomIcon.ic_contact_mail,
                       color: Color(0xff08A8FF),
-                      size: 22,
+                      size: 22.sp,
                     ),
                     fillColor: Colors.white,
                     hintText: 'username@gmail.com',
-                    hintStyle: TextStyle(
-                      color: Color(0xff4A494B),
-                    ),
+                    hintStyle:
+                        TextStyle(color: Color(0xff4A494B), fontSize: 18.sp),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 65),
+            SizedBox(height: 65.h),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -124,16 +115,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               },
               style: ElevatedButton.styleFrom(
                 shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
+                  borderRadius: new BorderRadius.circular(30.0.r),
                 ),
                 primary: Colors.white,
-                fixedSize: Size(250, 55),
+                fixedSize: Size(250.w, 55.h),
               ),
               child: Text(
                 'send'.tr(),
                 style: TextStyle(
                   color: Color(0xff08A8FF),
-                  fontSize: 16,
+                  fontSize: 17.sp,
                 ),
               ),
             ),

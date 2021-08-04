@@ -1,14 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Provider/line_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
-import 'package:toptan/Widgets/invoice_line_card.dart';
-import 'package:toptan/Widgets/send_button.dart';
+import 'package:toptan/Widgets/button.dart';
+import 'package:toptan/Widgets/lines_list.dart';
+import 'package:toptan/Widgets/number_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Helper/enum.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LineScreen extends StatefulWidget {
   @override
@@ -16,8 +21,15 @@ class LineScreen extends StatefulWidget {
 }
 
 class _LineScreenState extends State<LineScreen> {
-  var valueLine;
-  var imageFile;
+  File? imageFile;
+  String? valueLine;
+  int? idLine;
+  int? price;
+  int? type;
+  var valueNumber;
+  int? numNumber;
+  final commentController = TextEditingController();
+  final commentFocus = FocusNode();
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -45,16 +57,16 @@ class _LineScreenState extends State<LineScreen> {
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: new Wrap(
+              child: Wrap(
                 children: <Widget>[
-                  new ListTile(
+                  ListTile(
                       leading: Icon(Icons.photo_library),
                       title: Text('photo_library'.tr()),
                       onTap: () {
                         _getFromGallery();
                         Navigator.of(context).pop();
                       }),
-                  new ListTile(
+                  ListTile(
                     leading: Icon(Icons.photo_camera),
                     title: Text('camera'.tr()),
                     onTap: () {
@@ -77,7 +89,56 @@ class _LineScreenState extends State<LineScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InkWell(
+            LinesList(
+              line: valueLine,
+              onTap: () {
+                showMaterialModalBottomSheet(
+                  context: context,
+                  closeProgressThreshold: 1.5,
+                  builder: (context) => SingleChildScrollView(
+                    controller: ModalScrollController.of(context),
+                    child: FutureBuilder(
+                      future: Provider.of<LineProvider>(context, listen: false)
+                          .getLineOperations(Localizations.localeOf(context)),
+                      builder: (ctx, snapshot) => Consumer<LineProvider>(
+                        builder: (BuildContext context, data, Widget? child) =>
+                            ListView.builder(
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: data.items!.length,
+                          itemBuilder: (ctx, i) => InkWell(
+                            onTap: () {
+                              valueLine = data.items![i].lineOperations!.name
+                                  .toString();
+                              idLine = data.items![i].lineOperations!.id;
+                              price = data.items![i].lineOperations!.costPrice;
+                              type = data.items![i].lineOperations!.numberType;
+                              setState(() {});
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 8.0.h),
+                              child: ListTile(
+                                title: Text(data.items![i].lineOperations!.name
+                                    .toString()),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            NumberLines(
+              number: valueNumber == number.GoldenNumbers
+                  ? 'golden_number'.tr()
+                  : valueNumber == number.SilverNumber
+                      ? 'silver_number'.tr()
+                      : valueNumber == number.NormalNumber
+                          ? 'normal_number'.tr()
+                          : 'choose_number'.tr(),
               onTap: () {
                 showMaterialModalBottomSheet(
                   context: context,
@@ -88,32 +149,35 @@ class _LineScreenState extends State<LineScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            valueLine = line.newline;
+                            valueNumber = number.GoldenNumbers;
+                            numNumber = 1;
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: ListTile(
-                            title: Text('New line'),
+                            title: Text('golden_number'.tr()),
                           ),
                         ),
                         InkWell(
                           onTap: () {
-                            valueLine = line.transformLine;
+                            valueNumber = number.SilverNumber;
+                            numNumber = 2;
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: ListTile(
-                            title: Text('Transform line'),
+                            title: Text('silver_number'.tr()),
                           ),
                         ),
                         InkWell(
                           onTap: () {
-                            valueLine = line.invoiceLine;
+                            valueNumber = number.NormalNumber;
+                            numNumber = 3;
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: ListTile(
-                            title: Text('Invoice line'),
+                            title: Text('normal_number'.tr()),
                           ),
                         ),
                       ],
@@ -121,134 +185,73 @@ class _LineScreenState extends State<LineScreen> {
                   ),
                 );
               },
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                margin: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.white,
-                ),
-                padding: EdgeInsets.all(12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      valueLine == line.newline
-                          ? 'New line'
-                          : valueLine == line.transformLine
-                              ? 'Transform line'
-                              : 'Invoice line',
-                      style: TextStyle(fontSize: 18, color: Color(0xff323B4A)),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down_sharp,
-                      color: Color(0xff08A8FF),
-                      size: 30,
-                    )
-                  ],
-                ),
-              ),
             ),
-            InkWell(
-              onTap: () {
-                /*   showMaterialModalBottomSheet(
-                  context: context,
-                  closeProgressThreshold: 1.5,
-                  builder: (context) => SingleChildScrollView(
-                    controller: ModalScrollController.of(context),
-                    child: Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            valueLine = line.newline;
-                            setState(() {});
-                            Navigator.pop(context);
-                          },
-                          child: ListTile(
-                            title: Text('New line'),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            valueLine = line.transformLine;
-                            setState(() {});
-                            Navigator.pop(context);
-                          },
-                          child: ListTile(
-                            title: Text('Transform line'),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            valueLine = line.invoiceLine;
-                            setState(() {});
-                            Navigator.pop(context);
-                          },
-                          child: ListTile(
-                            title: Text('Invoice line'),
-                          ),
-                        ),
-                      ],
+            if (idLine != null)
+              Align(
+                alignment: Localizations.localeOf(context).languageCode == 'ar'
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.0.w),
+                  child: Text(
+                    'available_numbers'.tr(),
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 18.sp,
+                      color: const Color(0xffffffff),
                     ),
-                  ),
-                );*/
-              },
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                margin: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.white,
-                ),
-                padding: EdgeInsets.all(12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Golden Number',
-                      style: TextStyle(fontSize: 18, color: Color(0xff323B4A)),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down_sharp,
-                      color: Color(0xff08A8FF),
-                      size: 30,
-                    )
-                  ],
-                ),
-              ),
-            ),
-
-            Container(
-              margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-              height: 50,
-              width: double.infinity,
-              child: TextField(
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  filled: true,
-                  suffixIcon: Icon(
-                    CustomIcon.ic_devices_mobile,
-                    color: Color(0xff08A8FF),
-                  ),
-                  fillColor: Colors.white,
-                  hintText: '0000-0000-0000',
-                  hintStyle: TextStyle(
-                    color: Color(0xff4A494B),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
-            ),
+            SizedBox(height: 10.h),
+            if (idLine != null && type == numNumber)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0.w),
+                child: FutureBuilder(
+                  future: Provider.of<LineProvider>(context, listen: false)
+                      .getLineOperationData(
+                          Localizations.localeOf(context), idLine),
+                  builder: (ctx, snapshot) => Consumer<LineProvider>(
+                    builder: (BuildContext context, data, child) =>
+                        GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 8.w,
+                        childAspectRatio: 1.3.h,
+                        mainAxisSpacing: 8.h,
+                      ),
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: data.lineDataItems!.length,
+                      itemBuilder: (ctx, i) => Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.r)),
+                        child: ListTile(
+                          title: Text(
+                            data.lineDataItems![i].number.toString(),
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp),
+                          ),
+                          subtitle: Padding(
+                            padding: EdgeInsets.only(top: 12.0.h),
+                            child: Text(
+                              '$price\$',
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
+              padding: EdgeInsets.only(top: 16.0.h, left: 16.w, right: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -258,7 +261,7 @@ class _LineScreenState extends State<LineScreen> {
                       'photo_id'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.left,
@@ -272,26 +275,28 @@ class _LineScreenState extends State<LineScreen> {
                           _showPicker(context);
                         },
                         child: Container(
-                          height: 45,
-                          width: 45,
+                          height: 45.h,
+                          width: 45.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.r)),
                             color: const Color(0xffffffff),
                           ),
                           child: Icon(
                             CustomIcon.ic_devices_camera,
                             color: Color(0xff08A8FF),
+                            size: 25.sp,
                           ),
                         ),
                       ),
                       //),
                       title: Text(
                         imageFile != null
-                            ? imageFile.toString()
+                            ? imageFile!.path.toString()
                             : 'attach_photo_id'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           color: const Color(0xffffffff),
                         ),
                       ),
@@ -301,7 +306,7 @@ class _LineScreenState extends State<LineScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
+              padding: EdgeInsets.only(top: 16.0.h, left: 16.w, right: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -311,7 +316,7 @@ class _LineScreenState extends State<LineScreen> {
                       'photo_QR_code'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.left,
@@ -321,10 +326,10 @@ class _LineScreenState extends State<LineScreen> {
                     flex: 2,
                     child: ListTile(
                       leading: Container(
-                        height: 45,
-                        width: 45,
+                        height: 45.h,
+                        width: 45.w,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.all(Radius.circular(50.r)),
                           color: const Color(0xffffffff),
                         ),
                         child: GestureDetector(
@@ -332,6 +337,7 @@ class _LineScreenState extends State<LineScreen> {
                           child: Icon(
                             CustomIcon.ic_devices_camera,
                             color: Color(0xff08A8FF),
+                            size: 25.sp,
                           ),
                         ),
                       ),
@@ -339,7 +345,7 @@ class _LineScreenState extends State<LineScreen> {
                         'attach_QR_code'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           color: const Color(0xffffffff),
                         ),
                       ),
@@ -348,34 +354,18 @@ class _LineScreenState extends State<LineScreen> {
                 ],
               ),
             ),
-            Align(
-              alignment: 'available_packages'.tr() == 'الحزم المتوفرة :'
-                  ? Alignment.topRight
-                  : Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'available_packages'.tr(),
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 18,
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-              ),
-            ),
-            InvoiceLineCard(),
-            // if(valueLine=='New Line')
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(15.0.r),
                 color: Colors.white,
               ),
               height: 150,
-              margin: EdgeInsets.all(15),
-              child: TextField(
+              margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+              child: TextFormField(
                 keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.done,
                 maxLines: null,
+                onEditingComplete: () => FocusScope.of(context).unfocus(),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -389,16 +379,21 @@ class _LineScreenState extends State<LineScreen> {
                   hintText: 'comment'.tr(),
                   hintStyle: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: const Color(0xff323b4a),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 30, bottom: 15),
-              child: SendButton(),
+            Padding(
+              padding: EdgeInsets.only(top: 20.0.h, bottom: 10.h),
+              child: ButtonSend(
+                text: 'send'.tr(),
+                buttonColor: Colors.white,
+                textColor: Color(0xff08A8FF),
+                onTap: () {},
+              ),
             ),
           ],
         ),

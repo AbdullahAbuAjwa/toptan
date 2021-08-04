@@ -93,5 +93,11 @@
   "no_notification": "لا يوجد إشعارات!",
   "enter_amount": "أدخل الكمية",
   "government": "المحافظة",
-  "no_messages": "لا يوجد رسائل بعد!"
+  "no_messages": "لا يوجد رسائل بعد!",
+  "choose_line": "اختر نوع الخط",
+  "golden_number": "رقم ذهبي",
+  "silver_number": "رقم فضي",
+  "normal_number": "رقم عادي",
+  "choose_number": "اختر رقم",
+  "available_numbers": "الأرقام المتوفرة"
 }

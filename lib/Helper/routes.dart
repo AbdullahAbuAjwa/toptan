@@ -18,7 +18,7 @@ import 'package:toptan/Pages/order_balance_screen.dart';
 import 'package:toptan/Pages/prices_screen.dart';
 import 'package:toptan/Pages/privacy_policy_screen.dart';
 import 'package:toptan/Pages/products_screen.dart';
-import 'package:toptan/Pages/reset_pass_wcreen.dart';
+import 'package:toptan/Pages/reset_pass_screen.dart';
 import 'package:toptan/Pages/send_request_screen.dart';
 import 'package:toptan/Pages/service_name_screen.dart';
 import 'package:toptan/Pages/service_price_screen.dart';

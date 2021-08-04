@@ -7,6 +7,7 @@ import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/user_provider.dart';
 import 'package:toptan/model/response/user.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginCard extends StatefulWidget {
   @override
@@ -29,7 +30,6 @@ class _LoginCardState extends State<LoginCard> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -43,8 +43,8 @@ class _LoginCardState extends State<LoginCard> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
+          topLeft: Radius.circular(20.0.r),
+          topRight: Radius.circular(20.0.r),
         ),
       ),
       child: SingleChildScrollView(
@@ -53,37 +53,40 @@ class _LoginCardState extends State<LoginCard> {
           children: [
             Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.h),
                   child: Text(
                     'login'.tr(),
                     style: TextStyle(
                       fontFamily: 'SF Pro',
-                      fontSize: 19,
+                      fontSize: 19.sp,
                       color: const Color(0xff08a8ff),
                       fontWeight: FontWeight.w700,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 30.h),
                 Container(
                   decoration: BoxDecoration(
                     color: const Color(0x6ef3f4f7),
                     border: Border.all(
-                      width: 1.0,
+                      width: 1.w,
                       color: const Color(0xffe2e9f8),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 8.w),
                     child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.0.h, horizontal: 8.w),
                             child: TextFormField(
                               controller: _emailController,
                               focusNode: _emailFocusNode,
@@ -98,14 +101,17 @@ class _LoginCardState extends State<LoginCard> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                labelText: 'email'.tr(),
-                                hintText: 'email'.tr(),
-                              ),
+                                  labelText: 'email'.tr(),
+                                  hintText: 'email'.tr(),
+                                  hintStyle: TextStyle(
+                                    fontSize: 16.sp,
+                                  )),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 10.h),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.h, horizontal: 8.w),
                             child: TextFormField(
                               controller: _passwordController,
                               textInputAction: TextInputAction.done,
@@ -124,6 +130,9 @@ class _LoginCardState extends State<LoginCard> {
                               decoration: InputDecoration(
                                 labelText: 'password'.tr(),
                                 hintText: '*********',
+                                hintStyle: TextStyle(
+                                  fontSize: 16.sp,
+                                ),
                               ),
                             ),
                           ),
@@ -132,18 +141,18 @@ class _LoginCardState extends State<LoginCard> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 30.h),
                 Container(
-                  height: 60,
-                  width: 250,
+                  height: 60.h,
+                  width: 250.w,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(75.0),
+                    borderRadius: BorderRadius.circular(75.r),
                     color: const Color(0xff08a8ff),
                     boxShadow: [
                       BoxShadow(
                         color: const Color(0x1c000000),
                         offset: Offset(0, 3),
-                        blurRadius: 6,
+                        blurRadius: 6.r,
                       ),
                     ],
                   ),
@@ -152,7 +161,7 @@ class _LoginCardState extends State<LoginCard> {
                       'login'.tr(),
                       style: TextStyle(
                         fontFamily: 'SF Pro',
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xffffffff),
                         fontWeight: FontWeight.w700,
                       ),
@@ -169,13 +178,13 @@ class _LoginCardState extends State<LoginCard> {
                           MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 15.h),
                 TextButton(
                   onPressed: () {
                     if (Provider.of<UserProvider>(context, listen: false)
@@ -187,7 +196,7 @@ class _LoginCardState extends State<LoginCard> {
                     'forget_password'.tr(),
                     style: TextStyle(
                       fontFamily: 'SF Pro',
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       color: const Color(0xff626e89),
                       fontWeight: FontWeight.w500,
                     ),

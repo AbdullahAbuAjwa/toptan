@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:toptan/Provider/service_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServiceDetailsCard extends StatefulWidget {
   final id;
@@ -28,7 +27,7 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       child: GestureDetector(
         onTap: () {
           setState(() {});
@@ -40,10 +39,10 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(15.r),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -51,7 +50,7 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
                   '${widget.price.toString()}\$',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 35,
+                    fontSize: 35.sp,
                     color: const Color(0xff08a8ff),
                   ),
                 ),
@@ -65,7 +64,7 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
                             '${widget.name}: ',
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.bold,
                               color: const Color(0xff445570),
                             ),
@@ -74,7 +73,7 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
                             widget.details,
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               color: const Color(0xff445570),
                             ),
                           ),
@@ -84,14 +83,14 @@ class _ServiceDetailsCardState extends State<ServiceDetailsCard> {
                           ? Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 1.5),
+                                border: Border.all(
+                                    color: Colors.black, width: 1.5.w),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
+                                    BorderRadius.all(Radius.circular(30.r)),
                               ),
                               child: Icon(
                                 Icons.check,
-                                size: 40,
+                                size: 40.sp,
                                 color: Color(0xff08a8ff),
                               ),
                             )

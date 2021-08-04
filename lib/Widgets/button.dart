@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ButtonSend extends StatelessWidget {
   final onTap;
   final text;
@@ -21,16 +21,16 @@ class ButtonSend extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(30.0),
+          borderRadius: new BorderRadius.circular(30.0.r),
         ),
         primary: buttonColor,
-        fixedSize: Size(250, 60),
+        fixedSize: Size(250.w, 60.h),
       ),
       child: Text(
         text,
         style: TextStyle(
           color: textColor,
-          fontSize: 16,
+          fontSize: 16.sp,
         ),
       ),
     );

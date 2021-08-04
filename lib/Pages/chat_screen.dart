@@ -11,6 +11,7 @@ import 'package:toptan/Widgets/chat_image_card.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toptan/Widgets/loading_list.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -81,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void dispose() {
     super.dispose();
-   // _messageController.dispose();
+    // _messageController.dispose();
   }
 
   @override
@@ -115,41 +116,12 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Text(
                                 'no_messages'.tr(),
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             );
                           }
-                          /*    return ListView.builder(
-                              reverse: true,
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (ctx, i) =>
-                                  // data.items![i].userId == AppShared.currentUser!.user.id?
-                                  snapshot.data.items![i].type == 0
-                                      ? ChatCard(
-                                          message:
-                                              snapshot.data[i].message,
-                                          sender:
-                                              snapshot.data[i].sender,
-                                          read: snapshot.data[i].read,
-                                          time: snapshot.data[i].time,
-                                          date: snapshot.data[i].date
-                                              .toString()
-                                              .substring(0, 10),
-                                        )
-                                      : ChatImageCard(
-                                          message:
-                                              snapshot.data.items![i].message,
-                                          sender:
-                                              snapshot.data.items![i].sender,
-                                          time: snapshot.data.items![i].time,
-                                          date: snapshot.data.items![i].date
-                                              .toString()
-                                              .substring(0, 10),
-                                        )
-                              // : Container(),
-                              );*/
                           return Consumer<ChatProvider>(
                             builder: (BuildContext context, data,
                                     Widget? child) =>
@@ -158,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         child: Text(
                                           'no_messages'.tr(),
                                           style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -196,8 +168,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         }),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 14.0, vertical: 12),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 14.0.w, vertical: 12.h),
                     child: imageFile == null
                         ? keyboardSend()
                         : keyboardSendImage(),
@@ -216,11 +188,11 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget keyboardSend() {
     return Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(25.r),
           color: Color(0xffF3F4F7),
         ),
-        padding: EdgeInsets.only(left: 5, bottom: 5),
-        height: 60,
+        padding: EdgeInsets.only(left: 5.w, bottom: 7.h),
+        height: 60.h,
         width: double.infinity,
         child: Row(
           children: <Widget>[
@@ -235,7 +207,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   border: InputBorder.none,
                   filled: true,
                   fillColor: Color(0xffF3F4F7),
-                  hintStyle: new TextStyle(color: Colors.grey, fontSize: 18),
+                  hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.sp),
                   hintText: "write_reply".tr(),
                 ),
               ),
@@ -248,14 +220,20 @@ class _ChatScreenState extends State<ChatScreen> {
                       onTap: () {
                         _showPicker(context);
                       },
-                      child: Icon(Icons.photo),
+                      child: Icon(
+                        Icons.photo,
+                        size: 24.sp,
+                      ),
                     ),
-                    SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     InkWell(
                       onTap: () {
                         sendMessage();
                       },
-                      child: Icon(Icons.send),
+                      child: Icon(
+                        Icons.send,
+                        size: 24.sp,
+                      ),
                     ),
                   ],
                 )),
@@ -269,7 +247,7 @@ class _ChatScreenState extends State<ChatScreen> {
       height: 140,
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 8.0.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -286,7 +264,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   },
                   child: Icon(Icons.photo),
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 20.w),
                 InkWell(
                   onTap: () {
                     sendMessage();
@@ -306,24 +284,24 @@ class _ChatScreenState extends State<ChatScreen> {
     MultipartFile? img;
     // chatProvider!.isLoading = true;
     try {
-    FocusScope.of(context).unfocus();
-    if (imageFile != null) {
-      img = await MultipartFile.fromFile(imageFile!.path);
-    }
+      FocusScope.of(context).unfocus();
+      if (imageFile != null) {
+        img = await MultipartFile.fromFile(imageFile!.path);
+      }
 
-    await chatProvider!.sendMessage(
-      Localizations.localeOf(context),
-      message: _messageController.text.trim(),
-      image: img,
-      type: 0,
-    );
-    // chatProvider!.isLoading = false;
+      await chatProvider!.sendMessage(
+        Localizations.localeOf(context),
+        message: _messageController.text.trim(),
+        image: img,
+        type: 0,
+      );
+      // chatProvider!.isLoading = false;
 
-    if (chatProvider!.chatResponse!.status) {
-      _messageController.clear();
-      imageFile = null;
-      setState(() {});
-    }
+      if (chatProvider!.chatResponse!.status) {
+        _messageController.clear();
+        imageFile = null;
+        setState(() {});
+      }
     } catch (error) {
       //chatProvider!.isLoading = false;
       print('error: ' + error.toString());

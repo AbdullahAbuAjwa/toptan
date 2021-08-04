@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/faq_card.dart';
 import 'package:toptan/Widgets/loading_list.dart';
-
 class FaqScreen extends StatefulWidget {
   @override
   _FaqScreenState createState() => _FaqScreenState();

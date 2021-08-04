@@ -12,6 +12,7 @@ import 'package:toptan/Provider/pos_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/button.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreatePOSScreen extends StatefulWidget {
   @override
@@ -81,7 +82,6 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pointOfSaleProvider =
         Provider.of<PointOfSaleProvider>(context, listen: false);
@@ -109,32 +109,33 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: 35),
+                  SizedBox(height: 30.h),
                   Stack(
                     children: [
                       CircleAvatar(
-                        radius: 53,
+                        radius: 53.r,
                         backgroundColor: Colors.white,
                         child: imageFile == null
                             ? CircleAvatar(
                                 backgroundImage:
                                     AssetImage('assets/images/avatar.png'),
-                                radius: 50,
+                                radius: 50.r,
                               )
                             : CircleAvatar(
                                 backgroundImage: FileImage(imageFile),
-                                radius: 50,
+                                radius: 50.r,
                               ),
                       ),
                       Positioned(
-                        top: 72,
+                        //top: 74.h,
+                        bottom: 5.h,
                         child: GestureDetector(
                           onTap: () {
                             _showPicker(context);
                           },
                           child: Container(
-                            height: 32,
-                            width: 32,
+                            height: 32.h,
+                            width: 32.w,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
@@ -142,7 +143,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                             ),
                             child: Icon(
                               CustomIcon.ic_devices_camera,
-                              size: 18,
+                              size: 18.sp,
                               color: Color(0xff08A8FF),
                             ),
                           ),
@@ -150,9 +151,10 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 25.h),
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 12.0.h, horizontal: 12.w),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -170,6 +172,9 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               hintText: 'name'.tr(),
                               filled: true,
                               fillColor: Colors.white,
+                              hintStyle: TextStyle(
+                                fontSize: 16.sp,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.0)),
@@ -180,7 +185,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           TextFormField(
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.phone,
@@ -194,10 +199,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                             decoration: InputDecoration(
                               hintText: 'mobile'.tr(),
                               filled: true,
+                              hintStyle: TextStyle(fontSize: 16.sp),
                               fillColor: Colors.white,
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_mobile,
                                 color: Color(0xff08A8FF),
+                                size: 27.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -209,7 +216,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           TextFormField(
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
@@ -223,10 +230,11 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                             decoration: InputDecoration(
                               hintText: 'email'.tr(),
                               filled: true,
+                              hintStyle: TextStyle(fontSize: 16.sp),
                               fillColor: Colors.white,
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_mail,
-                                size: 18,
+                                size: 20.sp,
                                 color: Color(0xff08A8FF),
                               ),
                               border: OutlineInputBorder(
@@ -239,7 +247,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           TextFormField(
                             textInputAction: TextInputAction.next,
                             controller: _passwordController,
@@ -253,9 +261,11 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               hintText: 'password'.tr(),
                               filled: true,
                               fillColor: Colors.white,
+                              hintStyle: TextStyle(fontSize: 16.sp),
                               suffixIcon: Icon(
                                 CustomIcon.ic_security_locked,
                                 color: Color(0xff08A8FF),
+                                size: 25.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -267,7 +277,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.0),
@@ -276,22 +286,31 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                             padding: EdgeInsets.all(6.0),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
-                                  hint: Text('government'.tr()),
+                                  hint: Text(
+                                    'government'.tr(),
+                                    style: TextStyle(fontSize: 16.sp),
+                                  ),
                                   itemHeight: 50,
                                   isExpanded: true,
                                   icon: Icon(
                                     Icons.keyboard_arrow_down_sharp,
                                     color: Color(0xff08A8FF),
-                                    size: 30,
+                                    size: 30.sp,
                                   ),
                                   value: valueNumber,
                                   items: [
                                     DropdownMenuItem(
-                                      child: Text('Qatar'),
+                                      child: Text(
+                                        'Qatar',
+                                        style: TextStyle(fontSize: 16.sp),
+                                      ),
                                       value: 1,
                                     ),
                                     DropdownMenuItem(
-                                      child: Text('Saudi Arabia'),
+                                      child: Text(
+                                        'Saudi Arabia',
+                                        style: TextStyle(fontSize: 16.sp),
+                                      ),
                                       value: 2,
                                     ),
                                   ],
@@ -319,9 +338,11 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                               hintText: 'address'.tr(),
                               filled: true,
                               fillColor: Colors.white,
+                              hintStyle: TextStyle(fontSize: 16.sp),
                               suffixIcon: Icon(
                                 CustomIcon.ic_contact_map_pin,
                                 color: Color(0xff08A8FF),
+                                size: 25.sp,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -338,7 +359,7 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 12),
+                    padding: EdgeInsets.only(top: 8.h, bottom: 12.h),
                     child: ButtonSend(
                       onTap: () {
                         createPointOfSale();
@@ -369,26 +390,26 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
     pointOfSaleProvider!.isLoading = true;
 
     try {
-    if (imageFile != null) {
-      img = await MultipartFile.fromFile(imageFile!.path);
-    }
-    await pointOfSaleProvider!.addPointOfSale(Localizations.localeOf(context),
-        name: _nameController.text.trim(),
-        mobile: _mobileController.text.trim(),
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-        government: valueNumber,
-        address: _addressController.text.trim(),
-        profileImage: img);
-    pointOfSaleProvider!.isLoading = false;
-    if (pointOfSaleProvider!.appResponse!.status) {
-      ShowToast.showToast(
-          pointOfSaleProvider!.appResponse!.message, MessageType.Success);
-      Navigator.pushReplacementNamed(context, 'move_to_home_screen');
-    } else {
-      ShowToast.showToast(
-          pointOfSaleProvider!.appResponse!.msg, MessageType.Failed);
-    }
+      if (imageFile != null) {
+        img = await MultipartFile.fromFile(imageFile!.path);
+      }
+      await pointOfSaleProvider!.addPointOfSale(Localizations.localeOf(context),
+          name: _nameController.text.trim(),
+          mobile: _mobileController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+          government: valueNumber,
+          address: _addressController.text.trim(),
+          profileImage: img);
+      pointOfSaleProvider!.isLoading = false;
+      if (pointOfSaleProvider!.appResponse!.status) {
+        ShowToast.showToast(
+            pointOfSaleProvider!.appResponse!.message, MessageType.Success);
+        Navigator.pushReplacementNamed(context, 'move_to_home_screen');
+      } else {
+        ShowToast.showToast(
+            pointOfSaleProvider!.appResponse!.msg, MessageType.Failed);
+      }
     } catch (error) {
       pointOfSaleProvider!.isLoading = false;
 
