@@ -99,5 +99,14 @@
   "silver_number": "رقم فضي",
   "normal_number": "رقم عادي",
   "choose_number": "اختر رقم",
-  "available_numbers": "الأرقام المتوفرة"
+  "available_numbers": "الأرقام المتوفرة",
+  "are_you_sure": "هل أنت متأكد",
+  "yes": "نعم",
+  "cancel": "إلغاء",
+  "change_password": "تغيير كلمة المرور",
+  "old_password": "كلمة المرور القديمة",
+  "new_password": "كلمة المرور الجديدة",
+  "confirm_new_password": "تأكيد كلمة المرور",
+  "companies": "الشركات",
+  "cart_empty": "السلة فارغة!"
 }

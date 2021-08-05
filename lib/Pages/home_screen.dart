@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/slider_provider.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:toptan/Widgets/home_cards.dart';
@@ -110,9 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: 'assets/images/mobile2.png',
                   title: 'mobile'.tr(),
                   onPress: () {
-                    Navigator.of(context).pushNamed(
-                      'move_to_mobile_screen',
-                    );
+                    ShowToast.showToast(
+                        'Soon', MessageType.Warning, Toast.LENGTH_SHORT);
+                    // Navigator.of(context).pushNamed(
+                    //   'move_to_mobile_screen',
+                    // );
                   },
                 ),
               ],

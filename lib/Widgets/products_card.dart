@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Provider/cart_provider.dart';
 
 class ProductsCard extends StatefulWidget {
-  final oPrice, sPrice, rPrice;
+  final oPrice, sPrice, rPrice, image, name, id;
+  final onOPriceTap, onSPriceTap, onRPriceTap;
 
-  const ProductsCard({Key? key, this.oPrice, this.sPrice, this.rPrice})
-      : super(key: key);
+  ProductsCard(
+      {this.oPrice,
+      this.sPrice,
+      this.rPrice,
+      this.image,
+      this.name,
+      this.id,
+      this.onOPriceTap,
+      this.onSPriceTap,
+      this.onRPriceTap});
 
   @override
   _ProductsCardState createState() => _ProductsCardState();
 }
 
 class _ProductsCardState extends State<ProductsCard> {
+  @override
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,10 +40,15 @@ class _ProductsCardState extends State<ProductsCard> {
             padding: EdgeInsets.only(top: 12.h),
             child: Container(
               height: 100.h,
-              child: Image.asset(
-                'assets/images/category.png',
+              child: Image.network(
+                widget.image,
                 height: 80.h,
                 fit: BoxFit.contain,
+                errorBuilder: (_, __, ___) => Image.asset(
+                  'assets/images/category.png',
+                  height: 80.h,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
@@ -36,135 +56,59 @@ class _ProductsCardState extends State<ProductsCard> {
             padding: EdgeInsets.only(top: 8.h),
             child: Center(
               child: Text(
-                'Name',
+                widget.name,
                 style: TextStyle(fontSize: 16.sp),
               ),
             ),
           ),
-          ListTile(
-            title: Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontSize: 15.sp,
-                  color: const Color(0xff08a8ff),
-                ),
-                children: [
-                  TextSpan(
-                    text: 'O|',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
-                  ),
-                  TextSpan(
-                    text: '\$${widget.oPrice}',
-                    style: TextStyle(
-                      color: const Color(0xff8b98b4),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            trailing: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                color: const Color(0xfff5f5f5),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w),
-                child: Icon(
-                  CustomIcon.ic_ecommerce_cart,
-                  color: Color(0xff08A8FF),
-                  size: 20.sp,
-                ),
-              ),
-            ),
-          ),
-          ListTile(
-            title: Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontSize: 15.sp,
-                  color: const Color(0xff08a8ff),
-                ),
-                children: [
-                  TextSpan(
-                    text: 'S|',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
-                  ),
-                  TextSpan(
-                    text: '\$${widget.sPrice}',
-                    style: TextStyle(
-                      color: const Color(0xff8b98b4),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              textHeightBehavior:
-                  TextHeightBehavior(applyHeightToFirstAscent: false),
-              textAlign: TextAlign.left,
-            ),
-            trailing: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                color: const Color(0xfff5f5f5),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w),
-                child: Icon(
-                  CustomIcon.ic_ecommerce_cart,
-                  color: Color(0xff08A8FF),
-                  size: 20.sp,
-                ),
-              ),
-            ),
-          ),
-          ListTile(
-            title: Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontSize: 15.sp,
-                  color: const Color(0xff08a8ff),
-                ),
-                children: [
-                  TextSpan(
-                    text: 'R|',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
-                  ),
-                  TextSpan(
-                    text: '\$${widget.rPrice}',
-                    style: TextStyle(
-                      color: const Color(0xff8b98b4),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              textHeightBehavior:
-                  TextHeightBehavior(applyHeightToFirstAscent: false),
-              textAlign: TextAlign.left,
-            ),
-            trailing: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                color: const Color(0xfff5f5f5),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w),
-                child: Icon(
-                  CustomIcon.ic_ecommerce_cart,
-                  color: Color(0xff08A8FF),
-                  size: 20.sp,
-                ),
-              ),
-            ),
-          ),
+          prices('O| ', widget.oPrice, widget.onOPriceTap),
+          prices('S| ', widget.sPrice, widget.onSPriceTap),
+          prices('R| ', widget.rPrice, widget.onRPriceTap),
         ],
+      ),
+    );
+  }
+
+  Widget prices(typePrice, price, onTap) {
+    return ListTile(
+      title: Text.rich(
+        TextSpan(
+          style: TextStyle(
+            fontFamily: 'SF Pro',
+            fontSize: 15.sp,
+            color: const Color(0xff08a8ff),
+          ),
+          children: [
+            TextSpan(
+              text: typePrice,
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+            ),
+            TextSpan(
+              text: '\$$price',
+              style: TextStyle(
+                color: const Color(0xff8b98b4),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+      trailing: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15.r)),
+          color: const Color(0xfff5f5f5),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w),
+          child: GestureDetector(
+            onTap: onTap,
+            child: Icon(
+              CustomIcon.ic_ecommerce_cart,
+              color: Color(0xff08A8FF),
+              size: 20.sp,
+            ),
+          ),
+        ),
       ),
     );
   }

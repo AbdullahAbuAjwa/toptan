@@ -1,10 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Helper/enum.dart';
+import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Provider/user_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/model/response/user.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -14,6 +21,14 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   bool notificationsEnable = true;
   var langValue;
+  UserProvider? userProvider;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +60,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     style: titleTextStyle(),
                   ),
                   subtitle: Text(
-                    'setting'.tr() == 'الإعدادات'
+                    Localizations.localeOf(context).languageCode == 'ar'
                         ? 'arabic'.tr()
-                        : 'setting'.tr() == 'Setting'
+                        : Localizations.localeOf(context).languageCode == 'en'
                             ? 'english'.tr()
                             : 'turkish'.tr(),
                   ),
@@ -59,13 +74,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     style: titleTextStyle(),
                   ),
                   subtitle: Text('********'),
-                  trailing: TextButton(
-                    onPressed: () {},
+                  trailing: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'move_to_change_pass_screen');
+                    },
                     child: Text(
                       'change'.tr(),
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
                         color: const Color(0xff616161),
                       ),
                     ),
@@ -135,6 +153,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 ListTile(
                   onTap: () {
+                    _showDialog(context);
                     //signOut();
                   },
                   title: Text(
@@ -189,18 +208,56 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  /* signOut() {
-    Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          title: Text('log_out'.tr()),
+          content: Text('are_you_sure'.tr()),
+          actions: <Widget>[
+            TextButton(
+              child: Text('yes'.tr()),
+              onPressed: () {
+                Navigator.of(context).pop();
+                signOut();
+              },
+            ),
+            TextButton(
+              child: Text('cancel'.tr()),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> signOut() async {
     try {
-      Provider.of<LoginProvider>(context, listen: false)
-          .logout(Localizations.localeOf(context));
-      ShowToast.showToast('Logout success', MessageType.Success);
-      Navigator.of(context).pushReplacementNamed('move_to_login_screen');
+      await userProvider!.logout(Localizations.localeOf(context));
+      if (userProvider!.appResponse!.status) {
+        AppShared.currentUser = null;
+        ShowToast.showToast(
+            userProvider!.appResponse!.message, MessageType.Success,Toast.LENGTH_LONG);
+        await Navigator.of(context)
+            .pushReplacementNamed('move_to_login_screen');
+      } else {
+        ShowToast.showToast(
+            userProvider!.appResponse!.message, MessageType.Failed,Toast.LENGTH_LONG);
+      }
     } catch (error) {
-      ShowToast.showToast('Logout Failed', MessageType.Failed);
+      ShowToast.showToast('Logout Failed', MessageType.Failed,Toast.LENGTH_LONG);
       print('error: ' + error.toString());
     }
-  }*/
+  }
 
   titleTextStyle() {
     return TextStyle(

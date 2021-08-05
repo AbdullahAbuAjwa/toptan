@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toptan/Pages/addtional_services_screen.dart';
 import 'package:toptan/Pages/bank_accounts_screen.dart';
+import 'package:toptan/Pages/change_password_screen.dart';
 import 'package:toptan/Pages/chat_screen.dart';
 import 'package:toptan/Pages/check_internet_screen.dart';
 import 'package:toptan/Pages/create_pos_screen.dart';
@@ -12,12 +13,12 @@ import 'package:toptan/Pages/service_details_screen.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/line_screen.dart';
 import 'package:toptan/Pages/login_screen.dart';
-import 'package:toptan/Pages/mobile_screen.dart';
+import 'package:toptan/Pages/products_screen.dart';
 import 'package:toptan/Pages/notification_screen.dart';
 import 'package:toptan/Pages/order_balance_screen.dart';
 import 'package:toptan/Pages/prices_screen.dart';
 import 'package:toptan/Pages/privacy_policy_screen.dart';
-import 'package:toptan/Pages/products_screen.dart';
+import 'package:toptan/Pages/products_company_screen.dart';
 import 'package:toptan/Pages/reset_pass_screen.dart';
 import 'package:toptan/Pages/send_request_screen.dart';
 import 'package:toptan/Pages/service_name_screen.dart';
@@ -28,9 +29,9 @@ import 'package:toptan/Pages/term_of_use_screen.dart';
 import 'package:toptan/Pages/web_view_screen.dart';
 
 Map<String, Widget Function(BuildContext)> ROUTES = {
-  'move_to_mobile_screen': (ctx) => MobileScreen(),
-  'move_to_services_screen': (ctx) => ServicesScreen(),
   'move_to_products_screen': (ctx) => ProductsScreen(),
+  'move_to_services_screen': (ctx) => ServicesScreen(),
+  'move_to_products_company_screen': (ctx) => ProductsCompanyScreen(),
   'move_to_service_details_screen': (ctx) => ServiceDetailsScreen(),
   'move_to_financial_movements_screen': (ctx) => FinancialMovementsScreen(),
   'move_to_super_line_screen': (ctx) => LineScreen(),
@@ -54,4 +55,5 @@ Map<String, Widget Function(BuildContext)> ROUTES = {
   'move_to_additional_services_screen': (ctx) => AdditionalServicesScreen(),
   'move_to_webView_screen': (ctx) => WebViewScreen(),
   'move_to_check_internet_screen': (ctx) => CheckInternetScreen(),
+  'move_to_change_pass_screen': (ctx) => ChangePasswordScreen(),
 };

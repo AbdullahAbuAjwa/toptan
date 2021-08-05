@@ -99,6 +99,14 @@
   "silver_number": "Silver Number",
   "normal_number": "Normal Number",
   "choose_number": "Choose number type",
-  "available_numbers": "Available Numbers"
-
+  "available_numbers": "Available Numbers",
+  "are_you_sure": "Are you sure?",
+  "yes": "Yes",
+  "cancel": "Cancel",
+  "change_password": "Change Password",
+  "old_password": "Old password",
+  "new_password": "New password",
+  "confirm_new_password": "Confirm password",
+  "companies": "Companies",
+  "cart_empty": "Cart Empty!"
 }

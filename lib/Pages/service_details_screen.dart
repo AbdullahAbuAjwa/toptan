@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -326,11 +327,11 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       serviceProvider!.isLoading = false;
       if (serviceProvider!.appResponse!.status) {
         ShowToast.showToast(
-            serviceProvider!.appResponse!.message, MessageType.Success);
+            serviceProvider!.appResponse!.message, MessageType.Success,Toast.LENGTH_LONG);
         Navigator.pushReplacementNamed(context, 'move_to_send_request_screen');
       } else {
         ShowToast.showToast(
-            serviceProvider!.appResponse!.msg, MessageType.Failed);
+            serviceProvider!.appResponse!.msg, MessageType.Failed,Toast.LENGTH_LONG);
       }
     } catch (error) {
       serviceProvider!.isLoading = false;

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toptan/Provider/cart_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
+import 'package:toptan/Widgets/loading_list.dart';
 import 'package:toptan/Widgets/my_cart_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +14,14 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> {
+  Future? cartFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    cartFuture = CartProvider().getMyCart('en');
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -23,6 +34,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
         drawer: AppDrawer(),
         appBar: appBarAppWithNotification('my_cart'.tr(), context),
         body: Container(
+          height: double.infinity,
           margin: EdgeInsets.only(top: 10.h),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -33,8 +45,47 @@ class _MyCartScreenState extends State<MyCartScreen> {
           ),
           child: ListView(
             children: [
-              CartCard(),
-              CartCard(),
+              FutureBuilder(
+                //    future: cartFuture,
+                future: Provider.of<CartProvider>(context, listen: false)
+                    .getMyCart(Localizations.localeOf(context)),
+                builder: (ctx, AsyncSnapshot snapshot) => snapshot
+                            .connectionState ==
+                        ConnectionState.waiting
+                    ? loadingCart()
+                    : Consumer<CartProvider>(
+                        builder: (BuildContext context, data, Widget? child) =>
+                            data.items!.length == 0
+                                ? Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 30.0.h),
+                                      child: Text(
+                                        'cart_empty'.tr(),
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    physics: ScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: data.items!.length,
+                                    itemBuilder: (ctx, i) {
+                                      return CartCard(
+                                        id: data.items![i].id,
+                                        name: data.items![i].productCart!.name,
+                                        price: data.items![i].price,
+                                        image:
+                                            data.items![i].productCart!.image,
+                                        quantity: data.items![i].quantity,
+                                      );
+                                    },
+                                  ),
+                      ),
+              ),
               Text(
                 'total_amount'.tr(),
                 style: TextStyle(
@@ -47,7 +98,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                '\$1700.00',
+                '\$${Provider.of<CartProvider>(context).totalAmount.toString()}',
                 style: TextStyle(
                   fontFamily: 'SF Pro',
                   fontSize: 26.sp,
@@ -56,9 +107,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50.h),
+              SizedBox(height: 30.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 70.0.w),
+                padding:
+                    EdgeInsets.only(right: 70.0.w, left: 70.w, bottom: 20.h),
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(

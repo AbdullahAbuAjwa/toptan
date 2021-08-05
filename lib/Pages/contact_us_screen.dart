@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Helper/enum.dart';
@@ -302,11 +303,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           Localizations.localeOf(context));
       contactUsProvider!.isLoading = false;
       if (contactUsProvider!.appResponse!.status) {
-        ShowToast.showToast(
-            contactUsProvider!.appResponse!.message, MessageType.Success);
+        ShowToast.showToast(contactUsProvider!.appResponse!.message,
+            MessageType.Success, Toast.LENGTH_SHORT);
         clear();
       } else {
-        ShowToast.showToast('Failed', MessageType.Warning);
+        ShowToast.showToast(contactUsProvider!.appResponse!.validator,
+            MessageType.Failed, Toast.LENGTH_LONG);
       }
     } catch (error) {
       contactUsProvider!.isLoading = false;

@@ -159,14 +159,43 @@ Widget loadingServices() {
         itemCount: 6,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          childAspectRatio: 1.1,
-          mainAxisSpacing: 8,
+          crossAxisSpacing: 8.w,
+          childAspectRatio: 1.1.h,
+          mainAxisSpacing: 8.h,
         ),
         itemBuilder: (_, __) => Container(
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget loadingCart() {
+  return Container(
+    padding: const EdgeInsets.all(8.0),
+    child: Shimmer.fromColors(
+      baseColor: Color(0xffe7e7e7),
+      highlightColor: Color(0xFFF1F1F1),
+      enabled: true,
+      child: ListView.builder(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 2,
+        itemBuilder: (_, __) => Container(
+          margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+          child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: Container(
+              height: 150.h,
+              width: 150.w,
             ),
           ),
         ),

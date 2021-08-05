@@ -17,14 +17,14 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 8.h),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.r),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 6.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +34,7 @@ class _ServicePricesCardState extends State<ServicePricesCard> {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Text(
                         '${widget.name}',
                         style: TextStyle(

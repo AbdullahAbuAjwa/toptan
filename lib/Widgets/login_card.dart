@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
@@ -21,6 +22,7 @@ class _LoginCardState extends State<LoginCard> {
   FocusNode _emailFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
   UserProvider? loginProvider;
+  bool obscurePassword = true;
 
   @override
   void initState() {
@@ -116,7 +118,7 @@ class _LoginCardState extends State<LoginCard> {
                               controller: _passwordController,
                               textInputAction: TextInputAction.done,
                               focusNode: _passwordFocusNode,
-                              obscureText: true,
+                              obscureText: obscurePassword,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'enter_your_password'.tr();
@@ -129,6 +131,18 @@ class _LoginCardState extends State<LoginCard> {
                               },
                               decoration: InputDecoration(
                                 labelText: 'password'.tr(),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    obscurePassword = !obscurePassword;
+                                    setState(() {});
+                                  },
+                                  child: Icon(
+                                    obscurePassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    size: 24.sp,
+                                  ),
+                                ),
                                 hintText: '*********',
                                 hintStyle: TextStyle(
                                   fontSize: 16.sp,
@@ -229,11 +243,13 @@ class _LoginCardState extends State<LoginCard> {
       );
       loginProvider!.isLoading = false;
       if (userResponse.status) {
-        ShowToast.showToast('login_success'.tr(), MessageType.Success);
+        ShowToast.showToast(
+            'login_success'.tr(), MessageType.Success, Toast.LENGTH_SHORT);
 
         Navigator.pushReplacementNamed(context, 'move_to_home_screen');
       } else {
-        ShowToast.showToast(userResponse.message, MessageType.Warning);
+        ShowToast.showToast(
+            userResponse.message, MessageType.Warning, Toast.LENGTH_LONG);
       }
     } catch (error) {
       loginProvider!.isLoading = false;

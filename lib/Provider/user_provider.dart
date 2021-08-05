@@ -1,14 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:toptan/Helper/app_shared.dart';
+import 'package:toptan/model/request/change_password.dart';
 import 'package:toptan/model/request/edit_profile.dart';
 import 'package:toptan/model/request/login.dart';
+import 'package:toptan/model/response/app_response.dart';
 import 'package:toptan/model/response/user.dart';
 
 class UserProvider with ChangeNotifier {
   EditProfileResponse? _editProfileResponse;
 
   EditProfileResponse? get editProfileResponse => _editProfileResponse;
+  AppResponse? _appResponse;
+
+  AppResponse? get appResponse => _appResponse;
 
   bool _isLoading = false;
 
@@ -73,8 +78,30 @@ class UserProvider with ChangeNotifier {
     return editProfileResponse;
   }
 
-//todo
-  Future<UserResponse> logout(locale) async {
+  Future<AppResponse> changePassword(locale,
+      {oldPassword, newPassword, confirmPassword}) async {
+    ChangePassword changePassword = ChangePassword(
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword,
+    );
+    Response response = await AppShared.dio!.post(
+      '${AppShared.baseUrl}changePassword',
+      data: changePassword.toJson(),
+      options: Options(
+        headers: {
+          'Accept-Language': locale,
+          "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+        },
+      ),
+    );
+    AppResponse appResponse = AppResponse.fromJson(response.data);
+    _appResponse = appResponse;
+
+    return appResponse;
+  }
+
+  Future<AppResponse> logout(locale) async {
     var response = await AppShared.dio!.get(
       '${AppShared.baseUrl}logout',
       options: Options(
@@ -84,11 +111,12 @@ class UserProvider with ChangeNotifier {
         },
       ),
     );
-    UserResponse logoutResponse = UserResponse.fromJson(response.data);
+    AppResponse logoutResponse = AppResponse.fromJson(response.data);
+    _appResponse = logoutResponse;
     if (logoutResponse.status) {
-      AppShared.sharedPreferencesController!.clear();
       await AppShared.sharedPreferencesController!.setIsLogin(false);
-      print(logoutResponse.status.toString());
+      AppShared.sharedPreferencesController!.clear();
+      AppShared.sharedPreferencesController!.notShowIntro(false);
     }
     return logoutResponse;
   }

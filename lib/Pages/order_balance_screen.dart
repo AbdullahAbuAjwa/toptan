@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -221,12 +222,12 @@ class _OrderBalanceScreenState extends State<OrderBalanceScreen> {
 
       if (orderBalanceProvider!.appResponse!.status) {
         ShowToast.showToast(
-            orderBalanceProvider!.appResponse!.message, MessageType.Success);
+            orderBalanceProvider!.appResponse!.message, MessageType.Success,Toast.LENGTH_SHORT);
         Navigator.pushReplacementNamed(context, 'move_to_send_request_screen');
         //   _amountController.clear();
       } else {
         ShowToast.showToast(
-            orderBalanceProvider!.appResponse!.message, MessageType.Warning);
+            orderBalanceProvider!.appResponse!.message, MessageType.Warning,Toast.LENGTH_LONG);
       }
     } catch (error) {
       orderBalanceProvider!.isLoading = false;

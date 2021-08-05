@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
@@ -403,12 +404,12 @@ class _CreatePOSScreenState extends State<CreatePOSScreen> {
           profileImage: img);
       pointOfSaleProvider!.isLoading = false;
       if (pointOfSaleProvider!.appResponse!.status) {
-        ShowToast.showToast(
-            pointOfSaleProvider!.appResponse!.message, MessageType.Success);
+        ShowToast.showToast(pointOfSaleProvider!.appResponse!.message,
+            MessageType.Success, Toast.LENGTH_SHORT);
         Navigator.pushReplacementNamed(context, 'move_to_home_screen');
       } else {
-        ShowToast.showToast(
-            pointOfSaleProvider!.appResponse!.msg, MessageType.Failed);
+        ShowToast.showToast(pointOfSaleProvider!.appResponse!.msg,
+            MessageType.Failed, Toast.LENGTH_LONG);
       }
     } catch (error) {
       pointOfSaleProvider!.isLoading = false;

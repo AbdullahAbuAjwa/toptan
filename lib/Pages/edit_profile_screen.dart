@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/app_shared.dart';
@@ -265,7 +266,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (_nameController.text == AppShared.currentUser!.user.name &&
         _mobileController.text == AppShared.currentUser!.user.mobile &&
         imageFile == null) {
-      ShowToast.showToast('Nothing to update', MessageType.Failed);
+      ShowToast.showToast('Nothing to update', MessageType.Failed,Toast.LENGTH_LONG);
       return;
     }
     userProvider!.isLoading = true;
@@ -286,11 +287,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       if (userProvider!.editProfileResponse!.status) {
         ShowToast.showToast(
-            userProvider!.editProfileResponse!.message, MessageType.Success);
+            userProvider!.editProfileResponse!.message, MessageType.Success,Toast.LENGTH_SHORT);
         Navigator.pushReplacementNamed(context, 'move_to_home_screen');
       } else {
         ShowToast.showToast(
-            userProvider!.editProfileResponse!.message, MessageType.Warning);
+            userProvider!.editProfileResponse!.message, MessageType.Warning,Toast.LENGTH_LONG);
       }
     } catch (error) {
       userProvider!.isLoading = false;

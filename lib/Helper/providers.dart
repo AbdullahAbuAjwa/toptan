@@ -1,13 +1,14 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:toptan/Provider/bank_account_provider.dart';
+import 'package:toptan/Provider/cart_provider.dart';
 import 'package:toptan/Provider/connect_provider.dart';
 import 'package:toptan/Provider/line_provider.dart';
 import 'package:toptan/Provider/notification_provider.dart';
 import 'package:toptan/Provider/prices_provider.dart';
 import 'package:toptan/Provider/user_provider.dart';
 import 'package:toptan/Provider/chat_provider.dart';
-import 'package:toptan/Provider/company_provider.dart';
+import 'package:toptan/Provider/companies_products_provider.dart';
 import 'package:toptan/Provider/contact_us_provider.dart';
 import 'package:toptan/Provider/faq_provider.dart';
 import 'package:toptan/Provider/order_balance_provider.dart';
@@ -32,6 +33,7 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider.value(value: OrderBalanceProvider()),
   ChangeNotifierProvider.value(value: ChatProvider()),
   ChangeNotifierProvider.value(value: ServiceProvider()),
-  ChangeNotifierProvider.value(value: CompanyProvider()),
+  ChangeNotifierProvider.value(value: CompaniesProductsProvider()),
   ChangeNotifierProvider.value(value: LineProvider()),
+  ChangeNotifierProvider.value(value: CartProvider()),
 ];

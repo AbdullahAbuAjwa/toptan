@@ -4,11 +4,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toptan/Helper/enum.dart';
 
 class ShowToast {
-  static void showToast(message, type) {
+  static void showToast(message, type,length) {
     if (type == MessageType.Success) {
       Fluttertoast.showToast(
           msg: message,
-          toastLength: Toast.LENGTH_LONG,
+          toastLength: length,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Color(0xffffffff),
@@ -17,7 +17,7 @@ class ShowToast {
     } else if (type == MessageType.Failed) {
       Fluttertoast.showToast(
           msg: message,
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
@@ -26,7 +26,7 @@ class ShowToast {
     } else {
       Fluttertoast.showToast(
           msg: message,
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.grey,
