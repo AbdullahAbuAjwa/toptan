@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/model/response/chat.dart';
 
 class ChatImageCard extends StatelessWidget {
-  final userId, message, sender, read, type, date, time;
+  Chat? chat;
 
-  ChatImageCard(
-      {this.userId,
-      required this.message,
-      required this.sender,
-      this.read,
-      this.type,
-      required this.date,
-      required this.time});
+
+  ChatImageCard(this.chat); // ChatImageCard(
+
 
   @override
   Widget build(BuildContext context) {
     final align =
-        sender == 1 ? CrossAxisAlignment.start : CrossAxisAlignment.end;
-    final bg = sender == 1 ? Color(0xffF3F4F7) : Color(0xff08A8FF);
+        chat!.sender == 1 ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+    final bg = chat!.sender == 1 ? Color(0xffF3F4F7) : Color(0xff08A8FF);
     final mainAlignment =
-        sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
-    final icon = sender == 1
+    chat!.sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
+    final icon = chat!.sender == 1
         ? null
-        : read == 1
+        : chat!.read == 1
             ? Icons.done_all
             : Icons.done;
-    final radius = sender == 1
+    final radius = chat!.sender == 1
         ? BorderRadius.only(
             topRight: Radius.circular(20.r),
             bottomLeft: Radius.circular(20.r),
@@ -36,7 +32,7 @@ class ChatImageCard extends StatelessWidget {
             bottomLeft: Radius.circular(20.r),
             bottomRight: Radius.circular(20.r),
           );
-    final radiusImage = sender == 1
+    final radiusImage = chat!.sender == 1
         ? BorderRadius.only(
             topRight: Radius.circular(20.r),
           )
@@ -63,7 +59,7 @@ class ChatImageCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: radiusImage,
                   child: Image.network(
-                    message,
+                    chat!.message,
                     fit: BoxFit.cover,
                     height: MediaQuery.of(context).size.height * 0.34,
                     errorBuilder: (context, error, track) => Container(),
@@ -76,11 +72,11 @@ class ChatImageCard extends StatelessWidget {
                   mainAxisAlignment: mainAlignment,
                   children: <Widget>[
                     Text(
-                      date + ' ' + time,
+                      '${chat!.date} ${chat!.time}',
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 11,
-                        color: sender == 1 ? Colors.black : Color(0xffffffff),
+                        color: chat!.sender == 1 ? Colors.black : Color(0xffffffff),
                       ),
                     ),
                     SizedBox(width: 3.w),

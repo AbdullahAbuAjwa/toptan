@@ -45,7 +45,8 @@ class CartProvider with ChangeNotifier {
       options: Options(
         headers: {
           'Accept-Language': locale,
-          "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+          "Authorization":
+              'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
         },
       ),
     );
@@ -66,7 +67,7 @@ class CartProvider with ChangeNotifier {
           },
         ),
       );
-      //  print(response.data);
+       print(response.data);
       CartResponse cartResponse = CartResponse.fromJson(response.data);
       _totalAmount = cartResponse.totalCart;
       _items = cartResponse.myCart;
@@ -93,9 +94,54 @@ class CartProvider with ChangeNotifier {
       AppResponse appResponse = AppResponse.fromJson(response.data);
       _appResponse = appResponse;
       _totalAmount = appResponse.totalCart;
-     // notifyListeners();
+      notifyListeners();
     } catch (error) {
       throw error;
+    }
+    return appResponse;
+  }
+
+  Future<AppResponse?> deleteProductCart(locale, id) async {
+    try {
+      Response response =
+          await AppShared.dio!.get('${AppShared.baseUrl}deleteProductCart/$id',
+              options: Options(
+                headers: {
+                  'Accept-Language': locale,
+                  "Authorization":
+                      'Bearer ${AppShared.currentUser!.user.accessToken}'
+                },
+              ));
+
+      print(response.data.toString());
+      AppResponse appResponse = AppResponse.fromJson(response.data);
+      _items!.removeWhere((element) => element.id == id);
+      _appResponse = appResponse;
+      _totalAmount = appResponse.totalCart;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+    return appResponse;
+  }
+
+  Future<AppResponse> checkOut(locale) async {
+    Response response = await AppShared.dio!.post(
+      '${AppShared.baseUrl}checkOut',
+      options: Options(
+        headers: {
+          'Accept-Language': locale,
+          "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+        },
+      ),
+    );
+
+    AppResponse appResponse = AppResponse.fromJson(response.data);
+    if (appResponse.status) {
+      _appResponse = appResponse;
+      notifyListeners();
+    } else {
+      print(appResponse.message);
     }
     return appResponse;
   }

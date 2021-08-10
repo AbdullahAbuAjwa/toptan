@@ -35,6 +35,10 @@ class SharedPreferencesController {
     return _sharedPreferences?.getBool('isLogin') ?? false;
   }
 
+  String? getToken() {
+    return _sharedPreferences?.getString('access_token');
+  }
+
   Future<void> setIsLogin(bool isLogin) async {
     await _sharedPreferences?.setBool('isLogin', isLogin);
   }

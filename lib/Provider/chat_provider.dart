@@ -6,6 +6,7 @@ import 'package:toptan/model/response/app_response.dart';
 import 'package:toptan/model/response/chat.dart';
 
 class ChatProvider with ChangeNotifier {
+
   AppResponse? _chatResponse;
 
   AppResponse? get chatResponse => _chatResponse;

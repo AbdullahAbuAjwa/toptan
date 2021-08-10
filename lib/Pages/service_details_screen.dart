@@ -314,7 +314,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
     MultipartFile? img;
     serviceProvider!.isLoading = true;
 
-    try {
+    //try {
       if (imageFile != null) {
         img = await MultipartFile.fromFile(imageFile!.path);
       }
@@ -333,10 +333,10 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
         ShowToast.showToast(
             serviceProvider!.appResponse!.msg, MessageType.Failed,Toast.LENGTH_LONG);
       }
-    } catch (error) {
-      serviceProvider!.isLoading = false;
-      print('error: ' + error.toString());
-      throw (error);
-    }
+    // } catch (error) {
+    //   serviceProvider!.isLoading = false;
+    //   print('error: ' + error.toString());
+    //   throw (error);
+    // }
   }
 }

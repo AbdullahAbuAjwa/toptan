@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Provider/cart_provider.dart';
-import 'dart:math';
+
+import 'package:toptan/model/response/cart.dart';
 
 class CartCard extends StatefulWidget {
-  final id, name, price, image, onIncreaseTap, onDecreaseTap;
-  var quantity;
+  MyCart myCart;
 
-  CartCard(
-      {this.id,
-      this.name,
-      this.price,
-      this.image,
-      this.quantity,
-      this.onIncreaseTap,
-      this.onDecreaseTap});
+  CartCard(this.myCart); // final cartId, name, price, image;
+
 
   @override
   _CartCardState createState() => _CartCardState();
@@ -31,9 +25,10 @@ class _CartCardState extends State<CartCard> {
           child: Card(
             elevation: 0,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Image.network(
-                  widget.image,
+                  widget.myCart.productCart!.image,
                   height: 150.h,
                   width: 150.w,
                   errorBuilder: (_, __, ___) => Image.asset(
@@ -45,7 +40,7 @@ class _CartCardState extends State<CartCard> {
                 Column(
                   children: [
                     Text(
-                      widget.name,
+                      widget.myCart.productCart!.name,
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 18.sp,
@@ -56,7 +51,7 @@ class _CartCardState extends State<CartCard> {
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      '\$${widget.price}',
+                      '\$${widget.myCart.price}',
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 14.sp,
@@ -72,12 +67,11 @@ class _CartCardState extends State<CartCard> {
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              widget.quantity++;
+                              widget.myCart.quantity++;
                             });
                             Provider.of<CartProvider>(context, listen: false)
                                 .changeQuantity(Localizations.localeOf(context),
-                                    widget.id, 1);
-                            // widget.onIncreaseTap;
+                                    widget.myCart.id, 1);
                           },
                           icon: Icon(
                             Icons.add_circle_outline,
@@ -87,22 +81,20 @@ class _CartCardState extends State<CartCard> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text(widget.quantity.toString()),
+                          child: Text(widget.myCart.quantity.toString()),
                         ),
                         IconButton(
                           onPressed: () {
-                            if (widget.quantity > 1) {
+                            if (widget.myCart.quantity > 1) {
                               setState(() {
-                                widget.quantity--;
+                                widget.myCart.quantity--;
                               });
                               Provider.of<CartProvider>(context, listen: false)
                                   .changeQuantity(
                                       Localizations.localeOf(context),
-                                      widget.id,
+                                      widget.myCart.id,
                                       0);
                             }
-
-                            //    widget.onDecreaseTap;
                           },
                           icon: Icon(
                             Icons.remove_circle_outline,
@@ -114,6 +106,18 @@ class _CartCardState extends State<CartCard> {
                     )
                   ],
                 ),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        Provider.of<CartProvider>(context, listen: false)
+                            .deleteProductCart(Localizations.localeOf(context),
+                                widget.myCart.id);
+                      });
+                    },
+                    icon: Icon(
+                      Icons.delete_forever_rounded,
+                      color: Colors.red,
+                    ))
               ],
             ),
           ),

@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toptan/model/response/chat.dart';
 
 class ChatCard extends StatelessWidget {
-  final userId, message, sender, read, type, date, time;
+  Chat? chat;
 
-  ChatCard(
-      {this.userId,
-      required this.message,
-      required this.sender,
-      this.read,
-      this.type,
-      required this.date,
-      required this.time});
+  ChatCard(this.chat);
 
   @override
   Widget build(BuildContext context) {
-    final bg = sender == 1 ? Color(0xffF3F4F7) : Color(0xff08A8FF);
+    final bg = chat!.sender == 1 ? Color(0xffF3F4F7) : Color(0xff08A8FF);
     final align =
-        sender == 1 ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+        chat!.sender == 1 ? CrossAxisAlignment.start : CrossAxisAlignment.end;
     final mainAlignment =
-        sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
-    final icon = sender == 1
+        chat!.sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
+    final icon = chat!.sender == 1
         ? null
-        : read == 1
+        : chat!.read == 1
             ? Icons.done_all
             : Icons.done;
-    final radius = sender == 1
+    final radius = chat!.sender == 1
         ? BorderRadius.only(
             topRight: Radius.circular(20.r),
             bottomLeft: Radius.circular(20.r),
@@ -60,12 +54,12 @@ class ChatCard extends StatelessWidget {
                 padding: EdgeInsets.only(right: 5.0.w),
                 // : EdgeInsets.only(left: 10.0),
                 child: Text(
-                  message,
+                  chat!.message,
                   textScaleFactor: 1,
                   style: TextStyle(
                     fontFamily: 'SF Pro',
                     fontSize: 15.sp,
-                    color: sender == 1 ? Colors.black : Color(0xffffffff),
+                    color: chat!.sender == 1 ? Colors.black : Color(0xffffffff),
                     fontWeight: FontWeight.w500,
                     //height: 1.5,
                   ),
@@ -78,11 +72,14 @@ class ChatCard extends StatelessWidget {
                   mainAxisAlignment: mainAlignment,
                   children: <Widget>[
                     Text(
-                      date + ' ' + time,
+                      '${chat!.date.toString().substring(0, 10)} '
+                      '${chat!.time}',
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 11.sp,
-                        color: sender == 1 ? Colors.black : Color(0xffffffff),
+                        color: chat!.sender == 1
+                            ? Colors.black
+                            : Color(0xffffffff),
                       ),
                     ),
                     SizedBox(width: 3.w),

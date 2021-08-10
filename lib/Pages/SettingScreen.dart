@@ -11,7 +11,6 @@ import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/drawer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:toptan/model/response/user.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -39,6 +38,7 @@ class _SettingScreenState extends State<SettingScreen> {
       },
       child: Scaffold(
         drawer: AppDrawer(),
+
         backgroundColor: Color(0xff08A8FF),
         appBar: appBarAppWithNotification('setting'.tr(), context),
         body: Container(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
 import 'package:toptan/Provider/slider_provider.dart';
@@ -137,36 +136,36 @@ class _HomeScreenState extends State<HomeScreen> {
         'home_screen'.tr(),
         style: TextStyle(fontSize: 22.sp),
       ),
-      actions: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed('move_to_financial_movements_screen');
-            },
-            child: Row(
-              children: [
-                Text(
-                  '\$2000',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 20.sp,
-                    color: const Color(0xffefff02),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                Icon(
-                  CustomIcon.ic_shopping_wallet,
-                  color: Colors.white,
-                  size: 25.sp,
-                ),
-              ],
-            ),
-          ),
-        )
-      ],
+      // actions: [
+      //   Padding(
+      //     padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+      //     child: InkWell(
+      //       onTap: () {
+      //         Navigator.of(context)
+      //             .pushNamed('move_to_financial_movements_screen');
+      //       },
+      //       child: Row(
+      //         children: [
+      //           Text(
+      //             '\$2000',
+      //             style: TextStyle(
+      //               fontFamily: 'Roboto',
+      //               fontSize: 20.sp,
+      //               color: const Color(0xffefff02),
+      //               fontWeight: FontWeight.w500,
+      //             ),
+      //           ),
+      //           SizedBox(width: 10.w),
+      //           Icon(
+      //             CustomIcon.ic_shopping_wallet,
+      //             color: Colors.white,
+      //             size: 25.sp,
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   )
+      // ],
     );
   }
 }

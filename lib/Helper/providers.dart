@@ -5,6 +5,7 @@ import 'package:toptan/Provider/cart_provider.dart';
 import 'package:toptan/Provider/connect_provider.dart';
 import 'package:toptan/Provider/line_provider.dart';
 import 'package:toptan/Provider/notification_provider.dart';
+import 'package:toptan/Provider/orders_provider.dart';
 import 'package:toptan/Provider/prices_provider.dart';
 import 'package:toptan/Provider/user_provider.dart';
 import 'package:toptan/Provider/chat_provider.dart';
@@ -17,6 +18,7 @@ import 'package:toptan/Provider/pos_provider.dart';
 import 'package:toptan/Provider/service_prices_provider.dart';
 import 'package:toptan/Provider/service_provider.dart';
 import 'package:toptan/Provider/slider_provider.dart';
+import 'package:toptan/Provider/work_throw_provider.dart';
 
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider.value(value: UserProvider()),
@@ -36,4 +38,6 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider.value(value: CompaniesProductsProvider()),
   ChangeNotifierProvider.value(value: LineProvider()),
   ChangeNotifierProvider.value(value: CartProvider()),
+  ChangeNotifierProvider.value(value: OrderProvider()),
+  ChangeNotifierProvider.value(value: WorkThrowProvider()),
 ];

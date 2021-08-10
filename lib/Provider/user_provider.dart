@@ -120,4 +120,20 @@ class UserProvider with ChangeNotifier {
     }
     return logoutResponse;
   }
+
+  Future<AppResponse> forgotPassword(locale, {email}) async {
+    Response response = await AppShared.dio!.post(
+      '${AppShared.baseUrl}forgotPassword',
+      data: {'email': email},
+      options: Options(
+        headers: {
+          'Accept-Language': locale,
+        },
+      ),
+    );
+    AppResponse appResponse = AppResponse.fromJson(response.data);
+    print(response.data);
+    _appResponse = appResponse;
+    return appResponse;
+  }
 }

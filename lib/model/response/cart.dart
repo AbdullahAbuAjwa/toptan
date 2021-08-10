@@ -46,7 +46,7 @@ class MyCart {
   int? productId;
   int? price;
   String? typePrice;
-  int? quantity;
+  var quantity;
   DateTime? createdAt;
   ProductCart? productCart;
 
@@ -103,9 +103,9 @@ class ProductCart {
   final price1;
   final price2;
   final price3;
-  String? name;
-  String? image;
-  String? status;
+  final name;
+  final image;
+  final status;
 
   factory ProductCart.fromJson(Map<String, dynamic> json) => ProductCart(
         id: json["id"],

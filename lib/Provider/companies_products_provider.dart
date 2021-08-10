@@ -30,7 +30,8 @@ class CompaniesProductsProvider with ChangeNotifier {
         options: Options(
           headers: {
             'Accept-Language': locale,
-            "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            "Authorization":
+                'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
           },
         ),
       );
@@ -51,7 +52,7 @@ class CompaniesProductsProvider with ChangeNotifier {
         options: Options(
           headers: {
             'Accept-Language': locale,
-            "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            "Authorization": 'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
           },
         ),
       );

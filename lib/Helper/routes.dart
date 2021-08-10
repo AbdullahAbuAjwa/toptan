@@ -9,6 +9,7 @@ import 'package:toptan/Pages/edit_profile_screen.dart';
 import 'package:toptan/Pages/faq_screen.dart';
 import 'package:toptan/Pages/financial_movements_screen.dart';
 import 'package:toptan/Pages/forget_pass_screen.dart';
+import 'package:toptan/Pages/send_request_order.dart';
 import 'package:toptan/Pages/service_details_screen.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/line_screen.dart';
@@ -19,9 +20,8 @@ import 'package:toptan/Pages/order_balance_screen.dart';
 import 'package:toptan/Pages/prices_screen.dart';
 import 'package:toptan/Pages/privacy_policy_screen.dart';
 import 'package:toptan/Pages/products_company_screen.dart';
-import 'package:toptan/Pages/reset_pass_screen.dart';
 import 'package:toptan/Pages/send_request_screen.dart';
-import 'package:toptan/Pages/service_name_screen.dart';
+import 'package:toptan/Pages/order_details_screen.dart';
 import 'package:toptan/Pages/service_price_screen.dart';
 import 'package:toptan/Pages/services_screen.dart';
 
@@ -37,7 +37,8 @@ Map<String, Widget Function(BuildContext)> ROUTES = {
   'move_to_super_line_screen': (ctx) => LineScreen(),
   'move_to_chat_screen': (ctx) => ChatScreen(),
   'move_to_send_request_screen': (ctx) => SendRequestScreen(),
-  'move_to_service_name_screen': (ctx) => ServiceNameScreen(),
+  'move_to_send_request_order_screen': (ctx) => SendRequestOrderScreen(),
+  'move_to_order_details_screen': (ctx) => OrderDetailsScreen(),
   'move_to_home_screen': (ctx) => HomeScreen(),
   'move_to_login_screen': (ctx) => LoginScreen(),
   'move_to_term_of_use_screen': (ctx) => TermOfUseScreen(),
@@ -49,7 +50,6 @@ Map<String, Widget Function(BuildContext)> ROUTES = {
   'move_to_bank_accounts_screen': (ctx) => BankAccountsScreen(),
   'move_to_order_balance_screen': (ctx) => OrderBalanceScreen(),
   'move_to_forget_password_screen': (ctx) => ForgetPasswordScreen(),
-  'move_to_reset_password_screen': (ctx) => ResetPasswordScreen(),
   'move_to_faq_screen': (ctx) => FaqScreen(),
   'move_to_privacy_policy_screen': (ctx) => PrivacyPolicyScreen(),
   'move_to_additional_services_screen': (ctx) => AdditionalServicesScreen(),

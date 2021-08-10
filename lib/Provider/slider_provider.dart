@@ -17,13 +17,14 @@ class SliderProvider with ChangeNotifier {
         options: Options(
           headers: {
             'Accept-Language': locale,
-            "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            //   "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            "Authorization":
+                'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
           },
         ),
       );
-   //   print(response.data);
-      SliderResponse sliderResponse =
-          SliderResponse.fromJson(response.data);
+      //   print(response.data);
+      SliderResponse sliderResponse = SliderResponse.fromJson(response.data);
       _items = sliderResponse.sliders;
       notifyListeners();
     } on Exception {

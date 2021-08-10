@@ -177,7 +177,7 @@ Widget loadingServices() {
 
 Widget loadingCart() {
   return Container(
-    padding: const EdgeInsets.all(8.0),
+    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
     child: Shimmer.fromColors(
       baseColor: Color(0xffe7e7e7),
       highlightColor: Color(0xFFF1F1F1),
@@ -185,7 +185,7 @@ Widget loadingCart() {
       child: ListView.builder(
         physics: ScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 2,
+        itemCount: 3,
         itemBuilder: (_, __) => Container(
           margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           child: Card(
@@ -195,6 +195,35 @@ Widget loadingCart() {
             ),
             child: Container(
               height: 150.h,
+              width: 150.w,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget loadingOrders() {
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+    child: Shimmer.fromColors(
+      baseColor: Color(0xffe7e7e7),
+      highlightColor: Color(0xFFF1F1F1),
+      enabled: true,
+      child: ListView.builder(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (_, __) => Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+          child: Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Container(
+              height: 75.h,
               width: 150.w,
             ),
           ),

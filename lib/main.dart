@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'Helper/app_shared.dart';
 import 'Helper/providers.dart';
 import 'Helper/routes.dart';

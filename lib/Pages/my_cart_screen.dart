@@ -14,12 +14,11 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> {
-  Future? cartFuture;
-
   @override
-  void initState() {
-    super.initState();
-    cartFuture = CartProvider().getMyCart('en');
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Provider.of<CartProvider>(context)
+        .getMyCart(Localizations.localeOf(context));
   }
 
   @override
@@ -45,10 +44,34 @@ class _MyCartScreenState extends State<MyCartScreen> {
           ),
           child: ListView(
             children: [
-              FutureBuilder(
-                //    future: cartFuture,
-                future: Provider.of<CartProvider>(context, listen: false)
-                    .getMyCart(Localizations.localeOf(context)),
+              Provider.of<CartProvider>(context).items!.isEmpty
+                  ? loadingCart()
+                  : Provider.of<CartProvider>(context).totalAmount == 0 ||
+                          Provider.of<CartProvider>(context).totalAmount == null
+                      ? Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 30.0.h),
+                            child: Text(
+                              'cart_empty'.tr(),
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount:
+                              Provider.of<CartProvider>(context).items!.length,
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return CartCard(Provider.of<CartProvider>(context)
+                                .items![index]);
+                          },
+                        ),
+              /*  FutureBuilder(
+                future: _future,
                 builder: (ctx, AsyncSnapshot snapshot) => snapshot
                             .connectionState ==
                         ConnectionState.waiting
@@ -69,13 +92,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                       ),
                                     ),
                                   )
-                                : ListView.builder(
+                                :
+                            ListView.builder(
                                     physics: ScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: data.items!.length,
                                     itemBuilder: (ctx, i) {
                                       return CartCard(
-                                        id: data.items![i].id,
+                                        cartId: data.items![i].id,
                                         name: data.items![i].productCart!.name,
                                         price: data.items![i].price,
                                         image:
@@ -85,62 +109,78 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     },
                                   ),
                       ),
-              ),
-              Text(
-                'total_amount'.tr(),
-                style: TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontSize: 17.sp,
-                  color: const Color(0xff8b98b4),
-                  fontWeight: FontWeight.w500,
+              ),*/
+              if (Provider.of<CartProvider>(context).totalAmount != 0 &&
+                  Provider.of<CartProvider>(context).totalAmount != null)
+                Text(
+                  'total_amount'.tr(),
+                  style: TextStyle(
+                    fontFamily: 'SF Pro',
+                    fontSize: 17.sp,
+                    color: const Color(0xff8b98b4),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
               SizedBox(height: 10),
-              Text(
-                '\$${Provider.of<CartProvider>(context).totalAmount.toString()}',
-                style: TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontSize: 26.sp,
-                  color: const Color(0xff000000),
-                  fontWeight: FontWeight.w700,
+              if (Provider.of<CartProvider>(context).totalAmount != 0 &&
+                  Provider.of<CartProvider>(context).totalAmount != null)
+                Text(
+                  '\$${Provider.of<CartProvider>(context).totalAmount.toString()}',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro',
+                    fontSize: 26.sp,
+                    color: const Color(0xff000000),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
               SizedBox(height: 30.h),
-              Padding(
-                padding:
-                    EdgeInsets.only(right: 70.0.w, left: 70.w, bottom: 20.h),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0.h),
-                    ),
-                    primary: Color(0xff08A8FF),
-                    fixedSize: Size(100.w, 60.h),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'make_order'.tr(),
-                        style: TextStyle(
-                          fontFamily: 'SF Pro',
-                          fontSize: 16.sp,
-                          color: const Color(0xffffffff),
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.left,
+              if (Provider.of<CartProvider>(context).totalAmount != 0 &&
+                  Provider.of<CartProvider>(context).totalAmount != null)
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: 70.0.w, left: 70.w, bottom: 20.h),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await Provider.of<CartProvider>(context, listen: false)
+                          .checkOut(
+                        Localizations.localeOf(context),
+                      );
+                      Navigator.pushReplacementNamed(
+                        context,
+                        'move_to_send_request_order_screen',
+                        //  ModalRoute.withName('move_to_home_screen')
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0.h),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                        child: Icon(Icons.arrow_forward_outlined),
-                      )
-                    ],
+                      primary: Color(0xff08A8FF),
+                      fixedSize: Size(100.w, 60.h),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'make_order'.tr(),
+                          style: TextStyle(
+                            fontFamily: 'SF Pro',
+                            fontSize: 16.sp,
+                            color: const Color(0xffffffff),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                          child: Icon(Icons.arrow_forward_outlined),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
+                )
             ],
           ),
         ),

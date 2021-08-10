@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:toptan/Helper/enum.dart';
-import 'package:toptan/Helper/show_toast.dart';
-import 'package:toptan/Provider/cart_provider.dart';
 
 class ProductsCard extends StatefulWidget {
   final oPrice, sPrice, rPrice, image, name, id;

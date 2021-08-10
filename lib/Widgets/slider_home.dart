@@ -49,6 +49,9 @@ class SliderHomeScreenCard extends StatelessWidget {
                       child: Image.network(
                         image!,
                         fit: BoxFit.fill,
+                        errorBuilder: (_, __, ___) => Container(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

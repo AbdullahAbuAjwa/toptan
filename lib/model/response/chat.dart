@@ -41,7 +41,7 @@ class ChatResponse extends AppResponse {
 
 class Chat {
   int? userId;
-  String? message;
+  final message;
   int? sender;
   int? read;
   int? type;

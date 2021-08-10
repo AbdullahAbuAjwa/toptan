@@ -80,9 +80,10 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    // _messageController.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Provider.of<ChatProvider>(context)
+        .fetchChat(Localizations.localeOf(context));
   }
 
   @override
@@ -97,87 +98,35 @@ class _ChatScreenState extends State<ChatScreen> {
         drawer: AppDrawer(),
         appBar: appBarAppWithNotification('chat'.tr(), context),
         body: SingleChildScrollView(
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: FutureBuilder(
-                        future: chatProvider!
-                            .fetchChat(Localizations.localeOf(context)),
-                        builder: (ctx, AsyncSnapshot snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return loadingChat(context);
-                          }
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text(
-                                'no_messages'.tr(),
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            );
-                          }
-                          return Consumer<ChatProvider>(
-                            builder: (BuildContext context, data,
-                                    Widget? child) =>
-                                data.items!.length == 0
-                                    ? Center(
-                                        child: Text(
-                                          'no_messages'.tr(),
-                                          style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      )
-                                    : ListView.builder(
-                                        reverse: true,
-                                        itemCount: data.items!.length,
-                                        itemBuilder: (ctx, i) =>
-                                            // data.items![i].userId == AppShared.currentUser!.user.id?
-                                            data.items![i].type == 0
-                                                ? ChatCard(
-                                                    message:
-                                                        data.items![i].message,
-                                                    sender:
-                                                        data.items![i].sender,
-                                                    read: data.items![i].read,
-                                                    time: data.items![i].time,
-                                                    date: data.items![i].date
-                                                        .toString()
-                                                        .substring(0, 10),
-                                                  )
-                                                : ChatImageCard(
-                                                    message:
-                                                        data.items![i].message,
-                                                    sender:
-                                                        data.items![i].sender,
-                                                    time: data.items![i].time,
-                                                    date: data.items![i].date
-                                                        .toString()
-                                                        .substring(0, 10),
-                                                  )
-                                        // : Container(),
-                                        ),
-                          );
-                        }),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 14.0.w, vertical: 12.h),
-                    child: imageFile == null
-                        ? keyboardSend()
-                        : keyboardSendImage(),
-                  ),
-                ],
+              Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+                child: Provider.of<ChatProvider>(context).items!.length == 0
+                    ? Center(child: loadingChat(context))
+                    : ListView.builder(
+                        itemCount:
+                            Provider.of<ChatProvider>(context).items!.length,
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        reverse: true,
+                        itemBuilder: (context, index) =>
+                            Provider.of<ChatProvider>(context)
+                                        .items![index]
+                                        .type ==
+                                    0
+                                ? ChatCard(Provider.of<ChatProvider>(context)
+                                    .items![index])
+                                : ChatImageCard(
+                                    Provider.of<ChatProvider>(context)
+                                        .items![index]),
+                      ),
               ),
-              if (Provider.of<ChatProvider>(context).isLoading)
-                CircularProgressIndicator()
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 14.0.w, vertical: 12.h),
+                child: imageFile == null ? keyboardSend() : keyboardSendImage(),
+              ),
             ],
           ),
         ),

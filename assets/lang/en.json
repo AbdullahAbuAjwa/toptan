@@ -51,8 +51,9 @@
   "order_products": "Order Products",
   "select_all": "Select All",
   "waiting": "Waiting",
-  "accept": "Accept",
-  "reject": "Reject",
+  "activated": "Activated",
+  "canceled": "Canceled",
+  "processing": "Processing",
   "pos": "Point Of Sale",
   "prices": "Prices",
   "privacy_policy": "Privacy Policy",
@@ -108,5 +109,13 @@
   "new_password": "New password",
   "confirm_new_password": "Confirm password",
   "companies": "Companies",
-  "cart_empty": "Cart Empty!"
+  "cart_empty": "Cart Empty!",
+  "no_orders": "No orders!",
+  "no_image": "No image",
+  "no_number": "No number",
+  "image_balance": "Image Balance: ",
+  "comm": "Comment: ",
+  "product": "Product",
+  "quantity": "Quantity",
+  "price": "Price"
 }

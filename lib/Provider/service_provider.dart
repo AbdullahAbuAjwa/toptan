@@ -46,7 +46,7 @@ class ServiceProvider with ChangeNotifier {
         options: Options(
           headers: {
             'Accept-Language': locale,
-            "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            "Authorization": 'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
           },
         ),
       );
@@ -68,7 +68,7 @@ class ServiceProvider with ChangeNotifier {
         options: Options(
           headers: {
             'Accept-Language': locale,
-            "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+            "Authorization": 'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
           },
         ),
       );
@@ -97,7 +97,7 @@ class ServiceProvider with ChangeNotifier {
       options: Options(
         headers: {
           'Accept-Language': locale,
-          "Authorization": 'Bearer ${AppShared.currentUser!.user.accessToken}'
+          "Authorization": 'Bearer ${AppShared.sharedPreferencesController!.getToken()}'
         },
       ),
     );
