@@ -5,9 +5,7 @@ import 'package:toptan/model/response/chat.dart';
 class ChatImageCard extends StatelessWidget {
   Chat? chat;
 
-
   ChatImageCard(this.chat); // ChatImageCard(
-
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class ChatImageCard extends StatelessWidget {
         chat!.sender == 1 ? CrossAxisAlignment.start : CrossAxisAlignment.end;
     final bg = chat!.sender == 1 ? Color(0xffF3F4F7) : Color(0xff08A8FF);
     final mainAlignment =
-    chat!.sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
+        chat!.sender == 1 ? MainAxisAlignment.start : MainAxisAlignment.end;
     final icon = chat!.sender == 1
         ? null
         : chat!.read == 1
@@ -62,6 +60,7 @@ class ChatImageCard extends StatelessWidget {
                     chat!.message,
                     fit: BoxFit.cover,
                     height: MediaQuery.of(context).size.height * 0.34,
+                    width: MediaQuery.of(context).size.width / 2,
                     errorBuilder: (context, error, track) => Container(),
                   ),
                 ),
@@ -72,11 +71,13 @@ class ChatImageCard extends StatelessWidget {
                   mainAxisAlignment: mainAlignment,
                   children: <Widget>[
                     Text(
-                      '${chat!.date} ${chat!.time}',
+                      '${chat!.date.toString().substring(0,10)} ${chat!.time}',
                       style: TextStyle(
                         fontFamily: 'SF Pro',
                         fontSize: 11,
-                        color: chat!.sender == 1 ? Colors.black : Color(0xffffffff),
+                        color: chat!.sender == 1
+                            ? Colors.black
+                            : Color(0xffffffff),
                       ),
                     ),
                     SizedBox(width: 3.w),

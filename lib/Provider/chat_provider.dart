@@ -6,7 +6,6 @@ import 'package:toptan/model/response/app_response.dart';
 import 'package:toptan/model/response/chat.dart';
 
 class ChatProvider with ChangeNotifier {
-
   AppResponse? _chatResponse;
 
   AppResponse? get chatResponse => _chatResponse;
@@ -36,7 +35,7 @@ class ChatProvider with ChangeNotifier {
           },
         ),
       );
-      //  print(response.data);
+      //print(response.data);
       ChatResponse chatResponse = ChatResponse.fromJson(response.data);
 
       _items = chatResponse.chat!.reversed
@@ -63,13 +62,9 @@ class ChatProvider with ChangeNotifier {
         },
       ),
     );
-    // Chat chat = Chat(message: message, type: type);
-    // _items!.add(chat);
     AppResponse chatResponse = AppResponse.fromJson(response.data);
-    // if (chatResponse.status) {
     _chatResponse = chatResponse;
     notifyListeners();
-    //}
     return chatResponse;
   }
 }

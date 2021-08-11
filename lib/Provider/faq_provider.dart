@@ -21,7 +21,7 @@ class FAQProvider with ChangeNotifier {
           },
         ),
       );
-        print(response.data);
+      print(response.data);
       FAQResponse faqResponse = FAQResponse.fromJson(response.data);
       _items = faqResponse.faq;
       notifyListeners();

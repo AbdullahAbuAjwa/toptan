@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:toptan/Provider/cart_provider.dart';
 import 'package:toptan/Provider/chat_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/chat_card.dart';
@@ -80,14 +81,9 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  Widget build(BuildContext context) {
     Provider.of<ChatProvider>(context)
         .fetchChat(Localizations.localeOf(context));
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushReplacementNamed(context, 'move_to_home_screen');
@@ -104,28 +100,25 @@ class _ChatScreenState extends State<ChatScreen> {
                 height: MediaQuery.of(context).size.height * 0.75,
                 child: Provider.of<ChatProvider>(context).items!.length == 0
                     ? Center(child: loadingChat(context))
-                    : ListView.builder(
-                        itemCount:
-                            Provider.of<ChatProvider>(context).items!.length,
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        reverse: true,
-                        itemBuilder: (context, index) =>
-                            Provider.of<ChatProvider>(context)
-                                        .items![index]
-                                        .type ==
-                                    0
-                                ? ChatCard(Provider.of<ChatProvider>(context)
-                                    .items![index])
-                                : ChatImageCard(
-                                    Provider.of<ChatProvider>(context)
-                                        .items![index]),
-                      ),
+                    : Consumer<ChatProvider>(builder: (context, provider, _) {
+                        return ListView.builder(
+                          itemCount: provider.items!.length,
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          reverse: true,
+                          itemBuilder: (context, index) =>
+                              provider.items![index].type == 0
+                                  ? ChatCard(provider.items![index])
+                                  : ChatImageCard(provider.items![index]),
+                        );
+                      }),
               ),
               Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: 14.0.w, vertical: 12.h),
-                child: imageFile == null ? keyboardSend() : keyboardSendImage(),
+                child: imageFile == null
+                    ? keyboardSend(context)
+                    : keyboardSendImage(context),
               ),
             ],
           ),
@@ -134,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget keyboardSend() {
+  Widget keyboardSend(context) {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.r),
@@ -177,7 +170,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     SizedBox(width: 12.w),
                     InkWell(
                       onTap: () {
-                        sendMessage();
+                        sendMessage(context);
                       },
                       child: Icon(
                         Icons.send,
@@ -190,20 +183,24 @@ class _ChatScreenState extends State<ChatScreen> {
         ));
   }
 
-  Widget keyboardSendImage() {
+  Widget keyboardSendImage(context) {
     return Container(
       color: Color(0xffF3F4F7),
-      height: 140,
+      height: 150.h,
       width: double.infinity,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.file(
-              imageFile,
-              fit: BoxFit.fill,
-              width: MediaQuery.of(context).size.width * 0.5,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(7.r),
+              child: Image.file(
+                imageFile,
+                fit: BoxFit.fill,
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height * 0.38,
+              ),
             ),
             Row(
               children: [
@@ -216,7 +213,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 SizedBox(width: 20.w),
                 InkWell(
                   onTap: () {
-                    sendMessage();
+                    sendImageMessage(context);
                   },
                   child: Icon(Icons.send),
                 ),
@@ -228,31 +225,47 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Future<void> sendMessage() async {
-    //if (_messageController.text.trim().isEmpty) return;
-    MultipartFile? img;
-    // chatProvider!.isLoading = true;
+  Future<void> sendImageMessage(context) async {
     try {
-      FocusScope.of(context).unfocus();
+      //    Provider.of<CartProvider>(context).isLoading = true;
+      MultipartFile? img;
       if (imageFile != null) {
         img = await MultipartFile.fromFile(imageFile!.path);
-      }
+        await chatProvider!.sendMessage(
+          Localizations.localeOf(context),
+          message: ' ',
+          image: img,
+          type: 1,
+        );
 
+        //Provider.of<CartProvider>(context).isLoading = false;
+      }
+      if (chatProvider!.chatResponse!.status) {
+        imageFile = null;
+      } else {
+        print(chatProvider!.chatResponse!.message);
+      }
+    } on Exception catch (e) {
+      // Provider.of<CartProvider>(context).isLoading = false;
+      print('eeee: ' + e.toString());
+    }
+  }
+
+  Future<void> sendMessage(context) async {
+    if (_messageController.text.trim().isEmpty) return;
+    try {
+      //  FocusScope.of(context).unfocus();
       await chatProvider!.sendMessage(
         Localizations.localeOf(context),
         message: _messageController.text.trim(),
-        image: img,
         type: 0,
       );
-      // chatProvider!.isLoading = false;
-
       if (chatProvider!.chatResponse!.status) {
         _messageController.clear();
-        imageFile = null;
-        setState(() {});
+      } else {
+        print(chatProvider!.chatResponse!.message);
       }
     } catch (error) {
-      //chatProvider!.isLoading = false;
       print('error: ' + error.toString());
       throw (error);
     }

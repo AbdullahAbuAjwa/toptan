@@ -12,17 +12,17 @@ ChatResponse chatResponseFromJson(String str) =>
 String chatResponseToJson(ChatResponse data) => json.encode(data.toJson());
 
 class ChatResponse extends AppResponse {
-  var status;
-  var code;
-  var message;
-  List<Chat>? chat;
-
   ChatResponse({
     status,
     code,
     message,
     this.chat,
   }) : super(message: message, code: code, status: status);
+
+  var status;
+  var code;
+  var message;
+  List<Chat>? chat;
 
   factory ChatResponse.fromJson(Map<String, dynamic> json) => ChatResponse(
         status: json["status"],
@@ -40,16 +40,6 @@ class ChatResponse extends AppResponse {
 }
 
 class Chat {
-  int? userId;
-  final message;
-  int? sender;
-  int? read;
-  int? type;
-  DateTime? createdAt;
-  String? userName;
-  DateTime? date;
-  String? time;
-
   Chat({
     this.userId,
     this.message,
@@ -61,6 +51,16 @@ class Chat {
     this.date,
     this.time,
   });
+
+  int? userId;
+  var message;
+  int? sender;
+  int? read;
+  int? type;
+  DateTime? createdAt;
+  String? userName;
+  DateTime? date;
+  String? time;
 
   factory Chat.fromJson(Map<String, dynamic> json) => Chat(
         userId: json["user_id"],

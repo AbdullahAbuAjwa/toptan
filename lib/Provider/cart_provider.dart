@@ -67,7 +67,7 @@ class CartProvider with ChangeNotifier {
           },
         ),
       );
-       print(response.data);
+     // print(response.data);
       CartResponse cartResponse = CartResponse.fromJson(response.data);
       _totalAmount = cartResponse.totalCart;
       _items = cartResponse.myCart;
@@ -90,7 +90,7 @@ class CartProvider with ChangeNotifier {
                 },
               ));
 
-      print(response.data.toString());
+      // print(response.data.toString());
       AppResponse appResponse = AppResponse.fromJson(response.data);
       _appResponse = appResponse;
       _totalAmount = appResponse.totalCart;
@@ -113,7 +113,7 @@ class CartProvider with ChangeNotifier {
                 },
               ));
 
-      print(response.data.toString());
+      // print(response.data.toString());
       AppResponse appResponse = AppResponse.fromJson(response.data);
       _items!.removeWhere((element) => element.id == id);
       _appResponse = appResponse;
@@ -137,12 +137,8 @@ class CartProvider with ChangeNotifier {
     );
 
     AppResponse appResponse = AppResponse.fromJson(response.data);
-    if (appResponse.status) {
-      _appResponse = appResponse;
-      notifyListeners();
-    } else {
-      print(appResponse.message);
-    }
+    _appResponse = appResponse;
+    notifyListeners();
     return appResponse;
   }
 }
