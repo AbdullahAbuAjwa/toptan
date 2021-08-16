@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/model/response/user.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SharedPreferencesController {
   static Future<SharedPreferencesController>? _instance;
@@ -35,12 +36,12 @@ class SharedPreferencesController {
     return _sharedPreferences?.getBool('isLogin') ?? false;
   }
 
-  String? getToken() {
-    return _sharedPreferences?.getString('access_token');
-  }
-
   Future<void> setIsLogin(bool isLogin) async {
     await _sharedPreferences?.setBool('isLogin', isLogin);
+  }
+
+  String? getToken() {
+    return _sharedPreferences?.getString('access_token');
   }
 
   getUserData() {

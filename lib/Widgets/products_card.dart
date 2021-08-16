@@ -23,7 +23,6 @@ class ProductsCard extends StatefulWidget {
 
 class _ProductsCardState extends State<ProductsCard> {
   @override
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -41,7 +40,7 @@ class _ProductsCardState extends State<ProductsCard> {
                 height: 80.h,
                 fit: BoxFit.contain,
                 errorBuilder: (_, __, ___) => Image.asset(
-                  'assets/images/category.png',
+                  'assets/images/phone.jpg',
                   height: 80.h,
                   fit: BoxFit.contain,
                 ),

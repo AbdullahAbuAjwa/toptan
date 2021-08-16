@@ -73,6 +73,12 @@ class _MyAppState extends State<MyApp> {
           title: 'Toptan',
           theme: ThemeData(
             primarySwatch: Colors.blue,
+          ).copyWith(
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+                TargetPlatform.android: ZoomPageTransitionsBuilder(),
+              },
+            ),
           ),
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -116,4 +122,3 @@ void main() async {
 //todo
 //pushNamedAndRemoveUntil('name',ModalRoute().withName('name'));
 //pushNamedAndRemoveUntil('name',(route) => false);
-//mobile in shared preference

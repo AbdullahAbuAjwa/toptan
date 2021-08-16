@@ -9,6 +9,7 @@ import 'package:toptan/Pages/edit_profile_screen.dart';
 import 'package:toptan/Pages/faq_screen.dart';
 import 'package:toptan/Pages/financial_movements_screen.dart';
 import 'package:toptan/Pages/forget_pass_screen.dart';
+import 'package:toptan/Pages/qr_code_scanner_page.dart';
 import 'package:toptan/Pages/send_request_order.dart';
 import 'package:toptan/Pages/service_details_screen.dart';
 import 'package:toptan/Pages/home_screen.dart';
@@ -56,4 +57,5 @@ Map<String, Widget Function(BuildContext)> ROUTES = {
   'move_to_webView_screen': (ctx) => WebViewScreen(),
   'move_to_check_internet_screen': (ctx) => CheckInternetScreen(),
   'move_to_change_pass_screen': (ctx) => ChangePasswordScreen(),
+  'move_to_qr_code_scanner_screen': (ctx) => QRScannerScreen(),
 };

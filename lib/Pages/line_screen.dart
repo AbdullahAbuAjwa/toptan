@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
+import 'package:toptan/Pages/qr_code_scanner_page.dart';
 import 'package:toptan/Provider/line_provider.dart';
 import 'package:toptan/Widgets/app_bar.dart';
 import 'package:toptan/Widgets/button.dart';
@@ -30,6 +32,7 @@ class _LineScreenState extends State<LineScreen> {
   int? numNumber;
   final commentController = TextEditingController();
   final commentFocus = FocusNode();
+  String text = 'attach_QR_code'.tr();
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -333,7 +336,9 @@ class _LineScreenState extends State<LineScreen> {
                           color: const Color(0xffffffff),
                         ),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _navigateAndDisplaySelection(context);
+                          },
                           child: Icon(
                             CustomIcon.ic_devices_camera,
                             color: Color(0xff08A8FF),
@@ -342,7 +347,8 @@ class _LineScreenState extends State<LineScreen> {
                         ),
                       ),
                       title: Text(
-                        'attach_QR_code'.tr(),
+                        text,
+                        //       'attach_QR_code'.tr(),
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 16.sp,
@@ -354,6 +360,24 @@ class _LineScreenState extends State<LineScreen> {
                 ],
               ),
             ),
+            //    SizedBox(height: 12.h),
+            // QrImage(
+            //   data: "12226564222",
+            //   backgroundColor: Colors.white,
+            //   padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 7.h),
+            //   version: QrVersions.auto,
+            //   size: 100.h,
+            //   errorStateBuilder: (cxt, err) {
+            //     return Container(
+            //       child: Center(
+            //         child: Text(
+            //           "Uh oh! Something went wrong...",
+            //           textAlign: TextAlign.center,
+            //         ),
+            //       ),
+            //     );
+            //   },
+            // ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0.r),
@@ -399,5 +423,13 @@ class _LineScreenState extends State<LineScreen> {
         ),
       ),
     );
+  }
+
+  void _navigateAndDisplaySelection(BuildContext context) async {
+    final result =
+        await Navigator.pushNamed(context, 'move_to_qr_code_scanner_screen');
+    setState(() {
+      text = result.toString();
+    });
   }
 }

@@ -32,7 +32,7 @@ class _CartCardState extends State<CartCard> {
                     height: 150.h,
                     width: 150.w,
                     errorBuilder: (_, __, ___) => Image.asset(
-                      'assets/images/product.png',
+                      'assets/images/phone.jpg',
                       height: 150.h,
                       width: 150.w,
                     ),

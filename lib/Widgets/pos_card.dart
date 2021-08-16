@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-class POSCard extends StatefulWidget {
+class PointOfSaleCard extends StatefulWidget {
   final image;
   final name;
   final phoneNumber;
 
-  const POSCard({Key? key, this.image, this.name, this.phoneNumber})
+  const PointOfSaleCard({Key? key, this.image, this.name, this.phoneNumber})
       : super(key: key);
 
   @override
   _POSCARDState createState() => _POSCARDState();
 }
 
-class _POSCARDState extends State<POSCard> {
+class _POSCARDState extends State<PointOfSaleCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,6 +34,8 @@ class _POSCARDState extends State<POSCard> {
                 backgroundImage: NetworkImage(
                   widget.image,
                 ),
+                onBackgroundImageError: (_, __) =>
+                    Image.asset('assets/images/pos.png'),
               ),
               Text(
                 widget.name,
@@ -43,7 +46,9 @@ class _POSCARDState extends State<POSCard> {
                 ),
               ),
               Text(
-                '${widget.phoneNumber}',
+                widget.phoneNumber == null
+                    ? 'no_number'.tr()
+                    : '${widget.phoneNumber}',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 16.sp,

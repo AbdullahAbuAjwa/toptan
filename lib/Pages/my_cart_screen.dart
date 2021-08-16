@@ -43,13 +43,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 provider.items!.isEmpty
                     ? loadingCart()
                     : ListView.builder(
-                        itemCount: provider.items!.length,
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return CartCard(provider.items![index]);
-                        },
-                      ),
+                  itemCount: provider.items!.length,
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return CartCard(provider.items![index]);
+                  },
+                ),
                 if (provider.totalAmount != 0 && provider.totalAmount != null)
                   Text(
                     'total_amount'.tr(),
@@ -124,3 +124,5 @@ class _MyCartScreenState extends State<MyCartScreen> {
     );
   }
 }
+
+

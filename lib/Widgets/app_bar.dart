@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:toptan/Pages/notification_screen.dart';
 
 PreferredSizeWidget appBarApp(title) {
   return AppBar(
@@ -27,7 +29,11 @@ PreferredSizeWidget appBarAppWithNotification(title, context) {
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed('move_to_notification_screen');
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade,
+                    child: NotificationScreen()));
           },
           child: Icon(
             Icons.notifications_none_outlined,

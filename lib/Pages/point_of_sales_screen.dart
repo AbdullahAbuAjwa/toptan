@@ -17,8 +17,7 @@ class _PointOfSalesScreenState extends State<PointOfSalesScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    print('W: ' + MediaQuery.of(context).size.width.toString());
-    print('H: ' + MediaQuery.of(context).size.height.toString());
+
   }
 
   @override
@@ -53,7 +52,7 @@ class _PointOfSalesScreenState extends State<PointOfSalesScreen> {
                                 mainAxisSpacing: 8.h,
                               ),
                               itemCount: data.items!.length,
-                              itemBuilder: (ctx, index) => POSCard(
+                              itemBuilder: (ctx, index) => PointOfSaleCard(
                                     name: data.items![index].name,
                                     image: data.items![index].profileImage,
                                     phoneNumber: data.items![index].mobile,

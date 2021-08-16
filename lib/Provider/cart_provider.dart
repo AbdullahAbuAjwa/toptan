@@ -67,7 +67,7 @@ class CartProvider with ChangeNotifier {
           },
         ),
       );
-     // print(response.data);
+      // print(response.data);
       CartResponse cartResponse = CartResponse.fromJson(response.data);
       _totalAmount = cartResponse.totalCart;
       _items = cartResponse.myCart;

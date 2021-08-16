@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:toptan/Helper/app_shared.dart';
 import 'package:toptan/Helper/custom_icon_icons.dart';
 import 'package:toptan/Pages/SettingScreen.dart';
 import 'package:toptan/Pages/about_us_screen.dart';
+import 'package:toptan/Pages/addtional_services_screen.dart';
+import 'package:toptan/Pages/chat_screen.dart';
 import 'package:toptan/Pages/contact_us_screen.dart';
 import 'package:toptan/Pages/home_screen.dart';
 import 'package:toptan/Pages/my_cart_screen.dart';
+import 'package:toptan/Pages/notification_screen.dart';
 import 'package:toptan/Pages/order_products_screen.dart';
 import 'package:toptan/Pages/order_screen.dart';
 import 'package:toptan/Pages/point_of_sales_screen.dart';
@@ -28,7 +32,6 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-
       child: Container(
         color: Color(0xff08A8FF),
         child: ListView(
@@ -98,125 +101,156 @@ class _AppDrawerState extends State<AppDrawer> {
               title: 'home'.tr(),
               icon: Icons.home_outlined,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return HomeScreen();
-                }));
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: HomeScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'notification'.tr(),
               icon: Icons.notifications_none_outlined,
-              onTap: () async {
-                await Navigator.of(context)
-                    .pushNamed('move_to_notification_screen');
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: NotificationScreen(),
+                    ));
+                // await Navigator.of(context)
+                //     .pushNamed('move_to_notification_screen');
               },
             ),
             DrawerTile(
               title: 'my_cart'.tr(),
               icon: CustomIcon.ic_ecommerce_cart,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return MyCartScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: MyCartScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'chat'.tr(),
               icon: CustomIcon.ic_contact_chat,
               onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed('move_to_chat_screen');
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: ChatScreen(),
+                    ));
               },
             ),
             DrawerTile(
-              title: 'order'.tr(),
+              title: 'orders'.tr(),
               icon: Icons.view_compact,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return OrderScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: OrderScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'order_products'.tr(),
               icon: Icons.checklist,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return OrderProductsScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: OrderProductsScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'additional_services'.tr(),
               icon: Icons.monetization_on_outlined,
               onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed('move_to_additional_services_screen');
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: AdditionalServicesScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'pos'.tr(),
               icon: CustomIcon.ic_contact_map_pin,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return PointOfSalesScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: PointOfSalesScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'contact_us'.tr(),
               icon: Icons.contact_phone,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return ContactUsScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: ContactUsScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'aboutUs'.tr(),
               icon: Icons.info_outline,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return AboutUsScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: AboutUsScreen(),
+                    ));
               },
             ),
             DrawerTile(
               title: 'setting'.tr(),
               icon: Icons.settings,
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return SettingScreen();
-                    },
-                  ),
-                );
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      type: Localizations.localeOf(context).languageCode == 'ar'
+                          ? PageTransitionType.leftToRightWithFade
+                          : PageTransitionType.rightToLeftWithFade,
+                      child: SettingScreen(),
+                    ));
               },
             ),
             Container(

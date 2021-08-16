@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:toptan/Helper/enum.dart';
 import 'package:toptan/Helper/show_toast.dart';
+import 'package:toptan/Pages/forget_pass_screen.dart';
 import 'package:toptan/Provider/user_provider.dart';
 import 'package:toptan/model/response/user.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -203,8 +205,12 @@ class _LoginCardState extends State<LoginCard> {
                   onPressed: () {
                     if (Provider.of<UserProvider>(context, listen: false)
                         .isLoading) return;
-                    Navigator.of(context)
-                        .pushNamed('move_to_forget_password_screen');
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade,
+                          child: ForgetPasswordScreen()),
+                    );
                   },
                   child: Text(
                     'forget_password'.tr(),
